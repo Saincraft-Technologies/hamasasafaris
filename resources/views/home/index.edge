@@ -1,0 +1,65 @@
+@layout('main')
+
+
+@section('content')
+<section class="projects-section bg-light" id="destinations">
+    <div class="container px-4 px-lg-5">
+        <!-- Featured Project Row-->
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+        <h4 class="text-danger">Top Destinations</h4></div>
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+            <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/zanzibar_vacations.jpg" alt="zanzibar-vaccation" /></div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="featured-text text-center text-lg-left">
+                    <h4>Zanzibar beach holiday</h4>
+                    <p class="text-black-50 mb-0">Zanzibar, an enchanting island off the coast of Tanzania, offers a slice of paradise like no other. Explore the bustling markets, and savor the tantalizing flavors of the local cuisine. Be relaxation, adventure, or a romantic escape, Zanzibar is the perfect destination to unwind, rejuvenate, and create cherished memories that will last a lifetime.</p>
+                    <a class="btn btn-primary" href="#about">Explore!</a>
+                </div>
+            </div>
+        </div>
+        <!-- Project One Row-->
+        <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+            <div class="col-lg-6"><img class="img-fluid" width="100%" src="assets/img/day-trips-2.jpg" alt="..." /></div>
+            <div class="col-lg-6">
+                <div class="bg-danger text-center h-100 project">
+                    <div class="d-flex h-100">
+                        <div class="project-text w-100 my-auto text-center text-lg-left">
+                            <h4 class="text-white">Tanzania Safaris</h4>
+                            <p class="mb-0 text-white-50"> The wonders of the Serengeti, where the Great Migration unfolds, awe-inspiring spectacle of wildebeests and other wildlife in their natural habitat. Descend into the Ngorongoro Crater, a caldera offering unparalleled game viewing opportunities. Explore the Lake Manyara National Park, where lush greenery provide a stunning backdrop for encounters with elephants, tree-climbing lions, and an array of bird species.</p>
+                            <a class="btn btn-white mt-4" href="#about">Book Now!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Project Two Row-->
+        <div class="row gx-0 justify-content-center">
+            <div class="col-lg-6"><img class="img-fluid"style="" src="assets/img/kili-climb.jpg" alt="..." /></div>
+            <div class="col-lg-6 order-lg-first">
+                <div class="bg-black text-center h-100 project">
+                    <div class="d-flex h-100">
+                        <div class="project-text w-100 my-auto text-center text-lg-right">
+                            <h4 class="text-white">Kilimanjaro & Meru</h4>
+                            <p class="mb-0 text-white-50">Conquer the highest peak in Africa, push your limits, and create lifelong memories as you stand triumphantly atop Kilimanjaro, knowing that you've achieved an extraordinary feat.
+                            </p><a class="btn btn-white mt-4" href="#about">Book Now!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row gx-0 mt-5 mb-4 mb-lg-5 align-items-center">
+            <div class="col-xl-4 col-lg-5 mb-4 mb-lg-5">
+                <div class="featured-alt-text text-center text-lg-right">
+                    <h4>Cultural Experience</h4>
+                    <p class="text-black-50 mb-0">Opportunity to engage with indigenous communities, witness traditional ceremonies, partake in authentic culinary experiences, and learn traditional art forms. Each encounter will be a transformative experience, fostering cultural exchange, mutual respect, and appreciation.</p>
+                    <a class="btn btn-primary mt-3" href="#about">Book Now!</a>
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-7 mb-4 mb-lg-5"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/cultural-experience.jpg" alt="zanzibar-vaccation" /></div>
+        </div>
+    </div>
+</section>
+
+@include('letsplan')
+@endsection
