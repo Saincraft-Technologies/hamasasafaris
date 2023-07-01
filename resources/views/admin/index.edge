@@ -1,0 +1,68 @@
+@layout('welcome')
+
+
+@section('content')
+<!--title-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+
+    <button type="button" id="sidebarCollapse" class="btn btn-secondary">
+      <i class="fa fa-bars"></i>
+      <span class="sr-only">Toggle Menu</span>
+    </button>
+    <h5 class="ml-4 mt-2" style="position: relative; float:inline-start;">Home</h5>
+    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+      data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" style="float:right;" id="navbarSupportedContent">
+      @include('inc/rightbar')
+    </div>
+  </div>
+</nav>
+<div class="row ">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="page-title">
+          <i class="mdi mdi-library-outline title_icon title_icon"></i> Destinations
+          <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle"
+            onclick="largeModal('/admin/destinations/create', 'create destinations')">
+            <i class="mdi mdi-plus"></i>
+            add destinations
+          </button>
+        </h4>
+      </div> <!-- end card body-->
+    </div> <!-- end card -->
+  </div><!-- end col-->
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body class_room_content">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var showAllDestinations = function () {
+      var url = '/admin/destinations/list';
+  
+      $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (response) {
+          $('.class_room_content').html(response);
+          // initDataTable('basic-datatable');
+        }
+      });
+    }
+    showAllDestinations();
+    
+</script>
+@endsection

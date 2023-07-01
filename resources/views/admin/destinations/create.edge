@@ -1,0 +1,45 @@
+{{--  @section('content')  --}}
+<form method="POST" class="d-block ajaxForm" action="/admin/destinations/create">
+    {{ csrfField() }}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="destination">destination name</label>
+            <input type="text" class="form-control" id="destination" name="destination" required>
+            <small id="destination_help" class="form-text text-muted">provide destination name</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="caption">destination caption</label>
+            <input type="text" class="form-control" id="caption" name="caption" required>
+            <small id="caption_help" class="form-text text-muted">provide caption</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="description">description</label>
+            <input type="text" class="form-control" id="description" name="description" required>
+            <small id="description_help" class="form-text text-muted">provide description</small>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="row col-md-12">
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-primary" type="submit">
+                    create destination
+                </button>
+            </div>
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-secondary" onclick="closeModal('#large-modal')" type="reset" data-dismiss="modal">
+                    cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+{{--  @endsection  --}}
+
+<script>
+    // $(".ajaxForm").validate({}); // Jquery form validation initialization
+    // $(".ajaxForm").submit(function (e) {
+    //     var form = $(this);
+    //     ajaxSubmit(e, form, "POST", showAlldestinations);
+    // });
+</script>

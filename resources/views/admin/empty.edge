@@ -1,0 +1,11 @@
+@layout('welcome')
+
+@section('content')
+
+<script>
+    $(document).ready(function(){
+        console.log('running here!');
+        loadPage('/admin/dashboard');
+    })
+</script>
+@endsection

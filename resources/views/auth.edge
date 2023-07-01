@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manager|Login</title>
+    {{style('css/bootstrap.min.css')}}
+    {{style('css/materialdesignicons.min.css')}}
+</head>
+
+<body class="content" style="position: relative;top:100;">
+    <div style="z-index:1; position:static">
+        <section class="vh-100 m-4">
+            <div class="container-fluid h-custom">
+                <div class="row d-flex justify-content-center align-items-center h-100" style="margin-top:100px;">
+                    <div class="col-md-9 col-lg-6 col-xl-5">
+                        <h3>Website Manager</h3>
+                        <span style="font-size:medium;"></span><br>
+                        <!-- <a style="color:black; font-size:x-small;" href="https://github.com/Saincraft-Technologies"><i
+                                class="mdi mdi-github"></i> Saincraft Technologies</a>-->
+                        <img src="img/logo-dark.jpg" style="width:40vw" class="img-fluid" alt="Sample image">
+                    </div>
+                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 ">
+                        @!section('content')
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div style="position:fixed; bottom:0; width:100%;"
+            class=" d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-secondary">
+            <!-- Copyright -->
+            <div class="text-white mb-3 mb-md-0">
+                Copyright © 2020. All rights reserved.
+            </div>
+            <!-- Copyright -->
+
+            <!-- Right -->
+            <div>
+                <a href="#!" class="text-white me-4">
+                    <i class="mdi mdi-facebook"></i>
+                </a>
+                <a href="#!" class="text-white me-4">
+                    <i class="mdi mdi-twitter"></i>
+                </a>
+                <a href="#!" class="text-white me-4">
+                    <i class="mdi mdi-google"></i>
+                </a>
+                <a href="#!" class="text-white">
+                    <i class="mdi mdi-linkedin"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </div>
+
+    </div>
+    {{ script('js/jquery.min.js')}}
+    {{ script('js/bootstrap.min.js')}}
+</body>
+
+</html>

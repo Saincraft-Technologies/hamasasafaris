@@ -1,0 +1,46 @@
+{{--  @section('content')  --}}
+<form method="POST" class="d-block ajaxForm" action="/admin/itineraries/create">
+    {{ csrfField() }}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="name">Itinerary title</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+            <small id="name_help" class="form-text text-muted">provide from stop point</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="name">Itinerary title</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+            <small id="name_help" class="form-text text-muted">provide from stop point</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="name">Itinerary title</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+            <small id="name_help" class="form-text text-muted">provide from stop point</small>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="row col-md-12">
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-primary" type="submit">
+                    create itinerary
+                </button>
+            </div>
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-secondary" onclick="closeModal()" type="reset" data-dismiss="modal">
+                    cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+{{--  @endsection  --}}
+
+<script>
+    $('.large').toggle();
+    // $(".ajaxForm").validate({}); // Jquery form validation initialization
+    $(".ajaxForm").submit(function (e) {
+        var form = $(this);
+        ajaxSubmit(e, form, "POST", showAllItineraries);
+    });
+</script>

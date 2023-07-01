@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {{ style('css/custom.css') }}
+    {{ style('css/fontawesome.min.css') }}
+    {{ style('css/materialdesignicons.min.css') }}
+    {{ style('css/materialdesignicons.css.map') }}
+    <title>Hamasa|Safaris</title>
+</head>
+
+<body>
+    <!-- Navigation-->
+    @include('inc/navbar')
+    <!-- Masthead-->
+    @include('inc/parkhead')
+    <!-- About-->
+    <section class="about-section text-center" id="about">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="text-white mb-4">Welcome-Karibu</h2>
+                    <p class="text-white-50">Immerse yourself in a world where budget-friendly affordability meets the
+                        epitome of luxurious indulgence with Hamasa Safaris. As the premier tour operating company in
+                        Northern Tanzania, founded by Maasai Nature and culture experts, we are dedicated to providing
+                        outstanding value to all our travelers, regardless of trip duration or chosen category. From
+                        wallet-friendly adventures to opulent getaways, our diverse range of options ensures that you
+                        can experience the perfect balance between affordable prices and unparalleled luxury. Prepare to
+                        embark on an extraordinary journey that seamlessly combines the best of both worlds, where
+                        affordability meets lavishness, leaving you with unforgettable memories of unparalleled
+                        splendor.</p>
+                </div>
+            </div>
+            {{-- <img class="img-fluid" src="assets/img/ipad.png" alt="..." /> --}}
+        </div>
+    </section>
+    <!-- Projects-->
+    @!section('content')
+    <!-- Signup-->
+    @include('inc/signup')
+    @include('inc/contact')
+    <!-- Footer-->
+    @include('inc/footer')
+    <!-- Bootstrap core JS-->
+
+    {{ script('js/jquery-3.7.0.min.js') }}
+    {{ script('js/bootstrap.min.js') }}
+    {{ script('js/bootstrap.bundle.min.js') }}
+    {{ script('js/custom.js') }}
+
+</body>
+
+</html>

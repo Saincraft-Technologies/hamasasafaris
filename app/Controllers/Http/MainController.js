@@ -2,7 +2,7 @@
 
 class MainController {
     async index({view}){
-        return view.render('main');
+        return 'home';
     }
 }
 

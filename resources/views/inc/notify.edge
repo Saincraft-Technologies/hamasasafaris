@@ -1,0 +1,14 @@
+<!-- Toastr and alert notifications for PHP scripts -->
+<script type="text/javascript">
+  function notify(message) {
+    $.NotificationApp.send("heads up!", message, "top-right", "rgba(0,0,0,0.2)", "info");
+  }
+
+  function success_notify(message) {
+    $.NotificationApp.send("congratulations!", message, "top-right", "rgba(0,0,0,0.2)", "success");
+  }
+
+  function error_notify(message) {
+    $.NotificationApp.send("ooh snap!", message, "top-right", "rgba(0,0,0,0.2)", "error");
+  }
+</script>
