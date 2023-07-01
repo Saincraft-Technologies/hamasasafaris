@@ -10,6 +10,41 @@
   {{ style('css/fontawesome.min.css') }}
   {{ style('css/materialdesignicons.min.css') }}
   {{ style('css/materialdesignicons.css.map') }}
+  <style>
+    .carousel-item {
+      height: 500px;
+      /* Set the desired height of the slider */
+      opacity: 0.3;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    .carousel-item.active {
+      opacity: 1;
+    }
+
+    .carousel-item img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-caption {
+      background-color: rgba(0, 0, 0, 0.7);
+      /* Adjust the background color and opacity of the caption */
+      color: #fff;
+      /* Adjust the text color of the caption */
+      padding: 10px;
+    }
+
+    .carousel-caption h3 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .carousel-caption p {
+      font-size: 18px;
+    }
+  </style>
   <title>Hamasa|Safaris</title>
 </head>
 
