@@ -27,7 +27,9 @@
     "@adonisjs/mail": "^3.1.0",
     "@adonisjs/session": "^1.0.27",
     "@adonisjs/shield": "^1.0.8",
-    "mysql2": "^2.3.3"
+    "mailgun-js": "^0.22.0",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.9.3"
   },
   "autoload": {
     "App": "./app"

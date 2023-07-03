@@ -8,25 +8,19 @@ class MainController {
     async book({ session, request, response }) {
         try {
 
-            let booking = new Booking();
-            booking.name = request.input('name');
-            booking.email = request.input('email');
-            booking.phone = request.input('phone');
-            booking.country = request.input('country');
-            booking.travelers = request.input('travelers');
-            booking.days = request.input('days');
 
-            await booking.save();
-            await Mail.send('bookingemail', {}, (message) => {
-                message.from('info@hamasasafaris.com')
-                    .to(request.input('email'))
-                    .subject('Welcome to yardstick')
+            const data = request.only(['email', 'name', 'phone', 'country', 'travelers', 'days'])
+            const booking = await Booking.create(data)
+            await Mail.send('bookingemail', booking.toJSON(), (message) => {
+                message.from('samwel@hamasasafaris.com')
+                    .to(booking.email)
+                    .subject('Hamasa Safari Booking')
             });
             session.flash({ notification: 'Booking successfully!\n\rThank you for choosing Hamasa Safaris! \n\rCheck your email for more information!' });
             return response.redirect('/#bookings');
 
         } catch (error) {
-            console.log(error.message);
+            console.log(error);
         }
     }
 

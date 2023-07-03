@@ -25,12 +25,12 @@ module.exports = {
   smtp: {
     driver: 'smtp',
     pool: true,
-    port: 465,
-    host: Env.get('SMTP_HOST'),
+    port: Env.get('SMTP_HOST', 587),
+    host: Env.get('SMTP_HOST', 'smtp.zoho.com'),
     secure: false,
     auth: {
-      user: Env.get('MAIL_USERNAME'),
-      pass: Env.get('MAIL_PASSWORD')
+      user: Env.get('MAIL_USERNAME','samwel@hamasasafaris.com'),
+      pass: Env.get('MAIL_PASSWORD', 'saincraft@2023')
     },
     maxConnections: 5,
     maxMessages: 100,
