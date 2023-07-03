@@ -1,0 +1,33 @@
+<form method="POST" class="d-block ajaxForm" action="{{action}}">
+    {{ csrfField() }}
+    <div class="form-row">
+        <div class="offset-2 form-group col-md-8">
+            <label for="gallery">gallery name</label>
+            <input type="text" class="form-control" id="gallery" name="gallery" required>
+            <small id="gallery_help" class="form-text text-muted">provide gallery name</small>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="row col-md-12">
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-primary" type="submit">
+                    create gallery
+                </button>
+            </div>
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-secondary" onclick="closeModal('#large-modal')" type="reset"
+                    data-dismiss="modal">
+                    cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(".ajaxForm").validate({}); // Jquery form validation initialization
+    $(".ajaxForm").submit(function () {
+        var form = $(this);
+        ajaxSubmit(e, form, "POST", showAll);
+    });
+</script>

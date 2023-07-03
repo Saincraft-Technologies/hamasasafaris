@@ -1,0 +1,53 @@
+<form method="POST" class="d-block ajaxForm" action="{{action}}">
+    {{ csrfField() }}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="page">Page</label>
+            <input type="text" class="form-control" id="page" name="page" required>
+            <small id="page_help" class="form-text text-muted">provide page name</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="route">page route</label>
+            <input type="text" class="form-control" id="route" name="route" required>
+            <small id="route_help" class="form-text text-muted">provide route</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="title">page title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+            <small id="title_help" class="form-text text-muted">provide title</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="status">visibility</label>
+            <select type="text" class="form-control" id="status" name="status" required>
+                <option value="visible">Show on website</option>
+                <option value="none" selected>Don't show</option>
+            </select>
+            <small id="status_help" class="form-text text-muted">provide visibility status</small>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="row col-md-12">
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-primary" type="submit">
+                    create page
+                </button>
+            </div>
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-secondary" onclick="closeModal('#large-modal')" type="reset"
+                    data-dismiss="modal">
+                    cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(".ajaxForm").validate({}); // Jquery form validation initialization
+    $(".ajaxForm").submit(function (e) {
+        e.preventDefault()
+    alert('jquery here too', e)
+        var form = $(this);
+        ajaxSubmit(e, form, "POST", showAll);
+    });
+</script>

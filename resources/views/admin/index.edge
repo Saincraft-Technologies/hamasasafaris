@@ -3,25 +3,6 @@
 
 @section('content')
 <!--title-->
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-
-    <button type="button" id="sidebarCollapse" class="btn btn-secondary">
-      <i class="fa fa-bars"></i>
-      <span class="sr-only">Toggle Menu</span>
-    </button>
-    <h5 class="ml-4 mt-2" style="position: relative; float:inline-start;">Home</h5>
-    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-      data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-      aria-label="Toggle navigation">
-      <i class="fa fa-bars"></i>
-    </button>
-    <div class="collapse navbar-collapse" style="float:right;" id="navbarSupportedContent">
-      @include('inc/rightbar')
-    </div>
-  </div>
-</nav>
 <div class="row ">
   <div class="col-xl-12">
     <div class="card">
@@ -45,13 +26,21 @@
       <div class="card-body class_room_content">
 
       </div>
+      <div class="card-footer mt-3" style="position: fixed">
+        <p>
+          Copyright &copy;<script>
+            document.write(new Date().getFullYear());
+          </script> All rights reserved <i class="icon-heart" aria-hidden="true"></i> by <a
+            href="https://www.saincrafttechnologies.com" target="_blank">hamasasafaris.com</a>
+        </p>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
   var showAllDestinations = function () {
-      var url = '/admin/destinations/list';
+      var url = '/admin/destination/list';
   
       $.ajax({
         type: 'GET',

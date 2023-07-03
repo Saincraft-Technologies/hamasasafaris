@@ -1,38 +1,60 @@
+<style>
+  .lg-image {
+    width: 50px;
+  }
+
+  .lg-name {
+    width: 50px;
+  }
+</style>
 <nav id="sidebar" class=" bg-secondary" style="position:relative">
   <div class="logo mt-5">
-    <div class="row">
-      <div class="offset-0 col-xl-12 col-lg-12 col-md-12 col-sm-12"><img src="/img/avatar.jpg" class="ml-0"
-          style="border-radius:50px; width:50px; height:50px;" alt=""></div>
-    </div>
+    <img class="mt-0 rounded-circle js--image-preview" src="/img/avatar.png" srcset="/img/avatar.png"
+      style="width:50px;">
+
+    <h5 class="text-light">{{loggedInUser.username}}<br>
+    </h5>
+
   </div>
   <ul class="list-unstyled components mb-5 mr-3">
 
     <li class="active">
-      <a href="javascript:void(0);" onclick="loadPage('/admin/dashboard')"><i class="mdi mdi-home"></i> Home</a>
+      <a href="/admin/dashboard"><i class="mdi mdi-home"></i> Home</a>
     </li>
     <li>
-      <a href="javascript:void(0);" onclick="loadPage('/admin/abouts')"><i class="mdi mdi-account"></i> About</a>
-    </li>
-    <li>
-      <a href="javascript:void(0);" onclick="loadPage('/admin/destinations/create')"><i class="mdi mdi-note"></i>
+      <a href="/admin/index/destination"><i class="mdi mdi-note"></i>
         Destinations</a>
     </li>
+
     <li>
-      <a href="javascript:void(0);" onclick="loadPage('/dashboard')"><i class="mdi mdi-bookmark"></i> Bookings</a>
+      <a href="/admin/index/accommodation"><i class="mdi mdi-note"></i>
+        Accommodation</a>
     </li>
     <li>
-      <a href="javascript:void(0);" onclick="loadPage('/dashboard')"><i class="mdi mdi-send"></i>
-        Contacts</a>
+      <a href="/admin/index/attraction"><i class="mdi mdi-note"></i>
+        Attractions</a>
+    </li>
+    <li>
+      <a href="/admin/index/facility"><i class="mdi mdi-note"></i>
+        Facilites</a>
+    </li>
+    <li>
+      <a href="/admin/index/stopPoint"><i class="mdi mdi-note"></i>
+        Stop Point</a>
+    </li>
+    <li>
+      <a href="/admin/index/activity"><i class="mdi mdi-note"></i>
+        Activities</a>
+    </li>
+    <li>
+      <a href="/admin/index/page"><i class="mdi mdi-note"></i> Pages</a>
+    </li>
+    <li>
+      <a href="/admin/index/gallery"><i class="mdi mdi-note"></i> Galleries</a>
+    </li>
+    <li>
+      <a href="/admin/index/booking"><i class="mdi mdi-bookmark"></i> Bookings</a>
     </li>
   </ul>
-
-  <div class="footer">
-    <p>
-      Copyright &copy;<script>
-        document.write(new Date().getFullYear());
-      </script> All rights reserved <i class="icon-heart" aria-hidden="true"></i> by <a
-        href="https://www.saincrafttechnologies.com" target="_blank">hamasaafaris.com</a>
-    </p>
-  </div>
 </nav>
 {{ script('js/jquery-3.7.0.min.js')}}

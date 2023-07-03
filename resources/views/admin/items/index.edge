@@ -1,0 +1,48 @@
+@layout('welcome')
+@section('content')
+{{ script('/js/init.js')}}
+<div class="row ">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="page-title">
+                    <i class="mdi mdi-library-outline title_icon title_icon"></i> {{model}}
+                    <button type="button" style="float:right" class="btn btn-outline-primary btn-rounded alignToTitle"
+                        onclick="largeModal('{{createRoute}}', 'create {{model}}')">
+                        <i class="mdi mdi-plus"></i>
+                        add {{model}}
+                    </button>
+                </h4>
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body class_room_content">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(()=>{
+    var showAll = function () {
+      var url = '{{listRoute}}';
+  
+      $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (response) {
+          $('.class_room_content').html(response);
+          initDataTable('basic-datatable');
+        }
+      });
+    }
+    showAll();
+    })
+    
+</script>
+@endsection

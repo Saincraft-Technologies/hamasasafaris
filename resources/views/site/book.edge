@@ -1,40 +1,141 @@
-<div class="container mt-4">
-    <h1>Tour Booking</h1>
-    <form>
-        {{ csrfField() }}
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" required>
+{{ script('/js/jquery.validate.min.js') }}
+<section class="contact-section" id="bookings">
+    <div class="container offset-2 mt-0 px-6 px-lg-5 ">
+        <div class="row gx-5 gx-lg-5">
+            <div class="col-md-8 mb-5 mb-md-4">
+                <div class="card py-5 h-100">
+                    <div class="card-body text-center">
+                        <h2>Tour Booking Form</h2>
+                        <form id="booking-form" action="/book" enctype="application/x-www-form-urlencoded"
+                            method="POST">
+                            {{ csrfField() }}
+                            <!-- Step 1: Personal Details -->
+                            <div id="step1" class="form-step row">
+                                <h4>Step 1: Personal Details</h4>
+                                <div class="form-group col-md-6">
+                                    <label for="name">Full Name*</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class=" col-md-6">
+                                    <label for="email">Email Address*</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class=" col-md-6">
+                                    <label for="phone">Phone Number*</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                                <div class=" col-md-6 mb-4">
+                                    <label for="country">Country*</label>
+                                    <input type="text" class="form-control" id="country" name="country" required>
+                                </div>
+                                <button class="btn btn-primary mt-4 col-md-6 offset-3 mb-4" type="button"
+                                    onclick="nextStep()">Next</button>
+                            </div>
+
+                            <!-- Step 2: Traveler Information -->
+                            <div id="step2" class="form-step col-md-12 collapse">
+                                <h4>Step 2: Traveler Information</h4>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="travelers">Number of Travelers</label>
+                                        <input type="number" name="travelers" class="form-control" value="1" min="1"
+                                            id="travelers" name="travelers" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="days">Number of Days</label>
+                                        <input type="number" name="days" class="form-control" value="1" min="1"
+                                            id="days" name="days" required>
+                                    </div>
+                                </div>
+                                <div id="traveler-details" class="col-md-12 mt-4">
+                                    <button class="btn btn-success col-md-5" type="submit">book</button>
+                                </div>
+                            </div>
+                            @if(old('notification'))
+
+                            <div id="step3" class="alert alert-success col-md-12">
+                                {{old('notification')}}
+                            </div>
+                            @endif
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" required>
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone:</label>
-            <input type="tel" class="form-control" id="phone" required>
-        </div>
-        <div class="form-group">
-            <label for="tour">Tour:</label>
-            <select class="form-control" id="tour" required>
-                <option value="">Select a tour</option>
-                <option value="serengeti">Serengeti Safari</option>
-                <option value="kilimanjaro">Kilimanjaro Trek</option>
-                <option value="ngorongoro">Ngorongoro Crater Tour</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="date">Date:</label>
-            <input type="date" class="form-control" id="date" required>
-        </div>
-        <div class="form-group">
-            <label for="participants">Number of Participants:</label>
-            <input type="number" class="form-control" id="participants" required>
-        </div>
-        <div class="form-group">
-            <label for="message">Message:</label>
-            <textarea class="form-control" id="message" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Book Now</button>
-    </form>
-</div>
+    </div>
+</section>
+<script>
+    var currentStep = 1;
+
+    function nextStep() {
+        let name = document.getElementById('name');
+        let phone = document.getElementById('phone');
+        let email = document.getElementById('email');
+        let days = document.getElementById('days');
+        console.log("name===>>", )
+        if($(name).val()==''|| $(phone).val()==''||$(email).val()==''||$(days).val()==''){
+            alert('please fill required fields to continue!')
+        }else{ 
+            if (currentStep < 3) {
+                document.getElementById("step" + currentStep).style.display = "none";
+                currentStep++;
+                document.getElementById("step" + currentStep).style.display = "block";
+            }
+        }
+     
+    }
+
+    function prevStep() {
+      if (currentStep > 1) {
+        document.getElementById("step" + currentStep).style.display = "none";
+        currentStep--;
+        document.getElementById("step" + currentStep).style.display = "block";
+      }
+    }
+
+    // Dynamically add traveler details fields based on the number of travelers
+    document.getElementById("num-travelers").addEventListener("change", function () {
+      var numTravelers = parseInt(this.value);
+      var travelerDetails = document.getElementById("traveler-details");
+
+      travelerDetails.innerHTML = ""; // Clear previous fields
+
+      for (var i = 0; i < numTravelers; i++) {
+        var travelerIndex = i + 1;
+
+        var travelerGroup = document.createElement("div");
+        travelerGroup.classList.add("form-group");
+
+        var travelerLabel = document.createElement("label");
+        travelerLabel.setAttribute("for", + travelerIndex);
+        travelerLabel.textContent = "Traveler " + travelerIndex + " Name";
+
+        var travelerInput = document.createElement("input");
+        travelerInput.classList.add("form-control");
+        travelerInput.setAttribute("id", + travelerIndex);
+        travelerInput.setAttribute("name", + travelerIndex);
+        travelerInput.setAttribute("required", true);
+
+        travelerGroup.appendChild(travelerLabel);
+        travelerGroup.appendChild(travelerInput);
+        travelerDetails.appendChild(travelerGroup);
+      }
+    });
+
+    // Update review section with entered data
+    document.getElementById("name").addEventListener("input", function () {
+      document.getElementById("review-name").textContent = this.value;
+    });
+
+    document.getElementById("email").addEventListener("input", function () {
+      document.getElementById("review-email").textContent = this.value;
+    });
+
+    document.getElementById("phone").addEventListener("input", function () {
+      document.getElementById("review-phone").textContent = this.value;
+    });
+
+    document.getElementById("num-travelers").addEventListener("input", function () {
+      document.getElementById("review-num-travelers").textContent = this.value;
+    });
+</script>

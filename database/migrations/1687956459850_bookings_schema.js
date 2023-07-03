@@ -7,16 +7,14 @@ class BookingsSchema extends Schema {
   up() {
     this.create('bookings', (table) => {
       table.increments()
-      table.string('fullname', 254).notNullable()
+      table.string('name', 254).notNullable()
       table.string('email', 254).notNullable()
-      table.integer('adults', 11).notNullable().defaultTo(0)
-      table.integer('children', 11).notNullable().defaultTo(0)
-      table.integer('days', 11).notNullable().defaultTo(0)
-      table.integer('language', 25).notNullable().defaultTo(0)
-      table.integer('nationality', 50).notNullable().defaultTo(0)
+      table.string('phone', 18).notNullable()
+      table.string('country', 50).notNullable()
+      table.integer('travelers', 11).notNullable()
+      table.integer('days', 3).notNullable()
       table.string('other_request', 254)
       table.string('identifier', 24)
-      table.string('status', 24).notNullable().defaultTo('plan')
       table.timestamps()
     })
   }

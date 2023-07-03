@@ -8,7 +8,7 @@ class DestinationAccomodationsSchema extends Schema {
     this.create('destination_accomodations', (table) => {
       table.increments()
       table.integer('destination_id').unsigned().references('id').inTable('destinations')
-      table.integer('accomodation_id').unsigned().references('id').inTable('accommodations')
+      table.integer('accommodation_id').unsigned().references('id').inTable('accommodations')
       table.integer('upload_id').unsigned().references('id').inTable('uploads')
       table.timestamps()
     })

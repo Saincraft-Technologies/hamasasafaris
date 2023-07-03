@@ -1,28 +1,27 @@
 
-
 <script type="text/javascript">
   var callBackFunction;
   var id;
   var callBackFunctionForGenericConfirmationModal;
   function largeModal(url, header, icon) {
-    jQuery('#large-modal').modal('show', { backdrop: 'true' });
-    // SHOW AJAX RESPONSE ON REQUEST SUCCESS
-    $.ajax({
-      url: url,
-      success: function (response) {
-        jQuery('#large-modal .modal-body').html(response);
-        jQuery('#large-modal .modal-title').html('<i class="' + icon + '"></i> ' + header);
-      }
-    });
+      $('#large-modal').modal('show', { backdrop: 'true' });
+      // SHOW AJAX RESPONSE ON REQUEST SUCCESS
+      $.ajax({
+        url: url,
+        success: function (response) {
+          $('#large-modal .modal-body').html(response);
+          $('#large-modal .modal-title').html('<i class="' + icon + '"></i> ' + header);
+        }
+      });
   }
   function largerModal(url, header) {
-    jQuery('#larger-modal').modal('show', { backdrop: 'true' });
+    $('#larger-modal').modal('show', { backdrop: 'true' });
     // SHOW AJAX RESPONSE ON REQUEST SUCCESS
     $.ajax({
       url: url,
       success: function (response) {
-        jQuery('#larger-modal .modal-body').html(response);
-        jQuery('#larger-modal .modal-title').html(header);
+        $('#larger-modal .modal-body').html(response);
+        $('#larger-modal .modal-title').html(header);
       }
     });
   }
@@ -30,33 +29,33 @@
 
   function rightModal(url, header) {
     // LOADING THE AJAX MODAL
-    jQuery('#right-modal').modal('show', { backdrop: 'true' });
+    $('#right-modal').modal('show', { backdrop: 'true' });
 
     // SHOW AJAX RESPONSE ON REQUEST SUCCESS
     $.ajax({
       url: url,
       success: function (response) {
-        jQuery('#right-modal .modal-body').html(response);
-        jQuery('#right-modal .modal-title').html(header);
+        $('#right-modal .modal-body').html(response);
+        $('#right-modal .modal-title').html(header);
       }
     });
   }
 
 
   function confirmModal(delete_url, param) {
-    jQuery('#alert-modal').modal('show', { backdrop: 'static' });
+    $('#alert-modal').modal('show', { backdrop: 'static' });
     callBackFunction = param;
     document.getElementById('delete_form').setAttribute('action', delete_url);
   }
   function confirmModalId(delete_url, param, id) {
-    jQuery('#alert-modal').modal('show', { backdrop: 'static' });
+    $('#alert-modal').modal('show', { backdrop: 'static' });
     callBackFunction = param;
     id = id;
     document.getElementById('delete_form').setAttribute('action', delete_url);
   }
 
   function genericConfirmModal(callBackFunction) {
-    jQuery('#genric-confirmation-modal').modal('show', { backdrop: 'static' });
+    $('#genric-confirmation-modal').modal('show', { backdrop: 'static' });
     callBackFunctionForGenericConfirmationModal = callBackFunction;
   }
 
@@ -74,7 +73,8 @@
     <div class="modal-content modal_height">
 
       <div class="modal-header border-1">
-        <button type="button" class="close" data-dismiss="modal" onclick="closeModal('#right-modal')" aria-hidden="true">×</button>
+        <button type="button" class="close" data-dismiss="modal" onclick="closeModal('#right-modal')"
+          aria-hidden="true">×</button>
         <h4 class="modal-title"></h4>
       </div>
       <div class="modal-body" style="overflow-x:scroll;">
@@ -92,7 +92,8 @@
     <div class="modal-content">
       <div class="modal-header d-print-none">
         <h4 class="modal-title" id="myLargeModalLabel"></h4>
-        <button type="button" class="close" onclick="closeModal('#large-modal')" data-dismiss="modal" aria-hidden="true">×</button>
+        <button type="button" class="close" onclick="closeModal('#large-modal')" data-dismiss="modal"
+          aria-hidden="true">×</button>
       </div>
       <div class="modal-body">
 
@@ -109,7 +110,8 @@
     <div class="modal-content">
       <div class="modal-header d-print-none">
         <h4 class="modal-title" id="myLargerModalLabel"></h4>
-        <button type="button" class="close" onclick="closeModal('#larger-modal')" data-dismiss="modal" aria-hidden="true">×</button>
+        <button type="button" class="close" onclick="closeModal('#larger-modal')" data-dismiss="modal"
+          aria-hidden="true">×</button>
       </div>
       <div class="modal-body">
 
@@ -129,7 +131,8 @@
           <p class="mt-1">This action is permanent</p>
           <p class="mt-1">Are you sure?</p>
           <form method="POST" class="ajaxDeleteForm" action="" id="delete_form">
-            <button type="button" class="btn btn-info my-2" onclick="closeModal('#alert-modal')" data-dismiss="modal">cancel</button>
+            <button type="button" class="btn btn-info my-2" onclick="closeModal('#alert-modal')"
+              data-dismiss="modal">cancel</button>
             <button type="submit" class="btn btn-danger my-2" onclick="">continue</button>
           </form>
         </div>
@@ -147,7 +150,8 @@
           <i class="dripicons-information h1 text-info"></i>
           <h4 class="mt-2">heads up!</h4>
           <p class="mt-3">are you sure?</p>
-          <button type="button" class="btn btn-info my-2" onclick="closeModal('#generic-confirmation-modal')" data-dismiss="modal">cancel</button>
+          <button type="button" class="btn btn-info my-2" onclick="closeModal('#generic-confirmation-modal')"
+            data-dismiss="modal">cancel</button>
           <button type="submit" class="btn btn-danger my-2" onclick="callTheCallBackFunction()">continue</button>
         </div>
       </div>
@@ -156,11 +160,11 @@
 </div><!-- /.modal -->
 
 <script>
-  jQuery(".ajaxDeleteForm").submit(function (e) {
+  $(".ajaxDeleteForm").submit(function (e) {
     var form = $(this);
     ajaxSubmit(e, form, "DELETE", callBackFunction, id);
   });
   var closeModal = function(name){
-      jQuery(name).modal('hide');
+      $(name).modal('hide');
     }
 </script>

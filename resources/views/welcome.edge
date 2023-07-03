@@ -5,11 +5,17 @@
   <title>Website | Manager</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {{ style('/css/materialdesignicons.min.css') }}
+  {{ style('/css/style')}}
+  {{ style('/css/app')}}
+  {{ style('/css/content-placeholder.css')}}
+  {{ style('/css/toastr.min.css')}}
+  {{ style('/css/vendor/dataTables.bootstrap4.css')}}
+  {{ style('/css/vendor/responsive.bootstrap4.css')}}
+  {{ style('/css/jquery-datatables.css')}}
+  {{ script('/js/jquery.min.js')}}
+  <link rel="icon" type="image/png" href="/assets/img/hamasa.png" />
 
-  {{ style('css/materialdesignicons.min.css')}}
-  {{ style('css/style')}}
-  {{ style('css/bootstrap.min.css')}}
-  {{ script('js/jquery.min.js')}}
 </head>
 
 <body>
@@ -21,16 +27,15 @@
     <!-- Page Content  -->
     <div id="content" style="position:relative">
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light mr-5"
-        style="position:absolute; z-index:1;  width:100%;">
+      <nav class="navbar navbar-expand-lg navbar mr-5"
+        style="position:absolute; z-index:1;  width:100%; background-color:rgb(246, 246, 246);">
         <div class="container-fluid">
 
-          <button type="button" id="sidebarCollapse" class="btn btn-secondary">
+          <button type="button" id="sidebarCollapse" class="btn btn-outline-secondary mr-3">
             <i class="mdi mdi-menu"></i>
             <span class="sr-only">Toggle Menu</span>
           </button>
-          <h5 class="ml-4 mt-2" style="position: relative; float:inline-start;">Dashboard</h5>
-          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+          <button class="btn btn-outline-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
             <i class="mdi mdi-menu"></i>
@@ -47,12 +52,29 @@
       overflow: scroll;">
         <div class="p-2 mainContent" style="top:10px; position:relative">
           @!section('content')
+
         </div>
       </div>
     </div>
   </div>
 
-
+  @include('inc/modals')
+  @include('inc/notify')
+  {{ script('/js/ajax_form_submission.js')}}
+  {{ script('/js/popper.min.js')}}
+  {{ script('/js/app.min.js')}}
+  {{ script('/js/main.js')}}
+  {{ script('/js/sub-sidebar.js')}}
+  {{script('/js/owl.carousel.min.js')}}
+  {{ script('/js/init.js')}}
+  {{ script('/js/content-placeholder.js')}}
+  {{ script('/js/ima3.js')}}
+  {{ script('/js/toastr.min.js')}}
+  {{ script('/js/dataTables.js')}}
+  {{ script('/js/dataTables.bootstrap4.js')}}
+  {{ script('/js/dataTables.buttons.min.js')}}
+  {{ script('/js/dataTables.keyTable.min.js')}}
+  {{ script('/js/dataTables.responsive.min.js')}}
   <script>
     const loadPage = function(route){
       console.log($);
@@ -66,12 +88,6 @@
         })
       }
   </script>
-
-  {{ script('js/popper.js')}}
-  {{ script('js/bootstrap.min.js')}}
-  {{ script('js/main.js')}}
-  {{ script('js/sub-sidebar.js')}}
-  {{script('js/owl.carousel.min.js')}}
 </body>
 
 </html>

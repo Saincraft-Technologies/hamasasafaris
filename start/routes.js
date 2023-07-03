@@ -16,24 +16,20 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 Route.group(() => {
-    Route.on('/admin').render('admin.empty');
-
+    Route.get('/admin', 'HomeController.index');
     Route.get('/admin/dashboard', 'HomeController.index');
-    Route.get('/admin/destinations/create', 'DestinationController.create');
-    Route.get('/admin/destinations/list', 'DestinationController.list');
-    Route.get('/admin/itineraries/create', 'ItineraryController.create');
-    Route.get('/admin/itineraries/list', 'ItineraryController.list');
-}).middleware(["auth"]);
+    Route.get('/admin/index/:model', 'ModelController.index');
+    Route.get('/admin/list/:model', 'ModelController.list');
+    Route.get('/admin/create/:model', 'ModelController.create');
+    Route.get('/admin/edit/:model/:id', 'ModelController.edit');
+    Route.post('/admin/update/:model/:id', 'ModelController.update');
+    Route.post('/admin/store/:model', 'ModelController.store');
+    Route.get('/logout', 'HomeController.logout');
+}).middleware(["isLoggedIn"]);
 
 Route.on('/').render('site.index');
-Route.get('/parks/ngorongoro', 'NgorongoroController.index');
-Route.get('/parks/manyara', 'ManyaraController.index');
-Route.get('/parks/serengeti', 'SerengetiController.index');
-Route.get('/parks/arusha', 'ArushaController.index');
-Route.get('/mountains/kilimanjaro', 'KilimanjaroController.index');
-Route.get('/mountains/meru', 'MeruController.index');
-Route.get('/cultural/maasai', 'MaasaiController.index');
-Route.get('/cultural/hadzabe', 'HadzabeController.index');
+Route.get('/pages/:modal', 'PagesController.index');
+Route.post('/book', 'MainController.book');
 Route.get('/login', 'HomeController.login');
 Route.get('/register', 'HomeController.register');
 Route.post('/login', 'HomeController.auth');
