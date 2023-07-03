@@ -1,5 +1,6 @@
 'use strict'
 const Booking = use('App/Models/Booking')
+const Mail = use('Mail')
 class MainController {
     async index({ view }) {
         return 'home';
@@ -16,7 +17,11 @@ class MainController {
             booking.days = request.input('days');
 
             await booking.save();
-
+            await Mail.send('bookingemail', {}, (message) => {
+                message.from('info@hamasasafaris.com')
+                    .to(request.input('email'))
+                    .subject('Welcome to yardstick')
+            });
             session.flash({ notification: 'Booking successfully!\n\rThank you for choosing Hamasa Safaris! \n\rCheck your email for more information!' });
             return response.redirect('/#bookings');
 
