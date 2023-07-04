@@ -1,69 +1,68 @@
 {{ script('/js/jquery.validate.min.js') }}
-<section class="contact-section" id="bookings">
-    <div class="container offset-2 mt-0 px-6 px-lg-5 ">
-        <div class="row gx-5 gx-lg-5">
-            <div class="col-md-8 mb-5 mb-md-4">
-                <div class="card py-5 h-100">
-                    <div class="card-body text-center">
-                        <h2>Tour Booking Form</h2>
-                        <form id="booking-form" action="/book" enctype="application/x-www-form-urlencoded"
-                            method="POST">
-                            {{ csrfField() }}
-                            <!-- Step 1: Personal Details -->
-                            <div id="step1" class="form-step row">
-                                <h4>Step 1: Personal Details</h4>
-                                <div class="form-group col-md-6">
-                                    <label for="name">Full Name*</label>
-                                    <input type="text" class="form-control" id="name" name="name" required>
-                                </div>
-                                <div class=" col-md-6">
-                                    <label for="email">Email Address*</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-                                <div class=" col-md-6">
-                                    <label for="phone">Phone Number*</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" required>
-                                </div>
-                                <div class=" col-md-6 mb-4">
-                                    <label for="country">Country*</label>
-                                    <input type="text" class="form-control" id="country" name="country" required>
-                                </div>
-                                <button class="btn btn-primary mt-4 col-md-6 offset-3 mb-4" type="button"
-                                    onclick="nextStep()">Next</button>
-                            </div>
-
-                            <!-- Step 2: Traveler Information -->
-                            <div id="step2" class="form-step col-md-12 collapse">
-                                <h4>Step 2: Traveler Information</h4>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="travelers">Number of Travelers</label>
-                                        <input type="number" name="travelers" class="form-control" value="1" min="1"
-                                            id="travelers" name="travelers" required>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="days">Number of Days</label>
-                                        <input type="number" name="days" class="form-control" value="1" min="1"
-                                            id="days" name="days" required>
-                                    </div>
-                                </div>
-                                <div id="traveler-details" class="col-md-12 mt-4">
-                                    <button class="btn btn-success col-md-5" type="submit">book</button>
-                                </div>
-                            </div>
-                            @if(old('notification'))
-
-                            <div id="step3" class="alert alert-success col-md-12">
-                                {{old('notification')}}
-                            </div>
-                            @endif
-                        </form>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 mb-5 mb-md-4">
+        <div class="card py-5 h-100">
+            <div class="card-body text-center">
+                <h2>Tour Booking Form</h2>
+                <form id="booking-form" action="/book" enctype="application/x-www-form-urlencoded"
+                    method="POST">
+                    {{ csrfField() }}
+                    <!-- Step 1: Personal Details -->
+                    <div id="step1" class="form-step row">
+                        <h4>Step 1: Personal Details</h4>
+                        <div class="form-group col-md-6">
+                            <label for="name">Full Name*</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class=" col-md-6">
+                            <label for="email">Email Address*</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class=" col-md-6">
+                            <label for="phone">Phone Number*</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
+                        <div class=" col-md-6 mb-4">
+                            <label for="country">Country*</label>
+                            <input type="text" class="form-control" id="country" name="country" required>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-primary mt-4 col-md-6 mb-4" type="button"
+                                onclick="nextStep()">Next</button>
+                        </div>
                     </div>
-                </div>
+
+                    <!-- Step 2: Traveler Information -->
+                    <div id="step2" class="form-step col-md-12 collapse">
+                        <h4>Step 2: Traveler Information</h4>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="travelers">Number of Travelers</label>
+                                <input type="number" name="travelers" class="form-control" value="1" min="1"
+                                    id="travelers" name="travelers" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="days">Number of Days</label>
+                                <input type="number" name="days" class="form-control" value="1" min="1"
+                                    id="days" name="days" required>
+                            </div>
+                        </div>
+                        <div id="traveler-details" class="col-md-12 mt-4">
+                            <button class="btn btn-success col-md-5" type="submit">book</button>
+                        </div>
+                    </div>
+                    @if(old('notification'))
+
+                    <div id="step3" class="alert alert-success col-md-12">
+                        {{old('notification')}}
+                    </div>
+                    @endif
+                </form>
             </div>
         </div>
     </div>
-</section>
+</div>
 <script>
     var currentStep = 1;
 
