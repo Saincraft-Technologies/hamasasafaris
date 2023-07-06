@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN npm install --production --silent && mv node_modules ../
 COPY . .
-RUN npm install mysql ../
+# RUN npm install mysql ../
 RUN node ace migration:rollback ../
 RUN node ace migration:run ../
 EXPOSE 3001
