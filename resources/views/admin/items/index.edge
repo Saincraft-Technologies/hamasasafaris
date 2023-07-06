@@ -1,6 +1,5 @@
 @layout('welcome')
 @section('content')
-{{ script('/js/init.js')}}
 <div class="row ">
     <div class="col-xl-12">
         <div class="card">
@@ -28,7 +27,7 @@
     </div>
 </div>
 <script>
-    $(document).ready(()=>{
+    // $(document).ready(()=>{
     var showAll = function () {
       var url = '{{listRoute}}';
   
@@ -42,7 +41,7 @@
       });
     }
     showAll();
-    })
+    // })
     
 </script>
 @endsection

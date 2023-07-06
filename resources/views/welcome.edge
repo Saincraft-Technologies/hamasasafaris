@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   {{ style('/css/materialdesignicons.min.css') }}
   {{ style('/css/style')}}
-  {{ style('/css/app')}}
+  {{ style('/css/app.css')}}
+  {{ style('/css/custom-css.css')}}
   {{ style('/css/content-placeholder.css')}}
   {{ style('/css/toastr.min.css')}}
   {{ style('/css/vendor/dataTables.bootstrap4.css')}}
@@ -18,63 +19,44 @@
 
 </head>
 
-<body>
+<body data-layout="detached">
+  @include('inc/navigation')
+  <div class="container-fluid">
 
-  <div class="wrapper d-flex  d-md-flex align-items-stretch" style="position: fixed; ">
-
-    @include('inc/navigation')
-
-    <!-- Page Content  -->
-    <div id="content" style="position:relative">
-
-      <nav class="navbar navbar-expand-lg navbar mr-5"
-        style="position:absolute; z-index:1;  width:100%; background-color:rgb(246, 246, 246);">
-        <div class="container-fluid">
-
-          <button type="button" id="sidebarCollapse" class="btn btn-outline-secondary mr-3">
-            <i class="mdi mdi-menu"></i>
-            <span class="sr-only">Toggle Menu</span>
-          </button>
-          <button class="btn btn-outline-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <i class="mdi mdi-menu"></i>
-          </button>
-          <div class="collapse navbar-collapse" style="float:right;" id="navbarSupportedContent">
-            @include('inc/rightbar')
+    <div class="wrapper">
+      @include('inc/rightbar')
+      <!-- Page Content  -->
+      <!-- PAGE CONTAINER-->
+      <div class="content-page">
+        <div class="content content-main">
+          <div class="loadings hidden"></div>
+          <!-- BEGIN PlACE PAGE CONTENT HERE -->
+          <div class="content_holder">
+            @!section('content')
           </div>
+          <!-- END PLACE PAGE CONTENT HERE -->
         </div>
-      </nav>
-      <div style="position: absolute;
-      top: 70px;
-      height:93%;
-      width:100%;
-      overflow: scroll;">
-        <div class="p-2 mainContent" style="top:10px; position:relative">
-          @!section('content')
-
-        </div>
+        <!-- Footer -->
+        @include('inc/footer')
       </div>
     </div>
   </div>
 
-  @include('inc/modals')
-  @include('inc/notify')
   {{ script('/js/ajax_form_submission.js')}}
   {{ script('/js/popper.min.js')}}
+  {{ script('/js/app.js')}}
   {{ script('/js/app.min.js')}}
   {{ script('/js/main.js')}}
   {{ script('/js/sub-sidebar.js')}}
+  {{ script('/js/jquery.dataTables.min.js')}}
   {{script('/js/owl.carousel.min.js')}}
   {{ script('/js/init.js')}}
   {{ script('/js/content-placeholder.js')}}
   {{ script('/js/ima3.js')}}
   {{ script('/js/toastr.min.js')}}
-  {{ script('/js/dataTables.js')}}
-  {{ script('/js/dataTables.bootstrap4.js')}}
-  {{ script('/js/dataTables.buttons.min.js')}}
-  {{ script('/js/dataTables.keyTable.min.js')}}
-  {{ script('/js/dataTables.responsive.min.js')}}
+
+  @include('inc/modals')
+  @include('inc/notify')
   <script>
     const loadPage = function(route){
       console.log($);

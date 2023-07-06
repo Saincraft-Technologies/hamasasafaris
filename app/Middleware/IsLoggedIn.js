@@ -12,7 +12,7 @@ class IsLoggedIn {
   async handle({ auth, request, response }, next) {
     // call next to advance the request
     try {
-      console.log('Auth =====>>>', auth)
+      // console.log('Auth =====>>>', auth)
       if (auth.check()) {
         await next()
       };

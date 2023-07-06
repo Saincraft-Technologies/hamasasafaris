@@ -3,17 +3,35 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="destination">destination name</label>
+
+            @if(destination.destination)
+            <input type="text" class="form-control" id="destination" value="{{destination.destination}}"
+                name="destination" required>
+            @else
+
             <input type="text" class="form-control" id="destination" name="destination" required>
+            @endif
             <small id="destination_help" class="form-text text-muted">provide destination name</small>
         </div>
         <div class="form-group col-md-6">
             <label for="caption">destination caption</label>
+            @if(destination.caption)
+            <input type="text" class="form-control" value="{{destination.caption}}" id="caption" name="caption"
+                required>
+            @else
             <input type="text" class="form-control" id="caption" name="caption" required>
+            @endif
             <small id="caption_help" class="form-text text-muted">provide caption</small>
         </div>
         <div class="form-group col-md-6">
             <label for="description">description</label>
-            <input type="text" class="form-control" id="description" name="description" required>
+            @if(destination.description)
+            <textarea type="text" style="height: 200px;" class="form-control" id="description" name="description"
+                required>{{destination.description}}</textarea>
+            @else
+            <textarea type="text" style="height: 200px;" class="form-control" id="description" name="description"
+                required></textarea>
+            @endif
             <small id="description_help" class="form-text text-muted">provide description</small>
         </div>
     </div>

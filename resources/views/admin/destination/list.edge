@@ -1,19 +1,24 @@
 <table id="basic-datatable" class="table table-striped td-responsive nowrap" width="100%">
     <thead>
         <tr style="background-color: #313a46; color: #ababab;">
-            @each(head in headers)
-            <th>{{head}}</th>
-            @endeach
+            <th>destination</th>
+            <th>caption</th>
+            <th>description</th>
+            <th>create date</th>
             <th>options</th>
         </tr>
     </thead>
     <tbody>
         @each(item in items)
         <tr>
-            @each(i in item)
-            <td><div style="word-spacing: normal; word-break:break-all;width:200px;">{{i}}</div></td>
-            @endeach
-            <td>
+            <td style=" width:7%;">{{item.destination}}</td>
+            <td style=" width:20%;">{{item.caption}}</td>
+            <td style=" width:40%;">
+                <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
+                    {{item.description}}</p>
+            </td>
+            <td style="width:20%;">{{item.created_at}}</td>
+            <td style=" width:10%;">
                 <div class="dropdown text-center">
                     <button type="button"
                         class="btn btn-sm btn-icon btn-rounded btn-outline-secondary dropdown-btn dropdown-toggle arrow-none card-drop"

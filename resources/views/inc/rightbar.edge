@@ -1,22 +1,37 @@
 <!-- LOGO -->
-<a href="/" class="topnav-logo">
-    <span class="topnav-logo-lg">
-        <img src="/assets/img/hamasa.png" alt="" height="40">
-    </span>
-</a>
-<div class="visit_website nav navbar-nav hidden">
-    <h4 style="color: #4e4e4e; float: left;">Hamasa Safaris</h4>
-    <img class="hidden content-placeholder" style="visibility: collapse;" src="/img/images/loader.gif" alt=""
-        height="30px;">
-</div>
+<nav class="navbar navbar-expand ml-5"
+    style="position:absolute; z-index:1;  width:100%; background-color:rgb(246, 246, 246);">
+    <div class="container-fluid">
 
-<ul class="nav navbar-nav ml-auto list-unstyled float-right">
+        <button type="button" id="sidebarCollapse" class="btn btn-outline-secondary mr-3">
+            <i class="mdi mdi-menu"></i>
+            <span class="sr-only">Toggle Menu</span>
+        </button>
+        <button class="btn btn-outline-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="mdi mdi-menu"></i>
+        </button>
+        <div class="collapse navbar-collapse" style="float:right;" id="navbarSupportedContent">
 
-    <li class="dropdown notification-list mt-3 mr-3">
-        <input type="checkbox" value="" name="changeTheme" id="changeTheme" data-switch="dark" />
-        <!--<label for="changeTheme" onclick="changeTheme();" data-on-label="dark" data-off-label="light"></label>-->
-        <script>
-            function changeTheme() {
+            <a href="/" class="topnav-logo">
+                <span class="topnav-logo-lg">
+                    <img src="/assets/img/hamasa.png" alt="" height="40">
+                </span>
+            </a>
+            <div class="visit_website nav navbar-nav hidden">
+                <h4 style="color: #4e4e4e; float: left;">Hamasa Safaris</h4>
+                <img class="hidden content-placeholder" style="visibility: collapse;" src="/img/images/loader.gif"
+                    alt="" height="30px;">
+            </div>
+
+            <ul class="nav navbar-nav ml-auto list-unstyled float-right">
+
+                <li class="dropdown notification-list mt-3 mr-3">
+                    <input type="checkbox" value="" name="changeTheme" id="changeTheme" data-switch="dark" />
+                    <!--<label for="changeTheme" onclick="changeTheme();" data-on-label="dark" data-off-label="light"></label>-->
+                    <script>
+                        function changeTheme() {
                     var value = $('#changeTheme').val();
                     (value == 'dark') ?
                         value = 'light' :
@@ -34,9 +49,9 @@
                         }
                     });
                 };
-        </script>
-    </li>
-    <!--<li class="dropdown notification-list">
+                    </script>
+                </li>
+                <!--<li class="dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button"
                 aria-haspopup="false" aria-expanded="false" onclick="getLanguageList()" title="change language">
                 <i class="mdi mdi-currency-twd noti-icon"></i>
@@ -56,51 +71,56 @@
         </li>-->
 
 
-    <li class="dropdown notification-list">
-        <a class="nav-link dropdown-toggle nav-user arrow-none mr-0"
-            style="background:transparent;border:0px solid #dddddd; color:#5d6af3;" data-toggle="dropdown" href="#"
-            role="button" aria-haspopup="false" aria-expanded="false">
-            <span class="account-user-avatar">
-                <img class="mt-0 rounded-circle js--image-preview" src="/img/avatar.png"
-                    style="width:38px;height:38px; background-color: #989595c7;">
+                <li class="dropdown notification-list">
+                    <a class="nav-link dropdown-toggle nav-user arrow-none mr-0"
+                        style="background:transparent;border:0px solid #dddddd; color:#5d6af3;" data-toggle="dropdown"
+                        href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <span class="account-user-avatar">
+                            <img class="mt-0 rounded-circle js--image-preview" src="/img/avatar.png"
+                                style="width:38px;height:38px; background-color: #989595c7;">
 
-            </span>
-            <span>
-                <span class="account-user-name text-dark">{{loggedInUser.username}}</span>
-                <span class="account-position  text-dark">{{loggedInUser.email}}</span>
+                        </span>
+                        <span>
+                            <span class="account-user-name text-dark">{{loggedInUser.username}}</span>
+                            <span class="account-position  text-dark">{{loggedInUser.email}}</span>
 
-            </span>
-        </a>
+                        </span>
+                    </a>
 
-        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-            <!-- item-->
-            <div class=" dropdown-header noti-title">
-                <h6 class="text-overflow m-0">welcome!</h6>
-            </div>
+                    <div
+                        class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+                        <!-- item-->
+                        <div class=" dropdown-header noti-title">
+                            <h6 class="text-overflow m-0">welcome!</h6>
+                        </div>
 
-            <!-- item-->
-            <a href="#" onclick="loadPage('/admin/profile', 'id', 'Profile')" class="dropdown-item notify-item">
-                <i class="mdi mdi-account-circle mr-1"></i>
-                <span>My Account</span>
-            </a>
-            <!-- item-->
-            <a href="#" onclick="loadPage('/settings','Settings')" class="dropdown-item notify-item">
-                <i class="mdi mdi-account-edit mr-1"></i>
-                <span>Settings</span>
-            </a>
-            <!-- item-->
-            <a href="mailto:info@saincrafttechnologies.com?Subject=Help%20On%20This" target="_blank"
-                class="dropdown-item notify-item">
-                <i class="mdi mdi-lifebuoy mr-1"></i>
-                <span>Support</span>
-            </a>
+                        <!-- item-->
+                        <a href="#" onclick="loadPage('/admin/profile', 'id', 'Profile')"
+                            class="dropdown-item notify-item">
+                            <i class="mdi mdi-account-circle mr-1"></i>
+                            <span>My Account</span>
+                        </a>
+                        <!-- item-->
+                        <a href="#" onclick="loadPage('/settings','Settings')" class="dropdown-item notify-item">
+                            <i class="mdi mdi-account-edit mr-1"></i>
+                            <span>Settings</span>
+                        </a>
+                        <!-- item-->
+                        <a href="mailto:info@saincrafttechnologies.com?Subject=Help%20On%20This" target="_blank"
+                            class="dropdown-item notify-item">
+                            <i class="mdi mdi-lifebuoy mr-1"></i>
+                            <span>Support</span>
+                        </a>
 
-            <!-- item-->
-            <a href="/logout" class="dropdown-item notify-item">
-                <i class="mdi mdi-logout mr-1"></i>
-                <span>Logout</span>
-            </a>
+                        <!-- item-->
+                        <a href="/logout" class="dropdown-item notify-item">
+                            <i class="mdi mdi-logout mr-1"></i>
+                            <span>Logout</span>
+                        </a>
 
+                    </div>
+                </li>
+            </ul>
         </div>
-    </li>
-</ul>
+    </div>
+</nav>

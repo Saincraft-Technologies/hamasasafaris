@@ -23,7 +23,7 @@ class HomeController {
             user.password = request.input('password');
             await user.save();
 
-            session.flash({ notification: 'user added successfully' });
+            session.flash({ status: true, notification: 'user added successfully' });
             return response.redirect('/login');
         } catch (error) {
 
@@ -43,7 +43,10 @@ class HomeController {
             }
             return response.redirect('/login')
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
+            session.flash({ status: false, notification: error.message });
+            return response.redirect('/login');
+
         }
     }
     async logout({ auth, response }) {

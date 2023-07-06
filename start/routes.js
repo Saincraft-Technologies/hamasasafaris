@@ -27,8 +27,18 @@ Route.group(() => {
     Route.get('/logout', 'HomeController.logout');
 }).middleware(["isLoggedIn"]);
 
-Route.on('/').render('site.index');
-Route.get('/pages/:modal', 'PagesController.index');
+// const getNav = async () => {
+//     const Navigations = use(`App/Models/Navigation`);
+
+//     return JSON.parse(JSON.stringify(await Navigations.all()));
+// }
+// Route.on('/').render('site.index', { navigations: [] });
+Route.get('/', 'MainController.construction');
+Route.get('/home', 'MainController.index');
+Route.get('/pages', 'MainController.genesis');
+Route.get('/pages/:destination', 'MainController.page');
+Route.get('/pages/:destination/:attraction', 'MainController.page');
+Route.get('/pages/:destination/:attraction/:activity', 'MainController.page');
 Route.post('/book', 'MainController.book');
 Route.get('/login', 'HomeController.login');
 Route.get('/register', 'HomeController.register');

@@ -6,7 +6,7 @@ class ModelController {
         try {
             console.log(await auth.getUser());
             let t = capitalize(params.model);
-            console.log(params);
+            // console.log(params);
 
             const Modal = use(`App/Models/${t}`);
             let model = await Modal.all();
@@ -21,7 +21,7 @@ class ModelController {
     async list({ params, view }) {
         try {
             let t = capitalize(params.model);
-            console.log(t);
+            // console.log(t);
 
             const Modal = use(`App/Models/${t}`);
             let model = await Modal.all();
@@ -37,10 +37,10 @@ class ModelController {
                         break;
                 }
             }
-            console.log('list invoked!', headers);
+            // console.log('list invoked!', headers);
             let editRoute = `/admin/edit/${params.model}`;
             let delRoute = `/admin/delete/${params.model}`;
-            return await view.render(`admin.items.list`, { items: model.toJSON(), headers: headers, model: params.model, delRoute: delRoute, editRoute: editRoute });
+            return await view.render(`admin.${params.model}.list`, { items: model.toJSON(), headers: headers, model: params.model, delRoute: delRoute, editRoute: editRoute });
         } catch (error) {
             console.log(error);
         }
@@ -62,11 +62,11 @@ class ModelController {
     async edit({ params, view }) {
         try {
             let t = capitalize(params.model);
-            console.log(t);
+            console.log('params', params);
 
             const Modal = use(`App/Models/${t}`);
-            let model = await Modal.find();
-            console.log('list invoked!', model);
+            let model = await Modal.find(params.id);
+            // console.log('list invoked!', model);
             let action = `/admin/update/${params.model}/${params.id}`
             return await view.render(`admin.${params.model}.create`, { [`${params.model}`]: model, action: action });
         } catch (error) {
