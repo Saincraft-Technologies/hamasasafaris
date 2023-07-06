@@ -1,7 +1,5 @@
 # Node modules
 node_modules
-package-lock.json
-package.json
 .env2
 .env1
 
