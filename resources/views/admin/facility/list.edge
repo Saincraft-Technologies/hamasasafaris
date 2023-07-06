@@ -1,11 +1,11 @@
+
 @include('admin/datatablejs')
 <table id="basic-datatable" class="table table-striped td-responsive nowrap" width="100%">
     <thead>
         <tr style="background-color: #313a46; color: #ababab;">
-            <th>destination</th>
+            <th>{{model}}</th>
             <th>caption</th>
             <th>description</th>
-            <th>gallery</th>
             <th>create date</th>
             <th>options</th>
         </tr>
@@ -13,13 +13,12 @@
     <tbody>
         @each(item in items)
         <tr>
-            <td style=" width:7%;">{{item.destination}}</td>
+            <td style=" width:7%;">{{item.facility}}</td>
             <td style=" width:20%;">{{item.caption}}</td>
             <td style=" width:40%;">
                 <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
                     {{item.description}}</p>
             </td>
-            <td style="width:20%;">{{item.gallery.gallery}}</td>
             <td style="width:20%;">{{item.created_at}}</td>
             <td style=" width:10%;">
                 <div class="dropdown text-center">

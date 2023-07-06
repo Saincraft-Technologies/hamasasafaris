@@ -21,9 +21,11 @@ Route.group(() => {
     Route.get('/admin/index/:model', 'ModelController.index');
     Route.get('/admin/list/:model', 'ModelController.list');
     Route.get('/admin/create/:model', 'ModelController.create');
+    Route.get('/admin/upload/:model/:id', 'ModelController.upload');
     Route.get('/admin/edit/:model/:id', 'ModelController.edit');
     Route.post('/admin/update/:model/:id', 'ModelController.update');
     Route.post('/admin/store/:model', 'ModelController.store');
+    Route.post('/admin/upload/:model/:id', 'ModelController.saveupload');
     Route.get('/logout', 'HomeController.logout');
 }).middleware(["isLoggedIn"]);
 

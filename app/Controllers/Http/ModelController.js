@@ -40,7 +40,8 @@ class ModelController {
             // console.log('list invoked!', headers);
             let editRoute = `/admin/edit/${params.model}`;
             let delRoute = `/admin/delete/${params.model}`;
-            return await view.render(`admin.${params.model}.list`, { items: model.toJSON(), headers: headers, model: params.model, delRoute: delRoute, editRoute: editRoute });
+            let uploadRoute = `/admin/upload/${params.model}`;
+            return await view.render(`admin.${params.model}.list`, { items: model.toJSON(), headers: headers, model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
         } catch (error) {
             console.log(error);
         }
@@ -73,8 +74,76 @@ class ModelController {
             console.log(error);
         }
     }
+    async upload({ params, view }) {
+        try {
+            let t = capitalize(params.model);
+            console.log('params', params);
+
+            const Modal = use(`App/Models/${t}`);
+            let model = await Modal.find(params.id);
+            let action = `/admin/upload/${params.model}/${params.id}`
+            return await view.render(`admin.${params.model}.upload`, { [`${params.model}`]: model, action: action });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     async store({ auth, params, request, response, view }) {
+        try {
+            let t = capitalize(params.model);
+            // console.log(t);
+
+            const Modal = use(`App/Models/${t}`);
+            const Gallery = use(`App/Models/Gallery`);
+            let newModal = new Modal();
+            const object = request.body;
+            for (const key in object) {
+                if (key !== '_csrf') {
+                    newModal[key] = object[key];
+                }
+            }
+            // before save add gallery if model is contains gallery
+
+            let gal = new Gallery();
+            switch (params.model) {
+                case 'accommodation':
+                    gal.gallery = request.input(`${params.model}`);
+                    gal.save();
+                    newModal.gallery_id = gal.id;
+                    await newModal.save();
+                    break;
+                case 'attraction':
+                    gal.gallery = request.input(`attraction`);
+                    console.log(gal);
+                    gal.save();
+                    newModal.gallery_id = gal.id;
+                    await newModal.save();
+                    break;
+                case 'stopPoint':
+                    gal.gallery = request.input(`${params.model}`);
+                    gal.save();
+                    newModal.gallery_id = gal.id;
+                    await newModal.save();
+                    break;
+                case 'destination':
+                    gal.gallery = request.input(`${params.model}`);
+                    gal.save();
+                    newModal.gallery_id = gal.id;
+                    await newModal.save();
+                    break;
+
+                default:
+                    await newModal.save();
+                    break;
+            }
+            response.json({ status: true, notification: 'successfully added ' + params.model });
+        } catch (error) {
+            console.log(error);
+            response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
+        }
+    }
+
+    async saveupload({ auth, params, request, response, view }) {
         try {
             let t = capitalize(params.model);
             // console.log(t);

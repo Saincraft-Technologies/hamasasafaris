@@ -1,60 +1,26 @@
-<style>
-  .lg-image {
-    width: 50px;
-  }
+<nav class="navbar-custom topnav-navbar topnav-navbar-dark" style="position: fixed; width:100%; z-index:99;" id="mainNav">
+  <div class="container-fluid">
+          <!-- LOGO -->
+          <a href="/" class="topnav-logo text-white" style="min-width: unset;">
+                  <span class="topnav-logo-lg">
+                          <img src="/assets/img/hamasa.png" alt="" height="40">
+                          Hamasa Safaris
+                  </span>
+                  <span class="topnav-logo-sm">
+                          <img src="/assets/img/hamasa.png" alt="" height="40">
+                          Hamasa Safaris
+                  </span>
+          </a>
 
-  .lg-name {
-    width: 50px;
-  }
-</style>
-<nav id="sidebar" class=" bg-secondary" style="position:relative">
-  <div class="logo mt-5">
-    <img class="mt-0 rounded-circle js--image-preview" src="/img/avatar.png" srcset="/img/avatar.png"
-      style="width:50px;">
 
-    <h5 class="text-light">{{loggedInUser.username}}<br>
-    </h5>
+          <a class="button-menu-mobile disable-btn">
+                  <i class="mdi mdi-menu"></i>
+          </a>
+
+          <div class="visit_website">
+                  <a href="/" target="" class="btn btn-outline-light ml-3">preview</a>
+                  <img class="hidden content-placeholder" src="/img/images/loader.gif" alt="" height="35px;">
+          </div>
 
   </div>
-  <ul class="list-unstyled components mb-5 mr-3">
-
-    <li class="active">
-      <a href="/admin/dashboard"><i class="mdi mdi-home"></i> Home</a>
-    </li>
-    <li>
-      <a href="/admin/index/destination"><i class="mdi mdi-note"></i>
-        Destinations</a>
-    </li>
-
-    <li>
-      <a href="/admin/index/accommodation"><i class="mdi mdi-note"></i>
-        Accommodation</a>
-    </li>
-    <li>
-      <a href="/admin/index/attraction"><i class="mdi mdi-note"></i>
-        Attractions</a>
-    </li>
-    <li>
-      <a href="/admin/index/facility"><i class="mdi mdi-note"></i>
-        Facilites</a>
-    </li>
-    <li>
-      <a href="/admin/index/stopPoint"><i class="mdi mdi-note"></i>
-        Stop Point</a>
-    </li>
-    <li>
-      <a href="/admin/index/activity"><i class="mdi mdi-note"></i>
-        Activities</a>
-    </li>
-    <li>
-      <a href="/admin/index/page"><i class="mdi mdi-note"></i> Pages</a>
-    </li>
-    <li>
-      <a href="/admin/index/gallery"><i class="mdi mdi-note"></i> Galleries</a>
-    </li>
-    <li>
-      <a href="/admin/index/booking"><i class="mdi mdi-bookmark"></i> Bookings</a>
-    </li>
-  </ul>
 </nav>
-{{ script('js/jquery-3.7.0.min.js')}}

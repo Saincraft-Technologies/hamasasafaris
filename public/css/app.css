@@ -12075,7 +12075,7 @@ body[data-layout="detached"] .wrapper {
 body[data-layout="detached"] .content-page {
   margin-left: 0;
   overflow: hidden;
-  padding: 0 15px 5px 30px;
+  padding: 55px 15px 5px 200px;
   position: relative;
   margin-right: -15px;
   width: 100%;
@@ -12109,7 +12109,7 @@ body[data-layout="detached"].enlarged .wrapper .footer {
 
   body[data-layout="detached"] .content-page {
     margin-left: 0 !important;
-    padding: 0 10px 60px 10px;
+    padding: 55px 10px 60px 10px;
   }
 }
 

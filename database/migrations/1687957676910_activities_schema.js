@@ -9,7 +9,7 @@ class ActivitiesSchema extends Schema {
       table.increments()
       table.string('activity', 100).notNullable()
       table.string('duration', 100).notNullable()
-      table.string('description', 254)
+      table.text('description')
       table.timestamps()
     })
   }

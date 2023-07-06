@@ -9,8 +9,8 @@ class StopPointsSchema extends Schema {
       table.increments()
       table.string('name', 100).notNullable()
       table.string('caption', 254)
-      table.string('description', 254)
-      table.integer('upload_id').unsigned().references('id').inTable('uploads')
+      table.text('description')
+      table.integer('gallery_id').unsigned().references('id').inTable('galleries')
       table.timestamps()
     })
   }

@@ -6,15 +6,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   {{ style('/css/materialdesignicons.min.css') }}
-  {{ style('/css/style')}}
-  {{ style('/css/app.css')}}
   {{ style('/css/custom-css.css')}}
   {{ style('/css/content-placeholder.css')}}
   {{ style('/css/toastr.min.css')}}
   {{ style('/css/vendor/dataTables.bootstrap4.css')}}
   {{ style('/css/vendor/responsive.bootstrap4.css')}}
-  {{ style('/css/jquery-datatables.css')}}
-  {{ script('/js/jquery.min.js')}}
+  {{ style('/css/vendor/buttons.bootstrap4.css')}}
+  {{ style('/css/vendor/summernote-bs4.css')}}
+  {{ style('/css/style')}}
+  {{ style('/css/app.css')}}
+  {{ script('/js/jquery-3.7.0.min.js')}}
   <link rel="icon" type="image/png" href="/assets/img/hamasa.png" />
 
 </head>
@@ -24,7 +25,7 @@
   <div class="container-fluid">
 
     <div class="wrapper">
-      @include('inc/rightbar')
+      @include('inc/sidebar')
       <!-- Page Content  -->
       <!-- PAGE CONTAINER-->
       <div class="content-page">
@@ -37,23 +38,20 @@
           <!-- END PLACE PAGE CONTENT HERE -->
         </div>
         <!-- Footer -->
-        @include('inc/footer')
       </div>
     </div>
   </div>
-
-  {{ script('/js/ajax_form_submission.js')}}
-  {{ script('/js/popper.min.js')}}
-  {{ script('/js/app.js')}}
   {{ script('/js/app.min.js')}}
+  {{ script('/js/app.js')}}
   {{ script('/js/main.js')}}
   {{ script('/js/sub-sidebar.js')}}
-  {{ script('/js/jquery.dataTables.min.js')}}
   {{script('/js/owl.carousel.min.js')}}
-  {{ script('/js/init.js')}}
-  {{ script('/js/content-placeholder.js')}}
-  {{ script('/js/ima3.js')}}
   {{ script('/js/toastr.min.js')}}
+  {{ script('/js/jquery.validate.min.js')}}
+  {{ script('/js/additional-methods.min.js')}}
+  {{ script('/js/content-placeholder.js')}}
+  {{ script('/js/addon.js')}}
+  {{ script('/js/ajax_form_submission.js')}}
 
   @include('inc/modals')
   @include('inc/notify')
