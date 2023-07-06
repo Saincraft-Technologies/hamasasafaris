@@ -13,7 +13,7 @@ class AccommodationsSchema extends Schema {
       table.string('phone', 24)
       table.text('caption')
       table.text('description')
-      table.integer('gallery_id').unsigned().references('id').inTable('gallery_id')
+      table.integer('gallery_id').unsigned().references('id').inTable('galleries')
       table.timestamps()
     })
   }
