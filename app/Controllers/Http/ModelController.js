@@ -1,11 +1,7 @@
 'use strict'
 
 const capitalize = s => s.replace(/./, c => c.toUpperCase());
-
-
-
 class ModelController {
-
     async index({ auth, params, view }) {
         try {
             console.log(await auth.getUser());
@@ -152,73 +148,71 @@ class ModelController {
     }
 
     async saveupload({ auth, params, request, response, view }) {
+
         try {
             let t = capitalize(params.model);
+            const Drive = use('Drive');
+            const Helpers = use('Helpers')
 
             console.log('am here ===>>>', request._files);
             const Modal = use(`App/Models/${t}`);
             const Upload = use(`App/Models/Upload`);
             let imageModal = new Upload();
+            const folder = '/public/uploads/';
 
             const picture = request.file('pic_image', {
                 types: ['image'],
                 size: '2mb'
-            })
-
-            require('aws-sdk/lib/maintenance_mode_message').suppress = true;
-            const AWS = require('aws-sdk');
-
-            const { v4 } = require('uuid');
-
-            const uploadToSpace = async (file, bucket, folderpath) => {
-                const s3 = new AWS.S3({
-                    endpoint: process.env.S3ENDPOINT + '/' + folderpath,
-                    region: 'fra1',
-                    secretAccessKey: process.env.NDOOSIRI,
-                    accessKeyId: process.env.NDOOFUNGUO
-                })
-                const { type, subtype, extname } = file;
-
-                let mimeType = type + '/' + subtype;
-                let fileType = mimeType;
-
-                const name = v4() + "." + extname;
-
-                let buffer = Buffer.from(JSON.stringify(file), 'utf-8');
-
-                await s3.putObject({
-                    Key: name,
-                    Bucket: bucket,
-                    ContentType: fileType,
-                    Body: buffer.toString("base64"),
-                    ACL: 'public-read',
-                }).promise();
-                let keyy = 'DO00V66TRWHZXCL8CM48';
-                let urll = 'https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com'
-                let secr = '2oBSgaKqRb6+6ZR0CK7Z1UvUKS3vQGF4JA24C9vCyQ4';
-
-                let url = `https://${bucket}.fra1.digitaloceanspaces.com/${folderpath}`;
-                console.log(url);
-                return { key: name, url }
-            }
-
-
-            // await picture.move('./public/uploads/', {
+            });
+            // await picture.move(Helpers.tmp(), {
             //     name: new Date().toISOString() + `${params.model}.jpg`,
             //     overwrite: true
             // })
-            if (picture) {
-                const asn = await uploadToSpace(picture, 'saincrafttechnologies-static-public-2023', 'hamasasafaris/uploads');
 
-                imageModal.gallery_id = params.id;
-                imageModal.filepath = asn.url + '/' + asn.key;
-                imageModal.metadata = picture.subtype;
-                imageModal.caption = request.input('caption');
-                imageModal.filename = asn.key;
-                console.log(await asn);
-                await imageModal.save();
-                return response.json({ status: true, notification: 'successfully added ' + params.model });
-            }
+            // if (!picture.moved()) {
+            //     console.log(picture.error());
+            //     return picture.error()
+            // }
+            const { v4 } = require('uuid');
+            const fs = require('fs');
+            const path = require('path');
+
+            const { type, subtype, extname } = picture;
+
+            let mimeType = type + '/' + subtype;
+            let fileType = mimeType;
+            const name = v4() + "." + extname;
+            // Sets the path and move the file
+            const filePath = `${path.resolve(`./tmp/public/uploads/`)}/${name}`;
+            const s3filePath = `${path.resolve(`./hamasasafaris/uploads/`)}/${name}`;
+            await picture.move(Helpers.tmpPath(folder), { name: name, overwrite: true })
+            // create readable stream
+            const fileStream = await fs.createReadStream(filePath)
+            const fileSize = await picture.stream.byteCount
+
+            // Uploads the file to Amazon S3 and stores the url
+            const s3Path = `hamasasafaris/uploads/${name}`
+            await Drive.disk('s3').put(s3Path, fileStream, { ACL: 'public-read', ContentType: `${picture.type}/${picture.subtype}` })
+            const fileUrl = await Drive.disk('s3').getUrl(s3Path)
+
+            // Destroy the readable stream and delete the file from tmp path
+            await fileStream._destroy(null, err => {
+                console.log(err);
+            })
+            await Drive.delete(filePath)
+
+
+            // if (fileUrl) {
+
+            imageModal.gallery_id = params.id;
+            imageModal.filepath = fileUrl;
+            imageModal.metadata = picture.subtype;
+            imageModal.caption = request.input('caption');
+            imageModal.filename = name;
+            console.log(await fileUrl);
+            await imageModal.save();
+            return response.json({ status: true, notification: 'successfully added ' + params.model });
+            // }
             // if (!picture.moved()) {
             //     console.log(picture.error());
             //     return picture.error()
