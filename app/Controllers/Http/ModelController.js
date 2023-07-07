@@ -209,7 +209,7 @@ class ModelController {
             imageModal.metadata = picture.subtype;
             imageModal.caption = request.input('caption');
             imageModal.filename = name;
-            console.log(await fileUrl);
+            // console.log(await fileUrl);
             await imageModal.save();
             return response.json({ status: true, notification: 'successfully added ' + params.model });
             // }

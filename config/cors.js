@@ -16,7 +16,7 @@ module.exports = {
   | Function - Receives the current origin and should return one of the above values.
   |
   */
-  origin: ['https://www.hamasasafaris.com', 'https://hamasasafaris.builds.saincrafttechnologies.com', 'https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com'],
+  origin: true,
 
   /*
   |--------------------------------------------------------------------------
