@@ -174,8 +174,8 @@ class ModelController {
                 const s3 = new AWS.S3({
                     endpoint: process.env.S3ENDPOINT + '/' + folderpath,
                     region: 'fra1',
-                    secretAccessKey: process.env.NDOOFUNGUO,
-                    accessKeyId: process.env.NDOOSIRI
+                    secretAccessKey: process.env.NDOOSIRI,
+                    accessKeyId: process.env.NDOOFUNGUO
                 })
                 const { type, subtype, extname } = file;
 
