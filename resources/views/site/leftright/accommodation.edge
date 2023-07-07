@@ -2,12 +2,33 @@
 @if(isOdd(item.id))
 
 <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="{{item.upload.path}}"
-            alt="{{item.accommodation}}" /></div>
-    <div class="col-xl-4 col-lg-5">
+    <div class="col-xl-7 col-lg-6 ">
+        <div id="{{item.accommodation}}" class="carousel slide " style="box-shadow: 10px 10px 10px rgb(208, 208, 208);"
+            data-ride="carousel">
+            <!-- Indicators-->
+            <ol class="carousel-indicators">
+                @each(upload in item.gallery.uploads)
+                <li data-target="{{item.accommodation}}" data-slide-to="{{upload.id}}"></li>
+                @endeach
+            </ol>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+
+                @each(upload in item.gallery.uploads)
+                <div class="carousel-item active">
+                    <img class="img-fluid mb-3 mb-lg-0" src="{{upload.filepath}}" alt="{{item.accommodation}}" />
+                </div>
+                @endeach
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-xl-4 col-lg-5 m-5">
         <div class="featured-text text-center text-lg-left">
             <h4>{{item.accommodation}}</h4>
-            <p class="text-black-50 mb-0">{{item.type}}</p>
+            <p class="text-black-50 mb-0">{{item.description}}</p>
 
             <a class="btn btn-danger" href="/accommodations/{{item.id}}">Explore!</a>
         </div>
@@ -19,13 +40,34 @@
     <div class="col-xl-4 col-lg-5 mb-4 mb-lg-5">
         <div class="featured-alt-text text-center text-lg-right">
             <h4>{{item.accommodation}}</h4>
-            <p class="text-black-50 mb-0">{{item.type}}</p>
+            <p class="text-black-50 mb-0">{{item.description}}</p>
 
             <a class="btn btn-danger" href="/accommodations/{{item.id}}">Explore!</a>
         </div>
     </div>
-    <div class="col-xl-8 col-lg-7 mb-4 mb-lg-5"><img class="img-fluid mb-3 mb-lg-0"
-            src="/assets/img/cultural-experience.jpg" alt="zanzibar-vaccation" /></div>
+    <div class="col-xl-7 col-lg-6 ">
+        <div id="{{item.accommodation}}" class="carousel slide " style="box-shadow: 10px 10px 10px rgb(208, 208, 208);"
+            data-ride="carousel">
+            <!-- Indicators-->
+            <ol class="carousel-indicators">
+                @each(upload in item.gallery.uploads)
+                <li data-target="{{item.accommodation}}" data-slide-to="{{upload.id}}"></li>
+                @endeach
+            </ol>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+
+                @each(upload in item.gallery.uploads)
+                <div class="carousel-item active">
+                    <img class="img-fluid mb-3 mb-lg-0" src="{{upload.filepath}}" alt="{{item.accommodation}}" />
+                </div>
+                @endeach
+            </div>
+
+        </div>
+
+    </div>
 </div>
 @endif
 @endeach

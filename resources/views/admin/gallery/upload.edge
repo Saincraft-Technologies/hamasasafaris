@@ -1,5 +1,6 @@
 {{ script('/js/init.js') }}
-<form method="POST" class="d-block ajaxForm" action="#">
+<form method="POST" class="d-block ajaxForm" enctype="multipart/form-data" action="{{action}}">
+    {{ csrfField() }}
     <div class="form-row">
         <div class="col-md-3"></div>
         <div class="form-group mb-2 col-md-6">
@@ -7,22 +8,29 @@
                 provide image .png format
             </small>
             <div class="col-md-12 custom-file-upload">
-                <div class="wrapper-image-preview" style="margin-left: -6px; ">
+                <div class="wrapper-image-preview" style="margin-left: 0px; ">
                     <div class="box" style="width: 230px; height:270px;">
                         <div class="js--image-preview"
                             style="height:220px; background-image: url('/img/avatar.png'); background-color: #F5F5F5;">
                         </div>
                         <div class="upload-options">
-                            <label for="user_image" class="btn" style="font-size:medium;"> <i
+                            <label for="pic_image" class="btn" style="font-size:medium;"> <i
                                     class="mdi mdi-upload mr-1"></i> upload
                                 image
                             </label>
-                            <input id="user_image" style="visibility:hidden;" type="file" class="image-upload"
-                                name="user_image" accept="image/png" onchange="">
+                            <input id="pic_image" style="visibility:hidden;" type="file" class="image-upload"
+                                name="pic_image" accept="image/*" onchange="">
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="form-group col-md-6">
+            <label for="caption">caption</label>
+            <textarea type="text" class="form-control" id="caption" name="caption" required>{{item.caption}}</textarea>
+            <small id="caption_help" class="form-text text-muted">provide caption</small>
         </div>
         <div class="col-md-3"></div>
         <div class="form-group mt-2 col-md-6">

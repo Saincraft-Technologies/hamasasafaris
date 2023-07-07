@@ -18,25 +18,61 @@ class MainController {
         const Destination = use(`App/Models/Destination`);
         const Attraction = use(`App/Models/Attraction`);
         const Activity = use(`App/Models/Activity`);
-        const DestinAttract = use(`App/Models/DestinationAttraction`);
-        const DestinAccommo = use(`App/Models/DestinationAccommodation`);
+        const Gallery = use(`App/Models/Gallery`);
+        const Upload = use(`App/Models/Upload`);
         const Accommodation = use(`App/Models/Accommodation`);
-        let destAttr = JSON.parse(JSON.stringify(await DestinAttract.all()));
-        let destAccom = JSON.parse(JSON.stringify(await DestinAccommo.all()));
-        let destination = [];
-        destAttr.map(async (value, key, arrayy) => {
-            let dest = JSON.parse(JSON.stringify(await Destination.find(value.destination_id)));
-            dest['attraction'] = JSON.parse(JSON.stringify(await Attraction.find(value.attraction_id)));
+        const model = await Accommodation.pick(3)
+        const destmodel = await Destination.pick(3)
+        const models = JSON.parse(JSON.stringify(await model));
+        const destmodels = JSON.parse(JSON.stringify(await destmodel));
+        const accommodations = [];
+        const destinations = [];
+        // const accommodation = [];
+        // const accommodation = [];
+        for (const value of models) {
 
-            destination.push(dest)
-        })
-        destAttr.map(async (value, key, arrayy) => {
-            let dest = JSON.parse(JSON.stringify(await Destination.find(value.destination_id)));
-            dest['attraction'] = JSON.parse(JSON.stringify(await Attraction.find(value.attraction_id)));
+            if (value['gallery_id']) {
+                console.log('value ===>>..', value.gallery_id);
+                const gall = await Gallery.find(value.gallery_id);
+                value['gallery'] = await gall.toJSON();
+                const uploads = await gall.uploads().fetch();
+                value['gallery']['uploads'] = JSON.parse(JSON.stringify(await uploads));
+                accommodations.push(await value);
+            } else {
+                accommodations.push(await value);
+            }
+        }
+        for (const value of destmodels) {
 
-            destination.push(dest)
-        })
-        return view.render('site.pages', { accommodations: JSON.parse(JSON.stringify(await Accommodation.all())), attractions: JSON.parse(JSON.stringify(await Attraction.all())), activities: JSON.parse(JSON.stringify(await Activity.all())) });
+            if (value['gallery_id']) {
+                console.log('value ===>>..', value.gallery_id);
+                const gall = await Gallery.find(value.gallery_id);
+                value['gallery'] = await gall.toJSON();
+                const uploads = await gall.uploads().fetch();
+                value['gallery']['uploads'] = JSON.parse(JSON.stringify(await uploads));
+                destinations.push(await value);
+            } else {
+                destinations.push(await value);
+            }
+        }
+        console.log(accommodations);
+
+        // let destAttr = JSON.parse(JSON.stringify(await DestinAttract.all()));
+        // let destAccom = JSON.parse(JSON.stringify(await DestinAccommo.all()));
+        // let destination = [];
+        // destAttr.map(async (value, key, arrayy) => {
+        //     let dest = JSON.parse(JSON.stringify(await Destination.find(value.destination_id)));
+        //     dest['attraction'] = JSON.parse(JSON.stringify(await Attraction.find(value.attraction_id)));
+
+        //     destination.push(dest)
+        // })
+        // destAttr.map(async (value, key, arrayy) => {
+        //     let dest = JSON.parse(JSON.stringify(await Destination.find(value.destination_id)));
+        //     dest['attraction'] = JSON.parse(JSON.stringify(await Attraction.find(value.attraction_id)));
+
+        //     destination.push(dest)
+        // })
+        return view.render('site.pages', { accommodations: JSON.parse(JSON.stringify(await accommodations)), destinations: JSON.parse(JSON.stringify(await destinations)), activities: JSON.parse(JSON.stringify(await Activity.all())) });
     }
     async page({ params, request, response, view }) {
 

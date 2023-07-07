@@ -54,9 +54,7 @@
 </form>
 <script>
     $(".ajaxForm").validate({}); // Jquery form validation initialization
-    $(".ajaxForm").submit(function (e) {
-        e.preventDefault()
-    alert('jquery here too', e)
+    $(".ajaxForm").submit(function () {
         var form = $(this);
         ajaxSubmit(e, form, "POST", showAll);
     });

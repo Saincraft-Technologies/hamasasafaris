@@ -27,9 +27,12 @@
     "@adonisjs/mail": "^3.1.0",
     "@adonisjs/session": "^1.0.27",
     "@adonisjs/shield": "^1.0.8",
+    "@aws-sdk/client-s3": "^3.367.0",
+    "aws-sdk": "^2.1412.0",
     "mailgun-js": "^0.22.0",
     "mysql": "^2.18.1",
-    "nodemailer": "^6.9.3"
+    "nodemailer": "^6.9.3",
+    "uuid": "^9.0.0"
   },
   "autoload": {
     "App": "./app"
