@@ -5,14 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet"
-        href="https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/hamasasafaris/public/css/custom.css">
-    <link rel="stylesheet"
-        href="https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/hamasasafaris/public/css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/public/css/materialdesignicons.min.css">
+    {{
+    style('https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/public/css/custom.css')
+    }}
+    {{
+    style('https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/public/css/fontawesome.min.css')
+    }}
+    {{
+    style('https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/public/css/materialdesignicons.min.css')
+    }}
     <link rel="icon" type="image/png"
-        href="https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/hamasasafaris/public/assets/img/hamasa.png" />
+        href="https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/public/assets/img/hamasa.png" />
 
     <title>Hamasa|Safaris</title>
 </head>
@@ -29,21 +32,21 @@
 
     @include('inc/contact')
     @include('inc/footer')
-    <script
-        src="https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/js/jquery-3.7.0.min.js">
-    </script>
-    <script
-        src="https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/js/popper.js">
-    </script>
-    <script
-        src="https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/js/bootstrap.min.js">
-    </script>
-    <script
-        src="https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/js/bootstrap.bundle.min.js">
-    </script>
-    <script
-        src="https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/js/custom.js">
-    </script>
+    {{
+    script('https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/public/js/jquery-3.7.0.min.js')
+    }}
+    {{
+    script('https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/public/js/popper.js')
+    }}
+    {{
+    script('https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/public/js/bootstrap.min.js')
+    }}
+    {{
+    script('https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/public/js/bootstrap.bundle.min.js')
+    }}
+    {{
+    script('https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/storekeeperapp/public/js/custom.js')
+    }}
 
 </body>
 
