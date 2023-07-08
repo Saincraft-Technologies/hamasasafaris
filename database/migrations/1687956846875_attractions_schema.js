@@ -10,7 +10,8 @@ class AttractionsSchema extends Schema {
       table.string('attraction', 100).notNullable()
       table.string('caption', 254)
       table.text('description')
-      table.integer('gallery_id').unsigned().references('id').inTable('galleries')
+      table.integer('article_id').unsigned().references('id').inTable('galleries')
+      table.integer('article_id').unsigned().references('id').inTable('articles')
       table.timestamps()
     })
   }

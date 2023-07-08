@@ -1,12 +1,11 @@
 'use strict'
 const Booking = use('App/Models/Booking');
 class AdminController {
-    async index({ view }) {
+    async index({ auth, view }) {
         try {
-            const bookings = await Booking.all();
-            console.log(await bookings.toJSON());
-            
-            return await view.render(`admin.dashboard`, { bookings: await bookings.toJSON() });
+            const loggedInUser = auth.check();
+            console.log(loggedInUser);
+            return await view.render(`admin.dashboard`, { bookings: await bookings.toJSON(), loggedInUser: loggedInUser });
         } catch (error) {
             console.log(error);
         }

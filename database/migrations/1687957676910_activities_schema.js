@@ -10,6 +10,7 @@ class ActivitiesSchema extends Schema {
       table.string('activity', 100).notNullable()
       table.string('duration', 100).notNullable()
       table.text('description')
+      table.integer('article_id').unsigned().references('id').inTable('articles')
       table.timestamps()
     })
   }

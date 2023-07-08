@@ -25,7 +25,11 @@ Route.group(() => {
     Route.get('/admin/edit/:model/:id', 'ModelController.edit');
     Route.post('/admin/update/:model/:id', 'ModelController.update');
     Route.post('/admin/store/:model', 'ModelController.store');
-    Route.post('/upload/:model/:id', 'ModelController.saveupload');
+    Route.post('/admin/upload/:model/:id', 'ModelController.saveupload');
+
+
+    Route.get('/storage/uploads/:model/:id', 'ModelController.gallery');
+
     Route.get('/logout', 'HomeController.logout');
 }).middleware(["isLoggedIn"]);
 
@@ -38,9 +42,25 @@ Route.group(() => {
 Route.get('/', 'MainController.construction');
 Route.get('/home', 'MainController.genesis');
 Route.get('/pages', 'MainController.genesis');
-Route.get('/pages/:destination', 'MainController.page');
-Route.get('/pages/:destination/:attraction', 'MainController.page');
-Route.get('/pages/:destination/:attraction/:activity', 'MainController.page');
+
+Route.get('/destinations/:destination', 'MainController.destination');
+Route.get('/destinations/:destination/:attraction', 'MainController.destination');
+Route.get('/destinations/:destination/:attraction/:activity', 'MainController.destination');
+
+
+Route.get('/attractions', 'MainController.attraction');
+Route.get('/attractions/:attraction', 'MainController.attraction');
+Route.get('/attractions/:attraction/:activity', 'MainController.attraction');
+
+Route.get('/activities', 'MainController.activity');
+Route.get('/activities/:activity', 'MainController.activity');
+Route.get('/activities/:activity/:activity', 'MainController.activity');
+
+
+Route.get('/accommodations', 'MainController.accommodation');
+Route.get('/accommodations/:accommodation', 'MainController.accommodation');
+Route.get('/accommodations/:accommodation/:activity', 'MainController.accommodation');
+
 Route.post('/book', 'MainController.book');
 Route.get('/login', 'HomeController.login');
 Route.get('/register', 'HomeController.register');

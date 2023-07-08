@@ -4,11 +4,11 @@
 const Model = use('Model')
 
 class AccommodationFacility extends Model {
-    facility() {
-        return this.hasMany('App/Models/Facility')
+    facilities() {
+        return this.belongsTo('App/Models/Facility')
     }
-    Accommodation() {
-        return this.hasMany('App/Models/Accommodation')
+    Accommodations() {
+        return this.belongsTo('App/Models/Accommodation')
     }
 }
 

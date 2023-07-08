@@ -8,8 +8,6 @@ class ModelController {
             let t = capitalize(params.model);
             // console.log(params);
 
-            const Modal = use(`App/Models/${t}`);
-            let model = await Modal.all();
             let createRoute = `/admin/create/${params.model}`;
             let listRoute = `/admin/list/${params.model}`;
             let mod = params.model;
@@ -24,21 +22,36 @@ class ModelController {
             // console.log(t);
 
             const Modal = use(`App/Models/${t}`);
-            const model = await Modal.all();
+            var model;
+            console.log('models ===>', params.model)
+            if (!params.model == 'gallery') {
+            } else {
+                model = await Modal.query().fetch();
+            }
+            try {
+                model = await Modal.query().with('gallery').fetch();
+            } catch (error) {
+                model = await Modal.query().fetch();
+            }
+            // const galleriess = await model.gallery().fetch()
+            // const galleries = JSON.parse(JSON.stringify(await model));
+            // console.log('galleries ====>>>', galleries)
             const models = JSON.parse(JSON.stringify(await model));
             const final = [];
-            console.log('list invoked!', await models);
             const Gal = use('App/Models/Gallery');
+
             for (const value of models) {
                 if (!value['gallery_id'] === null) {
+                    console.log('list invoked!', await value);
                     const gall = await Gal.find(value.gallery_id);
                     value['gallery'] = await gall.toJSON();
+
                     final.push(await value);
                 } else {
                     final.push(await value);
                 }
             }
-
+            console.log(...final)
 
             let editRoute = `/admin/edit/${params.model}`;
             let delRoute = `/admin/delete/${params.model}`;
@@ -144,6 +157,26 @@ class ModelController {
         } catch (error) {
             console.log(error);
             response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
+        }
+    }
+
+    async gallery({ params, view }) {
+        try {
+            const { id, model } = params;
+            const Gallery = use('App/Models/Gallery');
+            const Upload = use('App/Models/Upload');
+            const gallery = await Gallery.query().where('id', id).fetch()
+            const uploads = await Upload.query().where('gallery_id', id).fetch()
+            console.log("uploads ===>>>1", JSON.parse(JSON.stringify(gallery)), params.model);
+
+            let editRoute = `/admin/edit/${model}`;
+            let delRoute = `/admin/delete/${model}`;
+            let uploadRoute = `/admin/upload/${model}`;
+            const modelValue = JSON.parse(JSON.stringify(await gallery))
+            return await view.render(`admin.${model}.gallery`, { items: JSON.parse(JSON.stringify(uploads)), modelValue: modelValue[0]['gallery'], model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+
+        } catch (error) {
+
         }
     }
 

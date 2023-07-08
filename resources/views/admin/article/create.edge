@@ -1,0 +1,50 @@
+<form method="POST" class="d-block ajaxForm" action="{{action}}">
+    {{ csrfField() }}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="title">article name</label>
+            <input type="text" class="form-control" value="{{item.title}}" id="title" name="title" required>
+            <small id="accommodation_help" class="form-text text-muted">provide article title</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="author">article author</label>
+            <input type="text" class="form-control" value="{{item.author}}" id="author" name="author" required>
+            <small id="type_help" class="form-text text-muted">provide author</small>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="source">source</label>
+            <textarea type="text" class="form-control" id="source" name="source" required>{{item.source}}</textarea>
+            <small id="type_help" class="form-text text-muted">provide type</small>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="row col-md-12">
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-primary" type="submit">
+                    @if(item)
+                    update article
+                    @else
+                    create article
+                    @endif
+                </button>
+            </div>
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-secondary" onclick="closeModal('#large-modal')" type="reset"
+                    data-dismiss="modal">
+                    cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(".ajaxForm").validate({}); // Jquery form validation initialization
+    $(".ajaxForm").submit(function (e) {
+        e.preventDefault()
+    alert('jquery here too', e)
+        var form = $(this);
+        ajaxSubmit(e, form, "POST", showAll);
+    });
+</script>

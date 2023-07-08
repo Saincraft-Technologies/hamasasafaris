@@ -2,8 +2,13 @@
 <div class="left-side-menu left-side-menu-detached" style="position:fixed; left:0; top:50px;">
     <div class="leftbar-user">
         <a href="#">
-            <span class="leftbar-user-name"><i class="mdi mdi-account"></i>Gideon Sainyeye</span>
-            <span class="leftbar-user-name"><i class="mdi mdi-email"></i> example@xyz.com</span>
+            <span class="leftbar-user-name"><i class="mdi mdi-account"></i>
+
+                {{loggedInUser.username}}
+
+            </span>
+            <span class="leftbar-user-name"><i class="mdi mdi-email"></i>
+                {{loggedInUser.email}}</span>
         </a>
     </div>
     <!--- Sidemenu -->
@@ -104,11 +109,30 @@
                 <span class="menu-arrow"></span>
             </a>
         </li>
+
+        <li class="side-nav-item">
+            <a href="/admin/index/article" class="side-nav-link">
+                <i class="mdi  mdi-routes-clock"></i>
+                <span>
+                    Articles
+                </span>
+                <span class="menu-arrow"></span>
+            </a>
+        </li>
         <li class="side-nav-item">
             <a href="/admin/index/gallery" class="side-nav-link">
                 <i class="mdi mdi-view-gallery-outline"></i>
                 <span>
                     Galleries
+                </span>
+                <span class="menu-arrow"></span>
+            </a>
+        </li>
+        <li class="side-nav-item">
+            <a href="/admin/index/section" class="side-nav-link">
+                <i class="mdi  mdi-routes-clock"></i>
+                <span>
+                    Section
                 </span>
                 <span class="menu-arrow"></span>
             </a>

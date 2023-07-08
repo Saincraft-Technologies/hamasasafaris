@@ -50,7 +50,7 @@
     --bs-success-rgb: 103, 194, 156;
     --bs-info-rgb: 28, 171, 196;
     --bs-warning-rgb: 228, 198, 98;
-    --bs-danger-rgb:179, 67, 67;
+    --bs-danger-rgb: 179, 67, 67;
     --bs-light-rgb: 248, 249, 250;
     --bs-dark-rgb: 33, 37, 41;
     --bs-black-rgb: 0, 0, 0;
@@ -12883,7 +12883,7 @@ body {
     height: auto;
     min-height: 35rem;
     padding: 15rem 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../assets/img/simba.webp");
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../assets/img/big5.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: scroll;
@@ -12959,6 +12959,7 @@ body {
         padding: 0 0 0 2rem;
         border-left: 0.5rem solid #b34343;
     }
+
     .projects-section .featured-alt-text {
         padding: 0 0 0 2rem;
         border-right: 0.5rem solid #b34343;

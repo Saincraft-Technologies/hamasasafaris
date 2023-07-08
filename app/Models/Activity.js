@@ -4,8 +4,11 @@
 const Model = use('Model')
 
 class Activity extends Model {
-    stopPoints(){
-        return this.belongsToMany('App/Models/StopPoint').pivotTable('stop_point_activities')
+    article() {
+        return this.belongsTo('App/Models/Article')
+    }
+    stopPoints() {
+        return this.belongsTo('App/Models/StopPoint')
     }
 }
 

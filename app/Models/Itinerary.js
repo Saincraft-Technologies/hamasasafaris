@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Itinerary extends Model {
+    gallery() {
+        return this.belongsTo('App/Models/Gallery')
+    }
     fromPoint() {
         return this.hasMany('App/Models/StopPoint', 'id', 'from_id').pivotTable('stop_points')
     }

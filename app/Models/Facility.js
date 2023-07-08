@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Facility extends Model {
+    gallery() {
+        return this.belongsTo('App/Models/Gallery')
+    }
     destination(){
         return this.belongsTo('App/Models/Destination').pivotTable('destination_facilities')
     }

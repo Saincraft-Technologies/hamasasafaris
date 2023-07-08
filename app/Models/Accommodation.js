@@ -4,11 +4,14 @@
 const Model = use('Model')
 
 class Accommodation extends Model {
-    destination() {
-        return this.belongsToMany('App/Models/Destination').pivotTable('destination_accomodations')
+    gallery() {
+        return this.belongsTo('App/Models/Gallery')
     }
-    facility() {
-        return this.belongsToMany('App/Models/Facility').pivotTable('accomodation_facilities')
+    destinations() {
+        return this.manyThrough('App/Models/DestinationAccommodation', 'destinations')
+    }
+    facilities() {
+        return this.manyThrough('App/Models/AccommodationFacility', 'facilities')
     }
 
 }

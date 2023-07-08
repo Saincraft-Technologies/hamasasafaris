@@ -10,7 +10,7 @@
     <tbody>
         @each(item in items)
         <tr>
-            <td style=" width:7%;">{{item.gallery}}</td>
+            <td onclick="showGallery('{{item.id}}', '{{model}}')" style=" width:7%;">{{item.gallery}}</td>
             <td style="width:20%;">{{item.created_at}}</td>
             <td style=" width:10%;">
                 <div class="dropdown text-center">

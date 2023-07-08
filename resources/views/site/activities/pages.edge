@@ -1,0 +1,31 @@
+@layout('main')
+@section('content')
+@include('site/activities/heading')
+<section class="projects-section bg-light mb-3" id="activities" style="box-shadow: 10px 10px 10px rgb(208, 208, 208);">
+    <div class="container px-4 px-lg-5">
+        <!-- Featured Project Row-->
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+            <h4 class="text-danger">{{activity.activity}}</h4>
+        </div>
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+            <div class="col-xl-8 col-lg-7">
+                @include('site/activities/slider')
+            </div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="featured-text text-center text-lg-left">
+                    <h4>About {{activity.activity}}</h4>
+                    <p class="text-black-50 mb-0">{{activity.description}}</p>
+                    <a class="btn btn-danger" href="/home#booking">Book!</a>
+                </div>
+            </div>
+        </div>
+        <h2>Key Features and Facilities</h2>
+        <!-- Facilities tiles -->
+        @include('site/tiles/facilities')
+
+        <!-- Facilities leftright -->
+
+        <h4>Other related accomodations</h4>
+    </div>
+</section>
+@endsection

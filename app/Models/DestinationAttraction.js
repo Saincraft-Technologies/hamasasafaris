@@ -4,11 +4,11 @@
 const Model = use('Model')
 
 class DestinationAttraction extends Model {
-    destination() {
-        return this.hasMany('App/Models/Destination')
+    destinations() {
+        return this.belongsTo('App/Models/Destination')
     }
-    attaction() {
-        return this.hasMany('App/Models/Attraction')
+    attractions() {
+        return this.belongsTo('App/Models/Attraction')
     }
 }
 

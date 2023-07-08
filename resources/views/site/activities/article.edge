@@ -1,0 +1,25 @@
+<!-- Featured Project Row-->
+<div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+    <div class="col-xl-4 col-lg-5">
+        <h4 style="margin-left:15px;"> {{activity.activity}}</h4>
+    </div>
+    <div class=" col-xl-8 col-lg-7">
+        <div class="featured-text text-left text-lg-left">
+            @each(item in activity.article.sections)
+            <h6>{{item.section}}</h6>
+            <small class="text-muted" style="font-size:small;"><i>{{item.caption}}</i></small>
+
+            <p class="text-black-50 mt-3 mb-5" style="text-align: left;">
+                {{item.body}}<br>
+                <img src="/{{item.upload.filepath}}" style="width: 60%;" alt=""><br>
+                <small><i>{{item.upload.caption}}</i></small>
+            </p>
+            @endeach
+            <legend class="text-black-50 mb-0 mt-2" style="text-align: left; font-size:small;"><small>
+                    <i>- Source</i><br>
+                    <i>{{activity.article.source}}</i><br>
+                    <i>{{activity.article.updated_at}}</i></small></legend>
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,32 +1,22 @@
-<div id="mySlider" class="carousel slide offset-2 mt-5 col-md-8" style="box-shadow: 10px 10px 10px rgb(208, 208, 208);"
+<div id="mySlider" class="carousel slide mt-0 col-md-11" style="box-shadow: 10px 10px 10px rgb(208, 208, 208);"
     data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-        <li data-target="#mySlider" data-slide-to="0" class="active"></li>
-        <li data-target="#mySlider" data-slide-to="1"></li>
-        <li data-target="#mySlider" data-slide-to="2"></li>
+        @each(item in attraction.gallery.uploads)
+        <li data-target="#mySlider" data-slide-to="{{item.id}}"></li>
+        @endeach
     </ol>
 
     <!-- Slides -->
     <div class="carousel-inner">
+        @each(item in attraction.gallery.uploads)
         <div class="carousel-item active">
-            <img src="/assets/img/big5-lion.jpg" alt="Slide 1">
+            <img src="/{{item.filepath}}" alt="{{item.caption}}">
             <div class="carousel-caption">
-                <h6>Lion-simba</h6>
+                <i>{{item.caption}}</i>
             </div>
         </div>
-        <div class="carousel-item">
-            <img src="/assets/img/Great-Wildebeest-Migration2.jpg" alt="Slide 2">
-            <div class="carousel-caption">
-                <h6>Great migration</h6>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="/assets/img/ballon-safaris.jpg" alt="Slide 3">
-            <div class="carousel-caption">
-                <h6>Ballons</h6>
-            </div>
-        </div>
+        @endeach
     </div>
 
 </div>

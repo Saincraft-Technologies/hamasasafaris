@@ -1,5 +1,7 @@
-
 @include('admin/datatablejs')
+<div class="row">
+    <h5 class="ml-2 mb-2">{{modelValue}} {{model}} gallery</h5>
+</div>
 <table id="basic-datatable" class="table table-striped td-responsive nowrap" width="100%">
     <thead>
         <tr style="background-color: #313a46; color: #ababab;">
@@ -18,6 +20,8 @@
             <td style=" width:40%;">
                 <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
                     {{item.description}}</p>
+            </td>
+            <td style="width:20%;" onclick="showGallery('{{item.gallery.id}}', '{{model}}')">{{item.gallery.gallery}}
             </td>
             <td style="width:20%;">{{item.created_at}}</td>
             <td style=" width:10%;">

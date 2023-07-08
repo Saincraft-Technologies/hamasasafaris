@@ -41,6 +41,19 @@
       });
     }
     showAll();
+    var showGallery = function (id, model) {
+      var url = '/storage/uploads/'+ model+"/"+id;
+  
+      $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (response) {
+          $('.class_room_content').html(response);
+          initDataTable('basic-gallery');
+        }
+      });
+    }
+    showGallery();
     // })
     
 </script>

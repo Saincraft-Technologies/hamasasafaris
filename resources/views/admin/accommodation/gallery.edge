@@ -1,0 +1,30 @@
+@include('admin/datatablejs')
+
+<div class="row">
+    <h5 class="ml-2 mb-2">{{modelValue}} {{model}} gallery</h5>
+</div>
+<table id="basic-gallery" class="table table-striped td-responsive nowrap" width="100%">
+    <thead>
+        <tr style="background-color: #313a46; color: #ababab;">
+            <th>image</th>
+            <th>Descriptions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @each(item in items)
+        <tr>
+            <td class="gallery-td"><img class="g-image" src="/{{item.filepath}}" alt="{{upload.caption}}"></td>
+            <td style="width:20%;">
+                <span class="text-muted"><strong>Caption:</strong> {{item.caption}}</span><br>
+                <span class="text-muted">{{item.metadata}}</span><br>
+                <span class="text-muted"><a href="/{{item.filepath}}" target="_blank"><i
+                            class="mdi mdi-download"></i></a></span>
+                <span class="text-muted ml-3"><a href="/{{item.filepath}}" target="_blank"><i
+                            class="mdi mdi-upload text-info "></i></a></span>
+                <span class="text-muted ml-3"><a href="/{{item.filepath}}" target="_blank"><i
+                            class="mdi mdi-delete text-danger"></i></a></span>
+            </td>
+        </tr>
+        @endeach
+    </tbody>
+</table>

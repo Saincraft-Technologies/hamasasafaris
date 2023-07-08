@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class StopPoint extends Model {
+    gallery() {
+        return this.belongsTo('App/Models/Gallery')
+    }
 }
 
 module.exports = StopPoint

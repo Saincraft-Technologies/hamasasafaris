@@ -4,8 +4,14 @@
 const Model = use('Model')
 
 class Attraction extends Model {
-    destination() {
-        return this.belongsToMany('App/Models/Destination').pivotTable('destination_attractions')
+    gallery() {
+        return this.belongsTo('App/Models/Gallery')
+    }
+    article() {
+        return this.belongsTo('App/Models/Article')
+    }
+    destinations() {
+        return this.belongsTo('App/Models/DestinationAttraction')
     }
 }
 

@@ -596,9 +596,17 @@ pre code {
   margin-left: auto;
 }
 
+.gallery-td .g-image {
+  width: 35%;
+}
+
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
+  }
+
+  .gallery-td .g-image {
+    width: 100%;
   }
 }
 
@@ -606,17 +614,29 @@ pre code {
   .container {
     max-width: 720px;
   }
+
+  .gallery-td .g-image {
+    width: 90%;
+  }
 }
 
 @media (min-width: 992px) {
   .container {
     max-width: 960px;
   }
+
+  .gallery-td .g-image {
+    width: 80%;
+  }
 }
 
 @media (min-width: 1200px) {
   .container {
     max-width: 1140px;
+  }
+
+  .gallery-td .g-image {
+    width: 70%;
   }
 }
 

@@ -4,7 +4,9 @@
 const Model = use('Model')
 
 class Upload extends Model {
-
+    gallery() {
+        return this.hasMany('App/Models/Gallery')
+    }
 }
 
 module.exports = Upload

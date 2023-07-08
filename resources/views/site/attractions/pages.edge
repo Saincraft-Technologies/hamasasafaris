@@ -1,0 +1,14 @@
+@layout('main')
+@section('content')
+<section class="projects-section bg-light mb-3" id="attractions" style="box-shadow: 10px 10px 10px rgb(208, 208, 208);">
+    <div class="container px-4 px-lg-5">
+        <!-- Featured Project Row-->
+        <h4 class="mt-5 mb-5" style="color:#b34343;">All Attractions</h4>
+        @include('site/tiles/attractions')
+        <!-- Facilities tiles -->
+        @include('site/tiles/facilities')
+        <!-- Facilities leftright -->
+    </div>
+
+</section>
+@endsection

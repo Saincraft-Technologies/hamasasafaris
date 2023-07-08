@@ -1,4 +1,3 @@
-
 @include('admin/datatablejs')
 <table id="basic-datatable" class="table table-striped td-responsive nowrap" width="100%">
     <thead>
@@ -20,7 +19,8 @@
                 <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
                     {{item.description}}</p>
             </td>
-            <td style="width:20%;">{{item.gallery.gallery}}</td>
+            <td style="width:20%;" onclick="showGallery('{{item.gallery.id}}', '{{model}}')">{{item.gallery.gallery}}
+            </td>
             <td style="width:20%;">{{item.created_at}}</td>
             <td style=" width:10%;">
                 <div class="dropdown text-center">

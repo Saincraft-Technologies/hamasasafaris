@@ -1,0 +1,22 @@
+<div id="mySlider" class="carousel slide mt-0 col-md-11" style="box-shadow: 10px 10px 10px rgb(208, 208, 208);"
+    data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        @each(item in accommodation.gallery.uploads)
+        <li data-target="#mySlider" data-slide-to="{{item.id}}"></li>
+        @endeach
+    </ol>
+
+    <!-- Slides -->
+    <div class="carousel-inner">
+        @each(item in accommodation.gallery.uploads)
+        <div class="carousel-item active">
+            <img src="/{{item.filepath}}" alt="{{item.caption}}">
+            <div class="carousel-caption">
+                <i>{{item.caption}}</i>
+            </div>
+        </div>
+        @endeach
+    </div>
+
+</div>
