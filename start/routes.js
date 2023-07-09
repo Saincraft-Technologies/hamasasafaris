@@ -25,7 +25,7 @@ Route.group(() => {
     Route.get('/admin/edit/:model/:id', 'ModelController.edit');
     Route.post('/admin/update/:model/:id', 'ModelController.update');
     Route.post('/admin/store/:model', 'ModelController.store');
-    Route.post('/admin/upload/:model/:id', 'ModelController.saveupload');
+    Route.post('/upload/:model/:id', 'ModelController.saveupload');
 
 
     Route.get('/storage/uploads/:model/:id', 'ModelController.gallery');
