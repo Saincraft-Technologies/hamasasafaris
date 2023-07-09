@@ -197,15 +197,6 @@ class ModelController {
                 types: ['image'],
                 size: '2mb'
             });
-            // await picture.move(Helpers.tmp(), {
-            //     name: new Date().toISOString() + `${params.model}.jpg`,
-            //     overwrite: true
-            // })
-
-            // if (!picture.moved()) {
-            //     console.log(picture.error());
-            //     return picture.error()
-            // }
             const { v4 } = require('uuid');
             const fs = require('fs');
             const path = require('path');
@@ -216,8 +207,7 @@ class ModelController {
             let fileType = mimeType;
             const name = v4() + "." + extname;
             // Sets the path and move the file
-            const filePath = `${path.resolve(`./tmp/public/uploads/`)}/${name}`;
-            const s3filePath = `${path.resolve(`./hamasasafaris/uploads/`)}/${name}`;
+            const filePath = `${path.resolve(`./public/uploads/`)}/${name}`;
             await picture.move(Helpers.tmpPath(folder), { name: name, overwrite: true })
             // create readable stream
             const fileStream = await fs.createReadStream(filePath)
@@ -235,34 +225,16 @@ class ModelController {
             await Drive.delete(filePath)
 
 
-            // if (fileUrl) {
 
             imageModal.gallery_id = params.id;
             imageModal.filepath = fileUrl;
             imageModal.metadata = picture.subtype;
             imageModal.caption = request.input('caption');
             imageModal.filename = name;
-            // console.log(await fileUrl);
+
             await imageModal.save();
             return response.json({ status: true, notification: 'successfully added ' + params.model });
-            // }
-            // if (!picture.moved()) {
-            //     console.log(picture.error());
-            //     return picture.error()
-            // }
-            // console.log(picture)
-            // // if (request.file) {
-
-
-            // // } else {
-            // //     const object = request.body;
-            // //     for (const key in object) {
-            // //         if (key !== '_csrf') {
-            // //             newModal[key] = object[key];
-            // //         }
-            // //     }
-            // // }
-            // console.log(t);
+            
         } catch (error) {
             console.log(error);
             response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
