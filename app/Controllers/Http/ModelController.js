@@ -191,7 +191,7 @@ class ModelController {
             const Modal = use(`App/Models/${t}`);
             const Upload = use(`App/Models/Upload`);
             let imageModal = new Upload();
-            const folder = '/public/uploads/';
+            const folder = './public/uploads/';
 
             const picture = request.file('pic_image', {
                 types: ['image'],
@@ -207,8 +207,8 @@ class ModelController {
             let fileType = mimeType;
             const name = v4() + "." + extname;
             // Sets the path and move the file
-            const filePath = `${path.resolve(`./public/uploads/`)}/${name}`;
-            await picture.move(Helpers.tmpPath(folder), { name: name, overwrite: true })
+            const filePath = `./public/uploads/${name}`;
+            await picture.move(folder, { name: name, overwrite: true })
             // create readable stream
             const fileStream = await fs.createReadStream(filePath)
             const fileSize = await picture.stream.byteCount
@@ -234,7 +234,7 @@ class ModelController {
 
             await imageModal.save();
             return response.json({ status: true, notification: 'successfully added ' + params.model });
-            
+
         } catch (error) {
             console.log(error);
             response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
