@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{ style('/css/custom.css') }}
-    {{ style('/css/fontawesome.min.css') }}
-    {{ style('/css/materialdesignicons.min.css') }}
+    <link rel="stylesheet" href="{{cdnLocal('/css/custom.css')}}">
+
+    <link rel="stylesheet" href="{{cdnLocal('/css/materialdesignicons.min.css')}}">
+    <link rel="icon" type="image/png" href="{{cdnLocal('/assets/img/hamasa.png')}}">
     <link rel="icon" type="image/png" href="/assets/img/hamasa.png" />
 
     <title>Hamasa|Safaris</title>
@@ -24,12 +25,18 @@
     @!section('content')
 
     @include('inc/contact')
-    {{--  @include('inc/footer')  --}}
-    {{ script('/js/jquery-3.7.0.min.js') }}
-    {{ script('/js/popper.js') }}
-    {{ script('/js/bootstrap.min.js') }}
-    {{ script('/js/bootstrap.bundle.min.js') }}
-    {{ script('/js/custom.js') }}
+    {{-- @include('inc/footer') --}}
+
+    <script src="{{cdnLocal('/js/jquery-3.7.0.min.js')}}">
+    </script>
+    <script src="{{cdnLocal('/js/popper.js')}}">
+    </script>
+    <script src="{{cdnLocal('/js/bootstrap.min.js')}}">
+    </script>
+    <script src="{{cdnLocal('/js/bootstrap.bundle.min.js')}}">
+    </script>
+    <script src="{{cdnLocal('/js/custom.js')}}">
+    </script>
 
 </body>
 
