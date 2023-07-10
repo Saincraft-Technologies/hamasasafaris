@@ -59,7 +59,7 @@ class MainController {
         });
     }
     async destination({ params, request, response, view }) {
-        const Navigation = use('App/Model/Navigation')
+        const Navigation = use('App/Models/Navigation')
         const Destination = use(`App/Models/Destination`);
         const Attraction = use(`App/Models/Attraction`);
         const fillUploads = async (array) => {
@@ -119,7 +119,10 @@ class MainController {
             let destin = await Destination.query().where('id', destination).first();
             let attract = await Attraction.query().where('id', attraction).first();
             console.log(destin, attract);
-            return view.render('site.attractions.page', { destination: destin, attraction: attract });
+            return view.render('site.attractions.page', {
+                destination: destin,
+                navigations: JSON.parse(JSON.stringify(await Navigation.all())), attraction: attract
+            });
         }
 
     }
