@@ -24,11 +24,11 @@ class MainController {
         const Attraction = use(`App/Models/Attraction`);
         const Activity = use(`App/Models/Activity`);
         const Gallery = use(`App/Models/Gallery`);
-        const Navigation = use(`App/Models/Navigation`);
         const Accommodation = use(`App/Models/Accommodation`);
         const accommodation = await Accommodation.query().with('gallery').fetch();
         const destination = await Destination.query().with('gallery').fetch();
         const attraction = await Attraction.query().with('gallery').fetch();
+        const Navigation = use(`App/Models/Navigation`);
         const activity = await Activity.query().with('gallery').fetch();
 
         /** Method to fill uploads! */
@@ -59,7 +59,7 @@ class MainController {
         });
     }
     async destination({ params, request, response, view }) {
-
+        const Navigation = use('App/Model/Navigation')
         const Destination = use(`App/Models/Destination`);
         const Attraction = use(`App/Models/Attraction`);
         const fillUploads = async (array) => {
@@ -102,13 +102,17 @@ class MainController {
 
             /** only destinations queried */
             /** images */
+
             const destinations = await fillUploads(destin.toJSON())
             console.log('destiny ===>>', destinations);
             const attractions = await fillUploads(destinations[0].attractions)
 
             const destinationWithArticle = await fillArticleContent(destinations)
             console.log('destinations===>>', destinationWithArticle);
-            return view.render('site.destinations.page', { destination: destinationWithArticle[0], attractions: attractions });
+            return view.render('site.destinations.page', {
+                destination: destinationWithArticle[0],
+                navigations: JSON.parse(JSON.stringify(await Navigation.all())), attractions: attractions
+            });
         } else {
             /** destination and attraction queried */
             console.log('only destination');
@@ -122,6 +126,7 @@ class MainController {
 
     async attraction({ params, request, response, view }) {
 
+        const Navigation = use(`App/Models/Navigation`);
         const Attraction = use(`App/Models/Attraction`);
         const fillUploads = async (array) => {
             const array1 = JSON.parse(JSON.stringify(await array));
@@ -164,13 +169,17 @@ class MainController {
             const attractions = await fillUploads(attract.toJSON())
             const attractionWithArticle = await fillArticleContent(attractions)
             console.log('attractions===>>', attractionWithArticle);
-            return view.render('site.attractions.page', { attraction: attractionWithArticle[0] });
+            return view.render('site.attractions.page', {
+                navigations: JSON.parse(JSON.stringify(await Navigation.all())), attraction: attractionWithArticle[0]
+            });
         }
 
         let attract = await Attraction.query().with('gallery').fetch();
         const attractions = await fillUploads(attract.toJSON())
         console.log('attractions===>>', attractions);
-        return view.render('site.attractions.pages', { attractions: attractions });
+        return view.render('site.attractions.pages', {
+            navigations: JSON.parse(JSON.stringify(await Navigation.all())), attractions: attractions
+        });
         /** only destinations queried */
         /** images */
 
@@ -178,6 +187,7 @@ class MainController {
     }
     async activity({ params, request, response, view }) {
 
+        const Navigation = use(`App/Models/Navigation`);
         const Activity = use(`App/Models/Activity`);
         const Attraction = use(`App/Models/Attraction`);
         const fillUploads = async (array) => {
@@ -223,7 +233,9 @@ class MainController {
             const activit = await fillUploads(active.toJSON())
             const activities = await fillArticleContent(activit)
             console.log('activities ===>>', activities);
-            return view.render('site.activities.page', { activity: activities[0] });
+            return view.render('site.activities.page', {
+                navigations: JSON.parse(JSON.stringify(await Navigation.all())), activity: activities[0]
+            });
         } else {
             /** destination and attraction queried */
             console.log('only destination');
@@ -231,12 +243,15 @@ class MainController {
             const activit = await fillUploads(active.toJSON())
             const activities = await fillArticleContent(activit)
             console.log(destin, attract);
-            return view.render('site.activities.page', { activities: activities });
+            return view.render('site.activities.page', {
+                navigations: JSON.parse(JSON.stringify(await Navigation.all())), activities: activities
+            });
         }
 
     }
     async accommodation({ params, request, response, view }) {
 
+        const Navigation = use(`App/Models/Navigation`);
         const Accommodation = use(`App/Models/Accommodation`);
         const fillUploads = async (array) => {
             const array1 = JSON.parse(JSON.stringify(await array));
@@ -262,14 +277,18 @@ class MainController {
             const facilities = await fillUploads(accommodations[0].facilities)
 
             console.log(accommodations);
-            return view.render('site.accommodations.page', { accommodation: accommodations[0], facilities: facilities });
+            return view.render('site.accommodations.page', {
+                navigations: JSON.parse(JSON.stringify(await Navigation.all())), accommodation: accommodations[0], facilities: facilities
+            });
         } else {
             /** accommodation and facility queried */
             console.log('only accommodation');
             let accommodat = await Accommodation.query().with('facilities').with('gallery').fetch();
             const accommodations = await fillUploads(accommodat.toJSON())
             console.log(accommodat.toJSON());
-            return view.render('site.accommodations.pages', { accommodations: accommodations });
+            return view.render('site.accommodations.pages', {
+                navigations: JSON.parse(JSON.stringify(await Navigation.all())), accommodations: accommodations
+            });
         }
 
     }
