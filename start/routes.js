@@ -39,7 +39,7 @@ Route.group(() => {
 //     return JSON.parse(JSON.stringify(await Navigations.all()));
 // }
 // Route.on('/').render('site.index', { navigations: [] });
-Route.get('/', 'MainController.construction');
+Route.get('/', 'MainController.genesis');
 Route.get('/home', 'MainController.genesis');
 Route.get('/pages', 'MainController.genesis');
 
