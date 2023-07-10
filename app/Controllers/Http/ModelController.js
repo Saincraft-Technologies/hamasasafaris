@@ -185,55 +185,43 @@ class ModelController {
         try {
             let t = capitalize(params.model);
             const Drive = use('Drive');
-            const Helpers = use('Helpers')
-
-            console.log('am here ===>>>', request._files);
             const Modal = use(`App/Models/${t}`);
             const Upload = use(`App/Models/Upload`);
-            let imageModal = new Upload();
-            const folder = './public/uploads/';
-
-            const picture = request.file('pic_image', {
+            const { v4 } = require('uuid');
+            const path = require('path');
+            const name = v4();
+            var extname;
+            var type;
+            var subtype;
+            var filepath;
+            // Uploads the file to Amazon S3 and stores the url
+            request.multipart.file('pic_image', {
                 types: ['image'],
                 size: '2mb'
+            }, async (file) => {
+
+                type = file.type;
+                subtype = file.subtype;
+                extname = file.extname;
+                let mimeType = type + '/' + subtype;
+                let fileType = mimeType;
+                const s3Path = `hamasasafaris/uploads/${name}.${extname}`
+                filepath = await Drive.disk('s3').put(s3Path, file.stream, { ACL: 'public-read', ContentType: `${type}/${subtype}` });
+                // console.log('answer ====>>> ', ans);
+
             });
-            const { v4 } = require('uuid');
-            const fs = require('fs');
-            const path = require('path');
 
-            const { type, subtype, extname } = picture;
-
-            let mimeType = type + '/' + subtype;
-            let fileType = mimeType;
-            const name = v4() + "." + extname;
-            // Sets the path and move the file
-            const filePath = `./public/uploads/${name}`;
-            await picture.move(folder, { name: name, overwrite: true })
-            // create readable stream
-            const fileStream = await fs.createReadStream(filePath)
-            const fileSize = await picture.stream.byteCount
-
-            // Uploads the file to Amazon S3 and stores the url
-            const s3Path = `hamasasafaris/uploads/${name}`
-            await Drive.disk('s3').put(s3Path, fileStream, { ACL: 'public-read', ContentType: `${picture.type}/${picture.subtype}` })
-            const fileUrl = await Drive.disk('s3').getUrl(s3Path)
-
-            // Destroy the readable stream and delete the file from tmp path
-            await fileStream._destroy(null, err => {
-                console.log(err);
-            })
-            await Drive.delete(filePath)
-
-
-
+            let processedData = await request.multipart.process()
+            console.log('processed data ====>>>>', await processedData);
+            let imageModal = new Upload();
             imageModal.gallery_id = params.id;
-            imageModal.filepath = fileUrl;
-            imageModal.metadata = picture.subtype;
+            imageModal.filepath = filepath;
+            imageModal.metadata = subtype;
             imageModal.caption = request.input('caption');
-            imageModal.filename = name;
-
+            imageModal.filename = `${name}.${extname}`;
             await imageModal.save();
-            return response.json({ status: true, notification: 'successfully added ' + params.model });
+            console.log('saved here!! ====>>>>');
+            response.json({ status: true, notification: 'successfully uploaded file ' });
 
         } catch (error) {
             console.log(error);

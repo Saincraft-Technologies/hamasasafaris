@@ -1,0 +1,43 @@
+@include('admin/datatablejs')
+<table id="basic-datatable" class="table table-striped td-responsive nowrap" width="100%">
+    <thead>
+        <tr style="background-color: #313a46; color: #ababab;">
+            <th>display name</th>
+            <th>route</th>
+            <th>icon</th>
+            <th>parent</th>
+            <th>sort order</th>
+            <th>create date</th>
+            <th>options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @each(item in items)
+        <tr>
+            <td style=" width:7%;">{{item.display_name}}</td>
+            <td style=" width:20%;">{{item.route}}</td>
+            <td style=" width:10%;">{{item.icon}}</td>
+            <td style=" width:7%;">{{item.parent}}</td>
+            <td style=" width:7%;">{{item.order}}</td>
+            <td style="width:20%;">{{item.created_at}}</td>
+            <td style=" width:10%;">
+                <div class="dropdown text-center">
+                    <button type="button"
+                        class="btn btn-sm btn-icon btn-rounded btn-outline-secondary dropdown-btn dropdown-toggle arrow-none card-drop"
+                        data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical"></i></button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item"
+                            onclick="largeModal('{{editRoute}}/{{item.id}}', 'update {{model}}',' mdi mdi-pencil text-info');"><i
+                                class="mdi mdi-update text-info"></i> edit</a>
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item"
+                            onclick="confirmModal('{{delRoute}}/{{item.id}}', showAll)"><i
+                                class="mdi mdi-delete text-danger"></i> delete</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        @endeach
+    </tbody>
+</table>
