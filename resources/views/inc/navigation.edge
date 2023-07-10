@@ -1,26 +1,33 @@
-<nav class="navbar-custom topnav-navbar topnav-navbar-dark" style="position: fixed; width:100%; z-index:99;" id="mainNav">
-  <div class="container-fluid">
-          <!-- LOGO -->
-          <a href="/" class="topnav-logo text-white" style="min-width: unset;">
-                  <span class="topnav-logo-lg">
-                          <img src="/assets/img/hamasa.png" alt="" height="40">
-                          Hamasa Safaris
-                  </span>
-                  <span class="topnav-logo-sm">
-                          <img src="/assets/img/hamasa.png" alt="" height="40">
-                          Hamasa Safaris
-                  </span>
-          </a>
+<nav class="navbar-custom topnav-navbar topnav-navbar-dark" style="position: fixed; width:100%; z-index:99;"
+        id="mainNav">
+        <div class="container-fluid">
+                <!-- LOGO -->
+                <a href="/" class="topnav-logo text-white" style="min-width: unset;">
+                        <span class="topnav-logo-lg">
+                                <img src="/assets/img/hamasa.png" alt="" height="40">
+                                Hamasa Safaris
+                        </span>
+                        <span class="topnav-logo-sm">
+                                <img src="/assets/img/hamasa.png" alt="" height="40">
+                                Hamasa Safaris
+                        </span>
+                </a>
 
 
-          <a class="button-menu-mobile disable-btn">
-                  <i class="mdi mdi-menu"></i>
-          </a>
+                <a class="button-menu-mobile disable-btn">
+                        <i class="mdi mdi-menu"></i>
+                </a>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
 
-          <div class="visit_website">
-                  <a href="/" target="" class="btn btn-outline-light ml-3">preview</a>
-                  <img class="hidden content-placeholder" src="/img/images/loader.gif" alt="" height="35px;">
-          </div>
+                        <ul class="navbar-nav ms-auto" style="font-size:14px;">
+                                @each(nav in navigations)
+                                <li class="nav-item"><a class="nav-link text-light"
+                                                href="{{nav.route}}">{{nav.display_name}}</a>
+                                </li>
+                                @endeach
+                                <!--  -->
+                        </ul>
+                </div>
 
-  </div>
+        </div>
 </nav>

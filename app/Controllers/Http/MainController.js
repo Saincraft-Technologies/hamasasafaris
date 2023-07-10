@@ -24,6 +24,7 @@ class MainController {
         const Attraction = use(`App/Models/Attraction`);
         const Activity = use(`App/Models/Activity`);
         const Gallery = use(`App/Models/Gallery`);
+        const Navigation = use(`App/Models/Navigation`);
         const Accommodation = use(`App/Models/Accommodation`);
         const accommodation = await Accommodation.query().with('gallery').fetch();
         const destination = await Destination.query().with('gallery').fetch();
@@ -53,6 +54,7 @@ class MainController {
             accommodations: JSON.parse(JSON.stringify(await accommodations)),
             destinations: JSON.parse(JSON.stringify(await destinations)),
             activities: JSON.parse(JSON.stringify(await activities)),
+            navigations: JSON.parse(JSON.stringify(await Navigation.all())),
             galleries: JSON.parse(JSON.stringify(await Gallery.query().with('uploads').fetch()))
         });
     }
