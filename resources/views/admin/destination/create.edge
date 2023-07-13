@@ -39,8 +39,12 @@
     <div class="form-row">
         <div class="row col-md-12">
             <div class="form-group col-md-6">
-                <button class="m-2 btn btn-block btn-primary" type="submit">
+                <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
+                    @if(destination.destination)
+                    update destination
+                    @else
                     create destination
+                    @endif
                 </button>
             </div>
             <div class="form-group col-md-6">
@@ -54,8 +58,16 @@
 </form>
 <script>
     $(".ajaxForm").validate({}); // Jquery form validation initialization
-    $(".ajaxForm").submit(function () {
+    $(".ajaxForm").submit(function (e) {
+        e.preventDefault()
         var form = $(this);
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving.");
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving..");
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving...");
+        $('.submit-btn').addClass('disabled');
         ajaxSubmit(e, form, "POST", showAll);
     });
 </script>

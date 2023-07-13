@@ -32,7 +32,7 @@
     <div class="form-row">
         <div class="row col-md-12">
             <div class="form-group col-md-6">
-                <button class="m-2 btn btn-block btn-primary" type="submit">
+                <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
                     create navigation
                 </button>
             </div>
@@ -48,7 +48,15 @@
 <script>
     $(".ajaxForm").validate({}); // Jquery form validation initialization
     $(".ajaxForm").submit(function () {
+        e.preventDefault()
         var form = $(this);
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving.");
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving..");
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving...");
+        $('.submit-btn').addClass('disabled');
         ajaxSubmit(e, form, "POST", showAll);
     });
 </script>

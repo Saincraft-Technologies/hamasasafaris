@@ -2,6 +2,7 @@
 function ajaxSubmit(e, form, method, callBackFunction, id) {
     if (form.valid()) {
         e.preventDefault();
+        $('#submit-btn').attr('disabled');
         var action = form.attr('action');
         var form2 = e.currentTarget;
 
@@ -22,6 +23,7 @@ function ajaxSubmit(e, form, method, callBackFunction, id) {
                         $('#right-modal').modal('hide');
                         $('#large-modal').modal('hide');
                         $('#larger-modal').modal('hide');
+                        $('#medium-modal').modal('hide');
                     }
                     if (!id == undefined || !id == 'undefined') {
 

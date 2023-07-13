@@ -3,38 +3,65 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="accommodation">accommodation name</label>
-            <input type="text" class="form-control" value="{{item.accommodation}}" id="accommodation"
+            @if(accommodation.accommodation)
+            <input type="text" class="form-control" id="accommodation" value="{{accommodation.accommodation}}"
                 name="accommodation" required>
+            @else
+
+            <input type="text" class="form-control" id="accommodation" name="accommodation" required>
+            @endif
             <small id="accommodation_help" class="form-text text-muted">provide accommodation name</small>
         </div>
         <div class="form-group col-md-6">
             <label for="type">accommodation type</label>
+            @if(accommodation.type)
             <input type="text" class="form-control" value="{{item.type}}" id="type" name="type" required>
+            @else
+
+            <input type="text" class="form-control" id="type" name="type" required>
+            @endif
             <small id="type_help" class="form-text text-muted">provide type</small>
         </div>
 
         <div class="form-group col-md-6">
             <label for="address">address</label>
+            @if(accommodation.address)
+            <textarea type="text" class="form-control" id="address" name="address"
+                required>{{accommodation.address}}</textarea>
+            @else
             <textarea type="text" class="form-control" id="address" name="address" required></textarea>
+            @endif
             <small id="type_help" class="form-text text-muted">provide type</small>
         </div>
 
         <div class="form-group col-md-6">
             <label for="phone">accommodation phone</label>
+            @if(accommodation.phone)
             <input type="text" class="form-control" value="{{item.phone}}" id="phone" name="phone" required>
+            @else
+            <input type="text" class="form-control" value="" id="phone" name="phone" required>
+            @endif
             <small id="phone_help" class="form-text text-muted">provide phone</small>
         </div>
 
         <div class="form-group col-md-6">
             <label for="caption">accommodation caption</label>
+            @if(accommodation.caption)
             <textarea type="text" class="form-control" id="caption" name="caption" required>{{item.caption}}</textarea>
+            @else
+            <textarea type="text" class="form-control" id="caption" name="caption" required></textarea>
+            @endif
             <small id="caption_help" class="form-text text-muted">provide caption</small>
         </div>
 
         <div class="form-group col-md-6">
             <label for="description">accommodation description</label>
+            @if(accommodation.description)
             <textarea type="text" class="form-control" id="description" name="description"
                 required>{{item.description}}</textarea>
+            @else
+            <textarea type="text" class="form-control" id="description" name="description" required></textarea>
+            @endif
             <small id="description_help" class="form-text text-muted">provide description</small>
         </div>
     </div>
@@ -42,7 +69,7 @@
     <div class="form-row">
         <div class="row col-md-12">
             <div class="form-group col-md-6">
-                <button class="m-2 btn btn-block btn-primary" type="submit">
+                <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
                     @if(item)
                     update accommodation
                     @else
@@ -63,8 +90,14 @@
     $(".ajaxForm").validate({}); // Jquery form validation initialization
     $(".ajaxForm").submit(function (e) {
         e.preventDefault()
-    alert('jquery here too', e)
         var form = $(this);
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving.");
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving..");
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving...");
+        $('.submit-btn').addClass('disabled');
         ajaxSubmit(e, form, "POST", showAll);
     });
 </script>

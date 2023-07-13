@@ -5,7 +5,7 @@
 
     <div class="col-lg-6">
 
-        <div id="destinationMainSlider" class="carousel slide " data-ride="carousel">
+        <div id="destinationMainSlider" class="carousel slide carousel-fade" data-ride="carousel">
             <!-- Indicators-->
             <ol class="carousel-indicators">
                 @each(upload in item.gallery.uploads)
@@ -57,7 +57,7 @@
 <div class="row gx-0 justify-content-center" style="">
     <div class="col-lg-6">
 
-        <div id="destinationMainSlider2" class="carousel slide "
+        <div id="destinationMainSlider2" class="carousel slide carousel-fade"
             style="box-shadow: 7px 7px 7px rgba(208, 208, 208, 0.668);" data-ride="carousel">
             <!-- Indicators-->
             <ol class="carousel-indicators">
@@ -103,3 +103,11 @@
 </div>
 @endif
 @endeach
+<script>
+    $('#destinationMainSlider').carousel({
+  interval: 2000
+})
+$('#destinationMainSlider2').carousel({
+  interval: 2500
+})
+</script>

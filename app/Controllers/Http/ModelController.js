@@ -122,29 +122,35 @@ class ModelController {
                 case 'gallery':
 
                     gal.gallery = request.input(`${params.model}`);
-                    gal.save();
-                    newModal.gallery_id = gal.id;
+                    newModal.gallery_id = await gal.toJSON().id;
+                    await newModal.save();
+                    response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
                 case 'accommodation':
 
                     gal.gallery = request.input(`${params.model}`);
-                    gal.save();
-                    newModal.gallery_id = gal.id;
+                    newModal.gallery_id = await gal.toJSON().id;
+                    await newModal.save();
+                    response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
                 case 'destination':
 
                     gal.gallery = request.input(`${params.model}`);
-                    gal.save();
-                    newModal.gallery_id = gal.id;
+                    await gal.save();
+
+                    newModal.gallery_id = await gal.toJSON().id;
+                    await newModal.save();
+                    response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
                 case 'attraction':
 
                     gal.gallery = request.input(`${params.model}`);
-                    gal.save();
-                    newModal.gallery_id = gal.id;
+                    newModal.gallery_id = await gal.toJSON().id;
+                    await newModal.save();
+                    response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
                 default:
@@ -152,8 +158,6 @@ class ModelController {
             }
 
 
-            await newModal.save();
-            response.json({ status: true, notification: 'successfully updated ' + params.model });
         } catch (error) {
             console.log(error);
             response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
@@ -181,24 +185,32 @@ class ModelController {
 
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
+                    await newModal.save();
+                    response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
 
                 case 'accommodation':
 
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
+                    await newModal.save();
+                    response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
 
                 case 'destination':
 
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
+                    await newModal.save();
+                    response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
 
                 case 'attraction':
 
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
+                    await newModal.save();
+                    response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
 
                 default:
@@ -206,8 +218,6 @@ class ModelController {
             }
 
 
-            await newModal.save();
-            response.json({ status: true, notification: 'successfully updated ' + params.model });
         } catch (error) {
             console.log(error);
             response.status(500).json({ status: false, notification: 'failed to update ' + params.model });
@@ -248,6 +258,7 @@ class ModelController {
             var type;
             var subtype;
             var filepath;
+            var caption = request.input('caption');
             // Uploads the file to Amazon S3 and stores the url
             request.multipart.file('pic_image', {
                 types: ['image'],
@@ -267,11 +278,11 @@ class ModelController {
 
             let processedData = await request.multipart.process()
             console.log('processed data ====>>>>', await processedData);
-            let imageModal = new Upload();
+            const imageModal = new Upload();
             imageModal.gallery_id = params.id;
             imageModal.filepath = filepath;
             imageModal.metadata = subtype;
-            imageModal.caption = request.input('caption');
+            imageModal.caption = caption;
             imageModal.filename = `${name}.${extname}`;
             await imageModal.save();
             console.log('saved here!! ====>>>>');
