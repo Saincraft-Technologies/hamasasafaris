@@ -153,10 +153,64 @@ class ModelController {
 
 
             await newModal.save();
-            response.json({ status: true, notification: 'successfully added ' + params.model });
+            response.json({ status: true, notification: 'successfully updated ' + params.model });
         } catch (error) {
             console.log(error);
             response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
+        }
+    }
+
+    async update({ auth, params, request, response, view }) {
+        try {
+            let t = capitalize(params.model);
+            console.log(t);
+            let id = params.id;
+
+            const Modal = use(`App/Models/${t}`);
+            const Gallery = use(`App/Models/Gallery`);
+            let newModal = await Modal.findOrFail(id);
+            const object = request.body;
+            for (const key in object) {
+                if (key !== '_csrf') {
+                    newModal[key] = object[key];
+                }
+            }
+            const gal = await Gallery.findOrFail(newModal.gallery_id);
+            switch (params.model) {
+                case 'gallery':
+
+                    gal.gallery = request.input(`${params.model}`);
+                    gal.save();
+                    break;
+
+                case 'accommodation':
+
+                    gal.gallery = request.input(`${params.model}`);
+                    gal.save();
+                    break;
+
+                case 'destination':
+
+                    gal.gallery = request.input(`${params.model}`);
+                    gal.save();
+                    break;
+
+                case 'attraction':
+
+                    gal.gallery = request.input(`${params.model}`);
+                    gal.save();
+                    break;
+
+                default:
+                    break;
+            }
+
+
+            await newModal.save();
+            response.json({ status: true, notification: 'successfully updated ' + params.model });
+        } catch (error) {
+            console.log(error);
+            response.status(500).json({ status: false, notification: 'failed to update ' + params.model });
         }
     }
 
