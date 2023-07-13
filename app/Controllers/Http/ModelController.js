@@ -110,7 +110,7 @@ class ModelController {
 
             const Modal = use(`App/Models/${t}`);
             const Gallery = use(`App/Models/Gallery`);
-            let newModal = new Modal();
+            const newModal = new Modal();
             const object = request.body;
             for (const key in object) {
                 if (key !== '_csrf') {
@@ -130,16 +130,20 @@ class ModelController {
                 case 'accommodation':
 
                     gal.gallery = request.input(`${params.model}`);
+                    await gal.save();
                     newModal.gallery_id = await gal.toJSON().id;
-                    await newModal.save();
-                    response.json({ status: true, notification: 'successfully saved ' + params.model });
+                    console.log('gallery ====>>>>', await gal.toJSON());
+                    if (gal.toJSON() !== undefined) {
+                        await newModal.save();
+                        response.json({ status: true, notification: 'successfully saved ' + params.model });
+                    }
+                    response.json({ status: false, notification: 'failed to save ' + params.model });
                     break;
 
                 case 'destination':
 
                     gal.gallery = request.input(`${params.model}`);
                     await gal.save();
-
                     newModal.gallery_id = await gal.toJSON().id;
                     await newModal.save();
                     response.json({ status: true, notification: 'successfully saved ' + params.model });
@@ -148,6 +152,7 @@ class ModelController {
                 case 'attraction':
 
                     gal.gallery = request.input(`${params.model}`);
+                    await gal.save();
                     newModal.gallery_id = await gal.toJSON().id;
                     await newModal.save();
                     response.json({ status: true, notification: 'successfully saved ' + params.model });
