@@ -10,6 +10,19 @@
             <div class="col-md-12 custom-file-upload">
                 <div class="wrapper-image-preview" style="margin-left: 0px; ">
                     <div class="box" style="width: 230px; height:270px;">
+                        @if(upload.filepath)
+                        <div class="js--image-preview"
+                            style="height:220px; background-image: url('{{upload.filepath}}'); background-color: #F5F5F5;">
+                        </div>
+                        <div class="upload-options">
+                            <label for="pic_image" class="btn" style="font-size:medium;"> <i
+                                    class="mdi mdi-upload mr-1"></i> replace
+                                image
+                            </label>
+                            <input id="pic_image" style="visibility:hidden;" type="file" class="image-upload"
+                                name="pic_image" accept="image/*" onchange="">
+                        </div>
+                        @else
                         <div class="js--image-preview"
                             style="height:220px; background-image: url('/img/avatar.png'); background-color: #F5F5F5;">
                         </div>
@@ -21,6 +34,7 @@
                             <input id="pic_image" style="visibility:hidden;" type="file" class="image-upload"
                                 name="pic_image" accept="image/*" onchange="">
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

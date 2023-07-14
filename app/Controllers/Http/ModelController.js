@@ -124,7 +124,7 @@ class ModelController {
                     gal.gallery = request.input(`${params.model}`);
                     newModal.gallery_id = await gal.toJSON().id;
                     await newModal.save();
-                    response.json({ status: true, notification: 'successfully saved ' + params.model });
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
                 case 'accommodation':
@@ -135,9 +135,9 @@ class ModelController {
                     console.log('gallery ====>>>>', await gal.toJSON());
                     if (gal.toJSON() !== undefined) {
                         await newModal.save();
-                        response.json({ status: true, notification: 'successfully saved ' + params.model });
+                        return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     }
-                    response.json({ status: false, notification: 'failed to save ' + params.model });
+                    return response.json({ status: false, notification: 'failed to save ' + params.model });
                     break;
 
                 case 'destination':
@@ -146,7 +146,7 @@ class ModelController {
                     await gal.save();
                     newModal.gallery_id = await gal.toJSON().id;
                     await newModal.save();
-                    response.json({ status: true, notification: 'successfully saved ' + params.model });
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
                 case 'attraction':
@@ -155,7 +155,7 @@ class ModelController {
                     await gal.save();
                     newModal.gallery_id = await gal.toJSON().id;
                     await newModal.save();
-                    response.json({ status: true, notification: 'successfully saved ' + params.model });
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
                 default:
@@ -165,7 +165,7 @@ class ModelController {
 
         } catch (error) {
             console.log(error);
-            response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
+            return response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
         }
     }
 
@@ -191,7 +191,7 @@ class ModelController {
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
                     await newModal.save();
-                    response.json({ status: true, notification: 'successfully updated ' + params.model });
+                    return response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
 
                 case 'accommodation':
@@ -199,7 +199,7 @@ class ModelController {
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
                     await newModal.save();
-                    response.json({ status: true, notification: 'successfully updated ' + params.model });
+                    return response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
 
                 case 'destination':
@@ -207,7 +207,7 @@ class ModelController {
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
                     await newModal.save();
-                    response.json({ status: true, notification: 'successfully updated ' + params.model });
+                    return response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
 
                 case 'attraction':
@@ -215,7 +215,7 @@ class ModelController {
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
                     await newModal.save();
-                    response.json({ status: true, notification: 'successfully updated ' + params.model });
+                    return response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
 
                 default:
@@ -225,7 +225,7 @@ class ModelController {
 
         } catch (error) {
             console.log(error);
-            response.status(500).json({ status: false, notification: 'failed to update ' + params.model });
+            return response.status(500).json({ status: false, notification: 'failed to update ' + params.model });
         }
     }
 
@@ -238,8 +238,8 @@ class ModelController {
             const uploads = await Upload.query().where('gallery_id', id).fetch()
             console.log("uploads ===>>>1", JSON.parse(JSON.stringify(gallery)), params.model);
 
-            let editRoute = `/admin/edit/${model}`;
-            let delRoute = `/admin/delete/${model}`;
+            let editRoute = `/upload/${model}/${id}`;
+            let delRoute = `/upload/${model}/${id}`;
             let uploadRoute = `/admin/upload/${model}`;
             const modelValue = JSON.parse(JSON.stringify(await gallery))
             return await view.render(`admin.${model}.gallery`, { items: JSON.parse(JSON.stringify(uploads)), modelValue: modelValue[0]['gallery'], model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
@@ -249,6 +249,23 @@ class ModelController {
         }
     }
 
+    async viewupload({ params, request, response, view }) {
+        try {
+            const { model, id, fileId } = params;
+            let t = capitalize(model);
+            const Modal = use(`App/Models/${t}`);
+            const Upload = use(`App/Models/Upload`);
+            /** prepare the file and modal view params */
+            let modal = await Modal.query().where('id', id).fetch();
+            const fileToView = await Upload.query().where('id', fileId).fetch();
+            console.log('list invoked!', fileToView.toJSON()[0]);
+            let action = `/uploads/${model}/${params.id}/${fileToView.toJSON()[0].id}`
+            return await view.render(`admin.${model}.upload`, { model: model, file: fileToView.toJSON()[0], action: action });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
     async saveupload({ auth, params, request, response, view }) {
 
         try {
@@ -291,11 +308,66 @@ class ModelController {
             imageModal.filename = `${name}.${extname}`;
             await imageModal.save();
             console.log('saved here!! ====>>>>');
-            response.json({ status: true, notification: 'successfully uploaded file ' });
+            return response.json({ status: true, notification: 'successfully uploaded file ' });
 
         } catch (error) {
             console.log(error);
-            response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
+            return response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
+        }
+    }
+    async deleteupload({ params, request, response, view }) {
+        try {
+            let t = capitalize(params.model);
+            const Drive = use('Drive');
+            const Modal = use(`App/Models/${t}`);
+            const Upload = use(`App/Models/Upload`);
+
+            const fileToDelete = await Upload.query().where('id', params.fileId).fetch();
+            await Drive.disk('s3').delete(fileToDelete.toJSON().filepath);
+            return await fileToDelete.delete();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async updateupload({ params, request, response, view }) {
+
+        try {
+            const Drive = use('Drive');
+            const Upload = use(`App/Models/Upload`);
+            const fileToUpdate = await Upload.find(params.fileId);
+            console.log("Params ===>>", await fileToUpdate.filename);
+            var extname;
+            var type;
+            var subtype;
+            // Uploads the file to Amazon S3 and stores the url
+
+            request.multipart.file('pic_image_update', {
+                types: ['image'],
+                size: '2mb'
+            }, async (file) => {
+                const s3Path = `hamasasafaris/uploads/${fileToUpdate.filename}`;
+                // console.log('file ====>>', s3Path);
+
+                if (file) {
+                    type = file.type;
+                    subtype = file.subtype;
+                    extname = file.extname;
+                    console.log(`${fileToUpdate.filename.split('.')[0]}.${extname}`);
+                    fileToUpdate.filename = `${fileToUpdate.filename.split('.')[0]}.${extname}`;
+                    fileToUpdate.filepath = await Drive.disk('s3').put(s3Path, file.stream, { ACL: 'public-read', ContentType: `${type}/${subtype}` });
+                }
+                fileToUpdate.metadata = type + '/' + subtype;
+                console.log('answer ====>>> ', fileToUpdate);
+
+            });
+            await request.multipart.process();
+            await fileToUpdate.save();
+            return response.json({ status: false, notification: 'successfully updated uploaded file!' });
+
+        } catch (error) {
+            console.log(error);
+            return response.json({ status: false, notification: 'failed to update uploaded file!' });
         }
     }
 }
