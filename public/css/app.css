@@ -596,17 +596,9 @@ pre code {
   margin-left: auto;
 }
 
-.gallery-td .g-image {
-  width: 35%;
-}
-
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
-  }
-
-  .gallery-td .g-image {
-    width: 100%;
   }
 }
 
@@ -614,29 +606,17 @@ pre code {
   .container {
     max-width: 720px;
   }
-
-  .gallery-td .g-image {
-    width: 90%;
-  }
 }
 
 @media (min-width: 992px) {
   .container {
     max-width: 960px;
   }
-
-  .gallery-td .g-image {
-    width: 80%;
-  }
 }
 
 @media (min-width: 1200px) {
   .container {
     max-width: 1140px;
-  }
-
-  .gallery-td .g-image {
-    width: 70%;
   }
 }
 
@@ -646,6 +626,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  position: absolute;
 }
 
 .row {
@@ -11739,9 +11720,9 @@ body {
 }
 
 .content-page {
-  margin-left: 250px;
+  margin-left: 0px;
   overflow: hidden;
-  padding: 5px 20px;
+  padding: 5px 0px;
   min-height: 80vh;
 }
 
@@ -11751,8 +11732,8 @@ body {
   background: linear-gradient(135deg, #8f75da 0%, #727cf5 60%);
   bottom: 0;
   position: fixed;
-  -webkit-transition: all .2s ease-out;
-  transition: all .2s ease-out;
+  -webkit-transition: all .15s ease-in-out;
+  transition: all .15s ease-in-out;
   top: 0;
 }
 
@@ -11807,7 +11788,7 @@ body {
 }
 
 .side-nav .menu-arrow:before {
-  content: "\F142";
+  content: "\F0142";
 }
 
 .side-nav .badge {
@@ -12095,11 +12076,11 @@ body[data-layout="detached"] .wrapper {
 body[data-layout="detached"] .content-page {
   margin-left: 0;
   overflow: hidden;
-  padding: 55px 15px 5px 200px;
+  padding: 50px 5px 5px 250px;
   position: relative;
-  margin-right: -15px;
+  margin-right: 0px;
+  margin-top: 5px;
   width: 100%;
-  padding-bottom: 60px;
 }
 
 body[data-layout="detached"].enlarged .wrapper .left-side-menu {
@@ -12129,7 +12110,8 @@ body[data-layout="detached"].enlarged .wrapper .footer {
 
   body[data-layout="detached"] .content-page {
     margin-left: 0 !important;
-    padding: 55px 10px 60px 10px;
+    padding: 0 10px 60px 10px;
+    margin-top: 55px;
   }
 }
 
@@ -12422,7 +12404,7 @@ body[data-layout="detached"].enlarged .wrapper .footer {
   background-color: transparent;
   font-size: 24px;
   cursor: pointer;
-  float: left;
+  float: right;
 }
 
 .button-menu-mobile.disable-btn {
@@ -12471,6 +12453,7 @@ body[data-layout="detached"].enlarged .wrapper .footer {
 
 .topnav-navbar-dark {
   background-color: #313a46;
+  position: relative;
 }
 
 .topnav-navbar-dark .nav-user {
@@ -16801,7 +16784,7 @@ table.dataTable thead .sorting_desc:before,
 table.dataTable thead .sorting_asc_disabled:before,
 table.dataTable thead .sorting_desc_disabled:before {
   right: 0.5rem;
-  content: "\F35D";
+  content: "\F0140";
   font-family: "Material Design Icons";
   font-size: 1rem;
   top: 18px;
@@ -16813,7 +16796,7 @@ table.dataTable thead .sorting_desc:after,
 table.dataTable thead .sorting_asc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:after {
   right: 0.5em;
-  content: "\F360";
+  content: "\F0143";
   font-family: "Material Design Icons";
   top: 12px;
   font-size: 1rem;
@@ -17123,7 +17106,7 @@ div.dt-button-info h2 {
 }
 
 .dragula-handle:before {
-  content: "\F1DB";
+  content: "\F01DB";
   font-family: "Material Design Icons";
   position: absolute;
 }

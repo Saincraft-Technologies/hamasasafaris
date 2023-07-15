@@ -8,9 +8,9 @@
             <div class="d-flex align-items-end row">
                 <div class="col-sm-7">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">Congratulations Admin! 🎉</h5>
-                        <p class="mb-4">You have <span class="fw-bold">72</span> visitors today</p>
-                        <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+                        <h5 class="card-title text-primary">Congratulations {{loggedInUser.username}}! 🎉</h5>
+                        <p class="mb-4">You have <span class="fw-bold">{{todayBookingCount}}</span> bookings today</p>
+                        <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Bookings</a>
                     </div>
                 </div>
             </div>
@@ -25,8 +25,9 @@
 
                         </div>
                         <span class="fw-semibold d-block mb-1">Destinations</span>
-                        <h3 class="card-title mb-2">2</h3>
-                        <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +72.80% views</small>
+                        <h3 class="card-title mb-2">{{destinationCount}}</h3>
+                        <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i>
+                            {{destinationViewCountPercentage}} +72.80% views</small>
                     </div>
                 </div>
             </div>
@@ -38,8 +39,9 @@
 
                         </div>
                         <span class="fw-semibold d-block mb-1">Attractions</span>
-                        <h3 class="card-title mb-2">12</h3>
-                        <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +72.80% views</small>
+                        <h3 class="card-title mb-2">{{attractionCount}}</h3>
+                        <small class="text-success fw-semibold"><i
+                                class='bx bx-up-arrow-alt'></i>{{attractionViewCountPercentage}} +72.80% views</small>
                     </div>
                 </div>
             </div>
@@ -60,7 +62,8 @@
                                 <div class="mt-sm-auto">
                                     <small class="text-success text-nowrap fw-semibold"><i class='bx bx-chevron-up'></i>
                                         68.2%</small>
-                                    <h3 class="mb-0">$84,686k</h3>
+                                    <span class="badge bg-label-warning rounded-pill">estimated worth</span>
+                                    <h3 class="mb-0">{{bookingEstimatedValue}} 18,000,000 TZS</h3>
                                 </div>
                             </div>
                             <div id="profileReportChart"></div>
@@ -108,8 +111,8 @@
                         <div class="card-title d-flex align-items-start justify-content-between">
 
                         </div>
-                        <span class="d-block mb-1">Received Visitors</span>
-                        <h3 class="card-title text-nowrap mb-2">$12,456</h3>
+                        <span class="d-block mb-1">Visitors</span>
+                        <h3 class="card-title text-nowrap mb-2">{{bookingCount}}</h3>
                         <small class="text-danger fw-semibold"><i class='bx bx-down-arrow-alt'></i> -14.82%</small>
                     </div>
                 </div>
@@ -120,8 +123,8 @@
                         <div class="card-title d-flex align-items-start justify-content-between">
 
                         </div>
-                        <span class="fw-semibold d-block mb-1">Pending plans</span>
-                        <h3 class="card-title mb-2">$8,857</h3>
+                        <span class="fw-semibold d-block mb-1">Package plans</span>
+                        <h3 class="card-title mb-2">{{packageCount}}</h3>
                         <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +28.14%</small>
                     </div>
                 </div>
@@ -137,8 +140,8 @@
         <div class="card h-100">
             <div class="card-header d-flex align-items-center justify-content-between pb-0">
                 <div class="card-title mb-0">
-                    <h5 class="m-0 me-2">Booking Statistics</h5>
-                    <small class="text-muted">42.82k Total Sales</small>
+                    <h5 class="m-0 me-2">Booking</h5>
+                    <small class="text-muted">{{bookingCount}}</small>
                 </div>
                 <div class="dropdown">
                     <button class="btn p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown"

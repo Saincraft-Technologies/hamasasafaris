@@ -3,19 +3,19 @@
 
 
 
-function initApp() {
-  // Install built-in polyfills to patch browser incompatibilities.
-  shaka.polyfill.installAll();
+// function initApp() {
+//   // Install built-in polyfills to patch browser incompatibilities.
+//   shaka.polyfill.installAll();
 
-  // Check to see if the browser supports the basic APIs Shaka needs.
-  if (shaka.Player.isBrowserSupported()) {
-    // Everything looks good!
-    initPlayer();
-  } else {
-    // This browser does not have the minimum set of APIs we need.
-    console.error('Browser not supported!');
-  }
-}
+//   // Check to see if the browser supports the basic APIs Shaka needs.
+//   if (shaka.Player.isBrowserSupported()) {
+//     // Everything looks good!
+//     initPlayer();
+//   } else {
+//     // This browser does not have the minimum set of APIs we need.
+//     console.error('Browser not supported!');
+//   }
+// }
 
 // async function initPlayer() {
 //   // Create a Player instance.
@@ -40,14 +40,14 @@ function initApp() {
 //   }
 // }
 
-function onErrorEvent(event) {
-  // Extract the shaka.util.Error object from the event.
-  onError(event.detail);
-}
+// function onErrorEvent(event) {
+//   // Extract the shaka.util.Error object from the event.
+//   onError(event.detail);
+// }
 
-function onError(error) {
-  // Log the error.
-  console.error('Error code', error.code, 'object', error);
-}
+// function onError(error) {
+//   // Log the error.
+//   console.error('Error code', error.code, 'object', error);
+// }
 
-document.addEventListener('DOMContentLoaded', initApp);
+// document.addEventListener('DOMContentLoaded', initApp);
