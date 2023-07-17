@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node ace migration:run"
+    "test": "node ace migration:run --force"
   },
   "keywords": [
     "adonisjs",
