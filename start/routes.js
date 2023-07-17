@@ -25,6 +25,8 @@ Route.group(() => {
     Route.get('/admin/edit/:model/:id', 'ModelController.edit');
     Route.post('/admin/update/:model/:id', 'ModelController.update');
     Route.post('/admin/store/:model', 'ModelController.store');
+    Route.get('/admin/selector/:model', 'ModelController.selector');
+    Route.get('/admin/selector/:model/:id', 'ModelController.selector');
     /*** Upload File Proccessing */
     Route.get('/upload/:model/:id/:fileId', 'ModelController.viewupload');
     Route.post('/upload/:model/:id', 'ModelController.saveupload');

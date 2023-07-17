@@ -23,40 +23,49 @@ class ModelController {
 
             const Modal = use(`App/Models/${t}`);
             var model;
-            console.log('models ===>', params.model)
-            if (!params.model == 'gallery') {
-            } else {
-                model = await Modal.query().fetch();
-            }
-            try {
-                model = await Modal.query().with('gallery').fetch();
-            } catch (error) {
-                model = await Modal.query().fetch();
-            }
-            // const galleriess = await model.gallery().fetch()
-            // const galleries = JSON.parse(JSON.stringify(await model));
-            // console.log('galleries ====>>>', galleries)
-            const models = JSON.parse(JSON.stringify(await model));
-            const final = [];
-            const Gal = use('App/Models/Gallery');
-
-            for (const value of models) {
-                if (!value['gallery_id'] === null) {
-                    console.log('list invoked!', await value);
-                    const gall = await Gal.find(value.gallery_id);
-                    value['gallery'] = await gall.toJSON();
-
-                    final.push(await value);
-                } else {
-                    final.push(await value);
-                }
-            }
-            console.log(...final)
-
             let editRoute = `/admin/edit/${params.model}`;
             let delRoute = `/admin/delete/${params.model}`;
             let uploadRoute = `/admin/upload/${params.model}`;
-            return await view.render(`admin.${params.model}.list`, { items: final, model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+            switch (t) {
+                case 'Itinerary':
+                    const itinaries = await Modal.query().with('fromPoint').with('toPoint').fetch();
+                    console.log('itineraries ===>>>', await itinaries.toJSON());
+
+                    return await view.render(`admin.${params.model}.list`, { items: itinaries.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+                    break;
+
+                default:
+                    if (!params.model == 'gallery') {
+                    } else {
+                        model = await Modal.query().fetch();
+                    }
+                    try {
+                        model = await Modal.query().with('gallery').fetch();
+                    } catch (error) {
+                        model = await Modal.query().fetch();
+                    }
+                    const models = JSON.parse(JSON.stringify(await model));
+                    const final = [];
+                    const Gal = use('App/Models/Gallery');
+                    console.log('models ===>', params.model)
+
+                    for (const value of models) {
+                        if (!value['gallery_id'] === null) {
+                            console.log('list invoked!', await value);
+                            const gall = await Gal.find(value.gallery_id);
+                            value['gallery'] = await gall.toJSON();
+
+                            final.push(await value);
+                        } else {
+                            final.push(await value);
+                        }
+                    }
+
+                    console.log(...final)
+                    return await view.render(`admin.${params.model}.list`, { items: final, model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+                    break;
+            }
+
         } catch (error) {
             console.log(error);
         }
@@ -75,6 +84,42 @@ class ModelController {
             console.log(error);
         }
     }
+
+    async selector({ params, view }) {
+        try {
+            let t = capitalize(params.model);
+            console.log(t);
+            const Modal = use(`App/Models/${t}`);
+            switch (params.model) {
+                case 'destination':
+                    const model = await Modal.all();
+                    console.log('list invoked!', model.toJSON());
+                    return await view.render(`admin.selector.destination`, { items: model.toJSON(), model: params.model });
+                    break;
+                case 'attraction':
+                    const Dest = use(`App/Models/Destination`);
+                    console.log('params ====>>>>', params)
+                    const dest = await Dest.query().where('id', params.id).with('attractions').fetch();
+
+                    console.log('====>>>', params, await dest.toJSON()[0]);
+                    return await view.render(`admin.selector.attraction`, { items: dest.toJSON()[0]['attractions'], model: params.model });
+                    break;
+                case 'stopPoint':
+                    const stopPointModel = await Modal.all();
+                    console.log('list invoked!', stopPointModel.toJSON());
+                    return await view.render(`admin.selector.stopPoint`, { items: stopPointModel.toJSON(), model: params.model });
+                    break; model
+                    model
+
+                default:
+                    const modelMain = await Modal.all();
+                    console.log('list invoked!', modelMain.toJSON());
+                    return await view.render(`admin.selector.selector`, { items: modelMain.toJSON(), model: params.model });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     async edit({ params, view }) {
         try {
             let t = capitalize(params.model);
@@ -82,9 +127,8 @@ class ModelController {
 
             const Modal = use(`App/Models/${t}`);
             let model = await Modal.find(params.id);
-            // console.log('list invoked!', model);
             let action = `/admin/update/${params.model}/${params.id}`
-            return await view.render(`admin.${params.model}.create`, { [`${params.model}`]: model, action: action });
+            return await view.render(`admin.${params.model}.create`, { item: model.toJSON(), action: action });
         } catch (error) {
             console.log(error);
         }
@@ -100,7 +144,7 @@ class ModelController {
             return await view.render(`admin.${params.model}.upload`, { [`${params.model}`]: model, action: action });
         } catch (error) {
             console.log(error);
-        }
+        } process
     }
 
     async store({ auth, params, request, response, view }) {
@@ -149,9 +193,35 @@ class ModelController {
                     return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
+                case 'package':
+
+                    // gal.gallery = request.input(`${params.model}`);
+                    // await gal.save();
+                    // newModal.gallery_id = await gal.toJSON().id;
+                    await newModal.save();
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
+                    break;
+
                 case 'attraction':
 
                     gal.gallery = request.input(`${params.model}`);
+                    await gal.save();
+                    newModal.gallery_id = await gal.toJSON().id;
+                    await newModal.save();
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
+                    break;
+
+                case 'itinerary':
+
+                    // gal.gallery = request.input(`${params.model}`);
+                    // await gal.save();
+                    // newModal.gallery_id = await gal.toJSON().id;
+                    await newModal.save();
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
+                    break;
+                case 'stopPoint':
+                    console.log('======>>', await request)
+                    gal.gallery = request.input(`name`);
                     await gal.save();
                     newModal.gallery_id = await gal.toJSON().id;
                     await newModal.save();

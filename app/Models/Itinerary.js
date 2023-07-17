@@ -8,11 +8,18 @@ class Itinerary extends Model {
         return this.belongsTo('App/Models/Gallery')
     }
     fromPoint() {
-        return this.hasMany('App/Models/StopPoint', 'id', 'from_id').pivotTable('stop_points')
+        return this.belongsTo('App/Models/StopPoint', 'from_id', 'id')
     }
     toPoint() {
-        return this.hasMany('App/Models/StopPoint', 'id', 'to_id').pivotTable('stop_points')
+        return this.belongsTo('App/Models/StopPoint', 'to_id', 'id')
     }
+    activities() {
+        return this.manyThrough('App/Models/ItineraryActivities', 'activities')
+    }
+    acommodations() {
+        return this.manyThrough('App/Models/ItineraryAccommodation', 'accomodations')
+    }
+
 }
 
 module.exports = Itinerary

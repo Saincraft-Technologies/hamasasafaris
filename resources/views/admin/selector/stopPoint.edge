@@ -1,0 +1,25 @@
+<label for="from_id">From Stop Point</label>
+<select name="from_id" id="from_id" class="form-control select2">
+    <option value="" disabled selected>Select {{model}}</option>
+    @each(item in items)
+    <option value="{{item.id}}">{{item.name}}</option>
+    @endeach
+</select>
+<small id="{{model}}_help" class="form-text text-muted">provide {{model}}</small>
+<script>
+    $('#from_id').select2({
+                    dropdownParent: $('#large-modal')});
+</script>
+
+<label for="to_id">To Stop Point</label>
+<select name="to_id" id="to_id" class="form-control select2">
+    <option value="" disabled selected>Select {{model}}</option>
+    @each(item in items)
+    <option value="{{item.id}}">{{item.name}}</option>
+    @endeach
+</select>
+<small id="{{model}}_help" class="form-text text-muted">provide {{model}}</small>
+<script>
+    $('#to_id').select2({
+                    dropdownParent: $('#large-modal')});
+</script>

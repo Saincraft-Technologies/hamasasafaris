@@ -1,21 +1,15 @@
-{{-- @section('content') --}}
 <form method="POST" class="d-block ajaxForm" action="{{action}}">
     {{ csrfField() }}
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="name">Itinerary title</label>
+            <label for="package">package name</label>
             <input type="text" class="form-control" id="name" name="name" required>
-            <small id="name_help" class="form-text text-muted">provide from stop point</small>
+            <small id="name_help" class="form-text text-muted">provide package name</small>
         </div>
         <div class="form-group col-md-6">
-            <label for="name">Itinerary title</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-            <small id="name_help" class="form-text text-muted">provide from stop point</small>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="name">Itinerary title</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-            <small id="name_help" class="form-text text-muted">provide from stop point</small>
+            <label for="description">description</label>
+            <input type="text" class="form-control" id="description" name="description" required>
+            <small id="description_help" class="form-text text-muted">provide description</small>
         </div>
     </div>
 
@@ -23,11 +17,11 @@
         <div class="row col-md-12">
             <div class="form-group col-md-6">
                 <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
-                    create itinerary
+                    create attraction
                 </button>
             </div>
             <div class="form-group col-md-6">
-                <button class="m-2 btn btn-block btn-secondary" onclick="closeModal()" type="reset"
+                <button class="m-2 btn btn-block btn-secondary" onclick="closeModal('#large-modal')" type="reset"
                     data-dismiss="modal">
                     cancel
                 </button>
@@ -35,11 +29,8 @@
         </div>
     </div>
 </form>
-{{-- @endsection --}}
-
 <script>
-    $('.large').toggle();
-    // $(".ajaxForm").validate({}); // Jquery form validation initialization
+    $(".ajaxForm").validate({}); // Jquery form validation initialization
     $(".ajaxForm").submit(function (e) {
         e.preventDefault()
         var form = $(this);
@@ -50,6 +41,6 @@
         $('.submit-btn').html('');
         $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving...");
         $('.submit-btn').addClass('disabled');
-        ajaxSubmit(e, form, "POST", showAllItineraries);
+        ajaxSubmit(e, form, "POST", showAll);
     });
 </script>

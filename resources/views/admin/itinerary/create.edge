@@ -1,0 +1,76 @@
+{{-- @section('content') --}}
+<form method="POST" class="d-block ajaxForm" enctype="application/x-www-form-urlencoded" action="{{action}}">
+    {{ csrfField() }}
+    <div class="form-row">
+        <div class="form-group col-md-12 from_id">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="day">day</label>
+            <input type="number" class="form-control" id="day" name="day" required>
+            <small id="day_help" class="form-text text-muted">provide from stop point</small>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="distance">distance</label>
+            <input type="text" class="form-control" id="distance" name="distance" required>
+            <small id="distance_help" class="form-text text-muted">provide distance to stop point</small>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="row col-md-12">
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
+                    create itinerary
+                </button>
+            </div>
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-secondary" onclick="closeModal()" type="reset"
+                    data-dismiss="modal">
+                    cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+{{-- @endsection --}}
+
+<script>
+    $(".ajaxForm").validate({}); // Jquery form validation initialization
+    $(".ajaxForm").submit(function (e) {
+        e.preventDefault()
+        var form = $(this);
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving.");
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving..");
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving...");
+        $('.submit-btn').addClass('disabled');
+        ajaxSubmit(e, form, "POST", showAll);
+    });
+
+    // const setAttractions = function(item){
+    //     const destinationId = $('#destinationId').val();
+    //     console.log('destinatin =====>>>>', destinationId );
+    //     $.ajax({
+    //         url:'/admin/selector/attraction/'+destinationId,
+    //         method:'GET',
+    //         success:async function(data){
+    //             $('.attractionId').html('');
+    //            $('.attractionId').append(await data);
+    //         }
+    //     })
+    // }
+    $(document).ready(function(){
+        $.ajax({
+            url:'/admin/selector/stopPoint',
+            method:'GET',
+            success:async function(data){
+                console.log('stoppoints', data)
+                $('.from_id').html('');
+               $('.from_id').append(await data);
+            }
+        })
+    })
+</script>

@@ -1,0 +1,12 @@
+<label for="{{model}}">select {{model}}</label>
+<select name="{{model}}Id" id="{{model}}Id" onchange="setAttractions(this)" class="form-control select2">
+    <option value="" disabled selected>select {{model}}</option>
+    @each(item in items)
+    <option value="{{item.id}}">{{item.destination}}</option>
+    @endeach
+</select>
+<small id="{{model}}_help" class="form-text text-muted">provide {{model}}</small>
+<script>
+    $('#destinationId').select2({
+                    dropdownParent: $('#large-modal')});
+</script>
