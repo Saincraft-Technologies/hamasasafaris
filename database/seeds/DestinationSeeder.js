@@ -19,7 +19,7 @@ const fs = require('fs');
 class DestinationSeeder {
   async run() {
     /** Read data from json file */
-    const DBDestinations = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_destinations.json')}`, { encoding: 'utf-8' }));
+    const DBDestinations = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_backup/hamasa_db_table_destinations.json')}`, { encoding: 'utf-8' }));
     /** Load db model */
     const Destination = use('App/Models/Destination');
     /** loop through the data */

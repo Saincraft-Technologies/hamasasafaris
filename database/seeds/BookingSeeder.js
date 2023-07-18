@@ -18,7 +18,7 @@ const path = require('path');
 class BookingSeeder {
   async run() {
     /** Read data from json file */
-    const DBBookings = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_bookings.json')}`, { encoding: 'utf-8' }));
+    const DBBookings = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_backup/hamasa_db_table_bookings.json')}`, { encoding: 'utf-8' }));
     /** Load db model */
     const Booking = use('App/Models/Booking');
     /** loop through the data */

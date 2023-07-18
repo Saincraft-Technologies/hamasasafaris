@@ -15,7 +15,7 @@ const path = require('path');
 const fs = require('fs');
 class UserSeeder {
   async run() {
-    const oldDbUsers = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_users.json')}`, { encoding: 'utf-8' }));
+    const oldDbUsers = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_backup/hamasa_db_table_users.json')}`, { encoding: 'utf-8' }));
     console.log(oldDbUsers.data);
     const User = use('App/Models/User')
     for (const item of oldDbUsers.data) {

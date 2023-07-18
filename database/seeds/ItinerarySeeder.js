@@ -18,7 +18,7 @@ class ItinerarySeeder {
   async run() {
 
     /** Read data from json file */
-    const DBItineraries = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_itineraries.json')}`, { encoding: 'utf-8' }));
+    const DBItineraries = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_backup/hamasa_db_table_itineraries.json')}`, { encoding: 'utf-8' }));
     /** Load db model */
     const Itinerary = use('App/Models/Itinerary');
     /** loop through the data */

@@ -18,7 +18,7 @@ class NavigationSeeder {
   async run() {
 
     /** Read data from json file */
-    const DBNavigations = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_navigations.json')}`, { encoding: 'utf-8' }));
+    const DBNavigations = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_backup/hamasa_db_table_navigations.json')}`, { encoding: 'utf-8' }));
     /** Load db model */
     const Navigation = use('App/Models/Navigation');
     /** loop through the data */

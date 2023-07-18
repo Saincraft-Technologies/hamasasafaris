@@ -19,7 +19,7 @@ const path = require('path');
 class ArticleSeeder {
   async run() {
 
-    const oldDbArticles = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_articles.json')}`, { encoding: 'utf-8' }));
+    const oldDbArticles = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_backup/hamasa_db_table_articles.json')}`, { encoding: 'utf-8' }));
     console.log(oldDbArticles.data);
     const Article = use('App/Models/Article')
     for (const item of oldDbArticles.data) {

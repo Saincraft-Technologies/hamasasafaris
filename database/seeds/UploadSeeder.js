@@ -17,7 +17,7 @@ const path = require('path');
 class UploadSeeder {
   async run() {
 
-    const oldDbUploads = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_uploads.json')}`, { encoding: 'utf-8' }));
+    const oldDbUploads = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_backup/hamasa_db_table_uploads.json')}`, { encoding: 'utf-8' }));
     console.log(oldDbUploads.data);
     const Upload = use('App/Models/Upload')
     for (const item of oldDbUploads.data) {

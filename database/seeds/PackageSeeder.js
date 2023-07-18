@@ -17,7 +17,7 @@ const path = require('path');
 class PackageSeeder {
   async run() {
     /** Read data from json file */
-    const DBPackages = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_packages.json')}`, { encoding: 'utf-8' }));
+    const DBPackages = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_backup/hamasa_db_table_packages.json')}`, { encoding: 'utf-8' }));
     /** Load db model */
     const Package = use('App/Models/Package');
     /** loop through the data */
