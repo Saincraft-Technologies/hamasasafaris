@@ -9,6 +9,7 @@ public
 # Environment variables, never commit this file
 .env2
 .env1
+database/hamasa_backup
 
 # The development sqlite file
 database/*.sqlite
