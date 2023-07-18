@@ -41,6 +41,9 @@
       </div>
     </div>
   </div>
+
+  @include('inc/modals')
+  @include('inc/notify')
   <script src="{{cdnLocal('/js/app.min.js')}}">
   </script>
   @include('admin/datatablejs')
@@ -66,8 +69,6 @@
   <script src="{{cdnLocal('/js/ajax_form_submission.js')}}">
   </script>
 
-  @include('inc/modals')
-  @include('inc/notify')
   <script>
     const loadPage = function(route){
       console.log($);
