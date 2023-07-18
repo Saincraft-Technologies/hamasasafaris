@@ -13,8 +13,8 @@
     "adonisjs",
     "adonis-app"
   ],
-  "author": "",
-  "license": "UNLICENSED",
+  "author": "Gideon Sainyeye",
+  "license": "",
   "private": true,
   "dependencies": {
     "@adonisjs/ace": "^5.0.8",
