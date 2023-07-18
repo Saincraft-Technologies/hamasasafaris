@@ -8,14 +8,14 @@
     "start": "node server.js",
     // "test": "node ace migration:rollback --force",
     "test": "node ace migration:run --force",
-    "seed": "node ace seed",
+    // "test": "node ace seed",
   },
   "keywords": [
     "adonisjs",
     "adonis-app"
   ],
   "author": "Gideon Sainyeye",
-  "license": "",
+  "license": "UNLICENSED",
   "private": true,
   "dependencies": {
     "@adonisjs/ace": "^5.0.8",
