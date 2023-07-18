@@ -6,15 +6,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    // "test": "node ace migration:rollback --force",
-    "test": "node ace migration:run --force",
-    // "test": "node ace seed",
+    "test": "node ace migration:run",
   },
   "keywords": [
     "adonisjs",
     "adonis-app"
   ],
-  "author": "Gideon Sainyeye",
+  "author": "",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
