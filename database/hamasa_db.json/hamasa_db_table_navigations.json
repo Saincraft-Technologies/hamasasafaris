@@ -1,0 +1,59 @@
+{
+    "type": "table",
+    "name": "navigations",
+    "database": "hamasa_db",
+    "data": 
+[
+{
+    "id": "1",
+    "display_name": "Home",
+    "route": "\/",
+    "parent": "#",
+    "icon": "mdi mdi-home",
+    "oder": "0",
+    "created_at": "2023-07-06 16:20:06",
+    "updated_at": "2023-07-06 16:20:06"
+},
+{
+    "id": "2",
+    "display_name": "Safari Ideas",
+    "route": "\/itineraries",
+    "parent": "#",
+    "icon": "mdi mdi-transit-detour",
+    "oder": "0",
+    "created_at": "2023-07-06 16:20:06",
+    "updated_at": "2023-07-06 16:20:06"
+},
+{
+    "id": "3",
+    "display_name": "Lodges & Camps",
+    "route": "\/accommodations",
+    "parent": "#",
+    "icon": "mdi mdi-bed-outline",
+    "oder": "0",
+    "created_at": "2023-07-06 16:23:52",
+    "updated_at": "2023-07-06 16:23:52"
+},
+{
+    "id": "4",
+    "display_name": "About",
+    "route": "\/about",
+    "parent": "#",
+    "icon": "mdi mdi-information-variant",
+    "oder": "0",
+    "created_at": "2023-07-06 16:23:52",
+    "updated_at": "2023-07-06 16:23:52"
+},
+{
+    "id": "5",
+    "display_name": "FAQ",
+    "route": "\/questions",
+    "parent": "#",
+    "icon": "mdi mdi-information",
+    "oder": "0",
+    "created_at": "2023-07-06 16:26:40",
+    "updated_at": "2023-07-06 16:26:40"
+}
+]
+
+}

@@ -1,0 +1,45 @@
+{
+    "type": "table",
+    "name": "destinations",
+    "database": "hamasa_db",
+    "data": 
+[
+{
+    "id": "1",
+    "destination": "Serengeti National Park",
+    "caption": "Serengeti nationa park",
+    "description": "Serengeti National Park, national park and wildlife refuge on the Serengeti Plain in north-central Tanzania. It is partly adjacent to the Kenya border and is northwest of the adjoining Ngorongoro Conservation Area. It is best known for its huge herds of plains animals (especially gnu [wildebeests], gazelles, and zebras), and it is the only place in Africa where vast land-animal migrations still take place. The park, an international tourist attraction, was added to the UNESCO World Heritage List in 1981.",
+    "gallery_id": "2",
+    "created_at": "2023-07-09 15:47:02",
+    "updated_at": "2023-07-13 08:58:35"
+},
+{
+    "id": "3",
+    "destination": "Ngorongoro Conservation Area",
+    "caption": "Ngorongoro Conservation Area in Tanzania is home to the impressive Ngorongoro Crater, the world's largest volcanic caldera.",
+    "description": "Ngorongoro Conservation Area iattractions include the Big Five, and offers diverse ecosystems, from plains to forests. Visitors can enjoy thrilling game drives, guided walks, and balloon safaris to observe the abundant wildlife. The area also provides opportunities for cultural encounters with the Maasai people, known for their traditional way of life. Located near Arusha, Ngorongoro is a must-visit destination for nature enthusiasts and those seeking immersive wildlife experiences.",
+    "gallery_id": "5",
+    "created_at": "2023-07-13 10:18:38",
+    "updated_at": "2023-07-13 10:27:09"
+},
+{
+    "id": "4",
+    "destination": "Mount Kilimanjaro",
+    "caption": "Mount Kilimanjaro is an extraordinary adventure that takes you to the rooftop of Africa.",
+    "description": "Kilimanjaro is the highest peak in Africa and attracts climbers from around the world. The trek offers a diverse range of landscapes, from lush rainforests to barren alpine deserts, culminating in a snow-capped summit. Various routes, such as the Machame, Marangu, and Lemosho, provide different experiences and difficulty levels. It is a physically challenging endeavor, but with proper preparation and a seasoned guide, climbers can conquer the majestic Kilimanjaro and revel in breathtaking views and a sense of accomplishment.",
+    "gallery_id": "6",
+    "created_at": "2023-07-13 10:31:26",
+    "updated_at": "2023-07-13 10:43:27"
+},
+{
+    "id": "5",
+    "destination": "Zanzibar a tropical paradise.",
+    "caption": "Zanzibar is a tropical paradise located off the coast of Tanzania in East Africa.",
+    "description": "Known for its stunning white sandy beaches, crystal-clear turquoise waters, and vibrant coral reefs, Zanzibar is a popular destination for beach lovers and water enthusiasts. The island also offers a rich cultural heritage, blending African, Arab, and European influences. Visitors can explore the historic Stone Town, historical landmarks, its spice plantations, and indulge in aromatic flavors. Whether you seek relaxation, adventure, or cultural experiences, Zanzibar offers a delightful mix of natural beauty and cultural treasures.",
+    "gallery_id": "7",
+    "created_at": "2023-07-13 10:48:09",
+    "updated_at": "2023-07-13 10:51:12"
+}
+]
+
+}

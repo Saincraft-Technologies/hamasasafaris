@@ -19,7 +19,7 @@ class TokenSeeder {
   async run() {
 
     /** Read data from json file */
-    const DBTokens = JSON.parse(fs.readFileSync(`${path.resolve('../hamasa_db.json/hamasa_db_table_destinations.json')}`, { encoding: 'utf-8' }));
+    const DBTokens = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_destinations.json')}`, { encoding: 'utf-8' }));
     /** Load db model */
     const Token = use('App/Models/Token');
     /** loop through the data */

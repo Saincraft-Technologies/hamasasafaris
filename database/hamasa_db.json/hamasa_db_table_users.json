@@ -1,0 +1,22 @@
+{
+    "type": "table",
+    "name": "users",
+    "database": "hamasa_db",
+    "data": 
+[
+{
+    "id": "1",
+    "username": "JerubaalXerxes",
+    "firstname": null,
+    "secondname": null,
+    "email": "gsainyeye@gmail.com",
+    "password": "$2a$10$QK6ue7SWVc5wbaw6IB.cXuUpnV\/bi5dpUt.RAZ9YvA6vzGXmE2VqS",
+    "address": null,
+    "gender": null,
+    "role": "user",
+    "created_at": "2023-07-06 13:03:35",
+    "updated_at": "2023-07-06 13:03:35"
+}
+]
+
+}

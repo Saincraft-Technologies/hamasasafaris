@@ -19,7 +19,7 @@ class StopPointSeeder {
   async run() {
 
     /** Read data from json file */
-    const DBStopPoints = JSON.parse(fs.readFileSync(`${path.resolve('../hamasa_db.json/hamasa_db_table_stop_points.json')}`, { encoding: 'utf-8' }));
+    const DBStopPoints = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_stop_points.json')}`, { encoding: 'utf-8' }));
     /** Load db model */
     const StopPoint = use('App/Models/StopPoint');
     /** loop through the data */

@@ -18,7 +18,7 @@ const path = require('path');
 class FacilitySeeder {
   async run() {
     /** Read data from json file */
-    const DBFacilities = JSON.parse(fs.readFileSync(`${path.resolve('../hamasa_db.json/hamasa_db_table_facilities.json')}`, { encoding: 'utf-8' }));
+    const DBFacilities = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_facilities.json')}`, { encoding: 'utf-8' }));
     /** Load db model */
     const Facility = use('App/Models/Facility');
     /** loop through the data */

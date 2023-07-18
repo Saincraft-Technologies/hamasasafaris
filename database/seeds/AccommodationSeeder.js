@@ -17,7 +17,7 @@ const path = require('path');
 class AccommodationSeeder {
   async run() {
     try {
-      const oldDbAccommodations = JSON.parse(fs.readFileSync(`${path.resolve('../hamasa_db.json/hamasa_db_table_accommodations.json')}`, { encoding: 'utf-8' }));
+      const oldDbAccommodations = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_accommodations.json')}`, { encoding: 'utf-8' }));
       console.log(oldDbAccommodations.data);
       const Accommodation = use('App/Models/Accommodation')
       for (const item of oldDbAccommodations.data) {

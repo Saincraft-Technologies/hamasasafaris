@@ -1,0 +1,51 @@
+{
+    "type": "table",
+    "name": "galleries",
+    "database": "hamasa_db",
+    "data": 
+[
+{
+    "id": "1",
+    "gallery": "Serena Hotels",
+    "created_at": "2023-07-06 13:12:04",
+    "updated_at": "2023-07-13 11:02:59"
+},
+{
+    "id": "2",
+    "gallery": "Serengeti National Park",
+    "created_at": "2023-07-09 15:47:02",
+    "updated_at": "2023-07-13 08:58:35"
+},
+{
+    "id": "5",
+    "gallery": "Ngorongoro Conservation Area",
+    "created_at": "2023-07-13 10:18:37",
+    "updated_at": "2023-07-13 10:18:37"
+},
+{
+    "id": "6",
+    "gallery": "Mount Kilimanjaro",
+    "created_at": "2023-07-13 10:31:26",
+    "updated_at": "2023-07-13 10:31:26"
+},
+{
+    "id": "7",
+    "gallery": "Zanzibar a tropical paradise.",
+    "created_at": "2023-07-13 10:48:09",
+    "updated_at": "2023-07-13 10:48:09"
+},
+{
+    "id": "8",
+    "gallery": "Sopa Lodges",
+    "created_at": "2023-07-13 11:26:23",
+    "updated_at": "2023-07-13 11:26:23"
+},
+{
+    "id": "9",
+    "gallery": "Hamasa Camps",
+    "created_at": "2023-07-13 11:42:36",
+    "updated_at": "2023-07-13 11:42:36"
+}
+]
+
+}

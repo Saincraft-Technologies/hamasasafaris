@@ -1,0 +1,54 @@
+{
+    "type": "table",
+    "name": "tokens",
+    "database": "hamasa_db",
+    "data": 
+[
+{
+    "id": "5",
+    "user_id": "1",
+    "token": "40fe8f3e-7d13-45bf-8a1c-ba165313ab10",
+    "type": "remember_token",
+    "is_revoked": "0",
+    "created_at": "2023-07-07 09:03:24",
+    "updated_at": "2023-07-07 09:03:24"
+},
+{
+    "id": "6",
+    "user_id": "1",
+    "token": "12598239-7a53-4e2c-beab-489dd043f4c5",
+    "type": "remember_token",
+    "is_revoked": "0",
+    "created_at": "2023-07-09 17:10:19",
+    "updated_at": "2023-07-09 17:10:19"
+},
+{
+    "id": "9",
+    "user_id": "1",
+    "token": "408d2812-bef8-4639-a1af-10b5dfd06800",
+    "type": "remember_token",
+    "is_revoked": "0",
+    "created_at": "2023-07-10 09:03:52",
+    "updated_at": "2023-07-10 09:03:52"
+},
+{
+    "id": "13",
+    "user_id": "1",
+    "token": "a95a441e-820b-4704-8031-27f26a114f7f",
+    "type": "remember_token",
+    "is_revoked": "0",
+    "created_at": "2023-07-13 12:53:03",
+    "updated_at": "2023-07-13 12:53:03"
+},
+{
+    "id": "15",
+    "user_id": "1",
+    "token": "a0052dad-9faa-4394-af06-e0e79af7dc4f",
+    "type": "remember_token",
+    "is_revoked": "0",
+    "created_at": "2023-07-14 18:05:36",
+    "updated_at": "2023-07-14 18:05:36"
+}
+]
+
+}

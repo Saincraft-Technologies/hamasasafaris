@@ -1,0 +1,79 @@
+{
+    "type": "table",
+    "name": "uploads",
+    "database": "hamasa_db",
+    "data": 
+[
+{
+    "id": "1",
+    "filepath": "https:\/\/saincrafttechnologies-static-public-2023.fra1.cdn.digitaloceanspaces.com\/hamasasafaris\/uploads\/501f8d59-c78e-4095-9e76-269630ef75b2.jpg",
+    "metadata": "jpeg",
+    "caption": "serena",
+    "filename": "5ad353af-7d25-4f1d-9bfc-9bf1894f957d.jpg",
+    "gallery_id": "1",
+    "created_at": "2023-07-07 05:33:33",
+    "updated_at": "2023-07-07 05:33:33"
+},
+{
+    "id": "5",
+    "filepath": "https:\/\/saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com\/hamasasafaris\/uploads\/1e4d0558-e49d-4ee4-a3e9-43f064f7c5dc.jpg",
+    "metadata": "jpeg",
+    "caption": "Wildebeest migration Serengeti",
+    "filename": "1e4d0558-e49d-4ee4-a3e9-43f064f7c5dc.jpg",
+    "gallery_id": "2",
+    "created_at": "2023-07-10 15:20:01",
+    "updated_at": "2023-07-10 15:20:01"
+},
+{
+    "id": "7",
+    "filepath": "https:\/\/saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com\/hamasasafaris\/uploads\/3d67d5c2-1688-47a1-9b53-2fc72e68c718.jpg",
+    "metadata": "jpeg",
+    "caption": null,
+    "filename": "3d67d5c2-1688-47a1-9b53-2fc72e68c718.jpg",
+    "gallery_id": "5",
+    "created_at": "2023-07-13 10:22:35",
+    "updated_at": "2023-07-13 10:22:35"
+},
+{
+    "id": "8",
+    "filepath": "https:\/\/saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com\/hamasasafaris\/uploads\/c609ef05-e95d-4701-9db4-bd1085414e99.jpeg",
+    "metadata": "jpeg",
+    "caption": null,
+    "filename": "c609ef05-e95d-4701-9db4-bd1085414e99.jpeg",
+    "gallery_id": "6",
+    "created_at": "2023-07-13 10:34:12",
+    "updated_at": "2023-07-13 10:34:12"
+},
+{
+    "id": "9",
+    "filepath": "https:\/\/saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com\/hamasasafaris\/uploads\/91233f84-c95c-41c0-b555-cb7fc3e493b2.webp",
+    "metadata": "webp",
+    "caption": null,
+    "filename": "91233f84-c95c-41c0-b555-cb7fc3e493b2.webp",
+    "gallery_id": "7",
+    "created_at": "2023-07-13 10:48:49",
+    "updated_at": "2023-07-13 10:48:49"
+},
+{
+    "id": "10",
+    "filepath": "https:\/\/saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com\/hamasasafaris\/uploads\/0c0f1045-db58-40ed-8510-d0c44ecaec88.jpg",
+    "metadata": "jpeg",
+    "caption": null,
+    "filename": "0c0f1045-db58-40ed-8510-d0c44ecaec88.jpg",
+    "gallery_id": "8",
+    "created_at": "2023-07-13 11:27:09",
+    "updated_at": "2023-07-13 11:27:09"
+},
+{
+    "id": "11",
+    "filepath": "https:\/\/saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com\/hamasasafaris\/uploads\/e809fa21-3f18-46f4-b185-30e1e9ad4517.jpg",
+    "metadata": "jpeg",
+    "caption": null,
+    "filename": "e809fa21-3f18-46f4-b185-30e1e9ad4517.jpg",
+    "gallery_id": "9",
+    "created_at": "2023-07-13 11:43:34",
+    "updated_at": "2023-07-13 11:43:34"
+}
+]
+
+}

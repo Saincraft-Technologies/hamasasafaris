@@ -1,0 +1,45 @@
+{
+    "type": "table",
+    "name": "accommodations",
+    "database": "hamasa_db",
+    "data": 
+[
+{
+    "id": "1",
+    "accommodation": "Serena Hotels",
+    "type": "5-star accommodations",
+    "address": " Sokoine Road, P.O. Box 2551, Arusha, Tanzania",
+    "phone": "+255 27 2503141",
+    "caption": "Serena Hotels in Tanzania offer an exceptional blend of luxury, comfort, and stunning locations. ",
+    "description": "Serena Hotels in Tanzania offer an exceptional blend of luxury, comfort, and stunning locations. Known for their commitment to excellence, Serena Hotels provide a range of accommodations in Tanzania, including beach resorts, safari lodges, and city hotels. Each property is meticulously designed to harmonize with its surroundings and showcase the natural beauty of Tanzania.\r\nIn the Serengeti, Serena Hotels offer safari lodges strategically located for optimal wildlife viewing during the annual Great Migration. Guests can experience the thrill of witnessing vast herds of wildebeests and zebras crossing the plains right from the comfort of their lodges.",
+    "gallery_id": "1",
+    "created_at": "2023-07-06 13:12:04",
+    "updated_at": "2023-07-13 11:02:59"
+},
+{
+    "id": "3",
+    "accommodation": "Sopa Lodges",
+    "type": "5-star accommodations",
+    "address": "P.O.Box",
+    "phone": "+255",
+    "caption": "Experience world-class service at Sopa Lodge",
+    "description": "Sopa Lodges offers lodges in various national parks and conservation areas, allowing guests to enjoy close proximity to wildlife and natural wonders. Their properties are designed to blend harmoniously with the surroundings, often featuring traditional African architecture and decor.\r\n\r\nEach Sopa Lodge provides spacious rooms or cottages with modern amenities, including en-suite bathrooms and private balconies or terraces. Guests can indulge in delicious cuisine at the on-site restaurants, which serve a variety of local and international dishes.",
+    "gallery_id": "8",
+    "created_at": "2023-07-13 11:26:23",
+    "updated_at": "2023-07-13 11:26:23"
+},
+{
+    "id": "4",
+    "accommodation": "Hamasa Camps",
+    "type": "Camp",
+    "address": "P.O.Box",
+    "phone": "+255",
+    "caption": "Indulge into the maasai culture camping at a maasai Boma ",
+    "description": "Indulge into the maasai culture camping at a maasai Boma.",
+    "gallery_id": "9",
+    "created_at": "2023-07-13 11:42:36",
+    "updated_at": "2023-07-13 11:42:36"
+}
+]
+
+}

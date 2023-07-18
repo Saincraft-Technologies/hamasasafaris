@@ -17,7 +17,7 @@ const path = require('path');
 class GallerySeeder {
   async run() {
 
-    const oldDbGalleries = JSON.parse(fs.readFileSync(`${path.resolve('../hamasa_db.json/hamasa_db_table_galleries.json')}`, { encoding: 'utf-8' }));
+    const oldDbGalleries = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_galleries.json')}`, { encoding: 'utf-8' }));
     console.log(oldDbGalleries.data);
     const Gallery = use('App/Models/Gallery')
     try {

@@ -1,0 +1,123 @@
+{
+    "type": "table",
+    "name": "adonis_schema",
+    "database": "hamasa_db",
+    "data": 
+[
+{
+    "id": "1",
+    "name": "1503248427885_user",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:44"
+},
+{
+    "id": "2",
+    "name": "1503248427886_token",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:45"
+},
+{
+    "id": "3",
+    "name": "1588278064983_pages_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:46"
+},
+{
+    "id": "4",
+    "name": "1687956459850_bookings_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:46"
+},
+{
+    "id": "5",
+    "name": "1687956461120_galleries_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:47"
+},
+{
+    "id": "6",
+    "name": "1687956462197_uploads_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:47"
+},
+{
+    "id": "7",
+    "name": "1687956846875_attractions_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:48"
+},
+{
+    "id": "8",
+    "name": "1687957257096_destinations_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:49"
+},
+{
+    "id": "9",
+    "name": "1687957420195_stop_points_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:49"
+},
+{
+    "id": "10",
+    "name": "1687957432797_itineraries_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:50"
+},
+{
+    "id": "11",
+    "name": "1687957610024_facilities_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:51"
+},
+{
+    "id": "12",
+    "name": "1687957676910_activities_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:51"
+},
+{
+    "id": "13",
+    "name": "1687958181881_accommodations_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:52"
+},
+{
+    "id": "14",
+    "name": "1687959121428_destination_facilities_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:53"
+},
+{
+    "id": "15",
+    "name": "1687959140360_destination_accomodations_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:54"
+},
+{
+    "id": "16",
+    "name": "1688364108304_stop_point_activities_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:55"
+},
+{
+    "id": "17",
+    "name": "1688364332730_destination_attractions_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:56"
+},
+{
+    "id": "18",
+    "name": "1688364635553_booking_attractions_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:57"
+},
+{
+    "id": "19",
+    "name": "1688563184527_navigations_schema",
+    "batch": "1",
+    "migration_time": "2023-07-06 13:01:57"
+}
+]
+
+}

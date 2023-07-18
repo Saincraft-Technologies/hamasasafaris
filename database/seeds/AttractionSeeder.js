@@ -18,7 +18,7 @@ const path = require('path');
 
 class AttractionSeeder {
   async run() {
-    const oldDbAttractions = JSON.parse(fs.readFileSync(`${path.resolve('../hamasa_db.json/hamasa_db_table_attractions.json')}`, { encoding: 'utf-8' }));
+    const oldDbAttractions = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_attractions.json')}`, { encoding: 'utf-8' }));
     console.log(oldDbAttractions.data);
     const Attraction = use('App/Models/Attraction')
     for (const item of oldDbAttractions.data) {

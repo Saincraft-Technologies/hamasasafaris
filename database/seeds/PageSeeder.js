@@ -19,7 +19,7 @@ class PageSeeder {
   async run() {
 
     /** Read data from json file */
-    const DBPages = JSON.parse(fs.readFileSync(`${path.resolve('../hamasa_db.json/hamasa_db_table_pages.json')}`, { encoding: 'utf-8' }));
+    const DBPages = JSON.parse(fs.readFileSync(`${path.resolve('./database/hamasa_db.json/hamasa_db_table_pages.json')}`, { encoding: 'utf-8' }));
     /** Load db model */
     const Page = use('App/Models/Page');
     /** loop through the data */
