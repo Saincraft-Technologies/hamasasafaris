@@ -10,7 +10,6 @@ class ItinerariesSchema extends Schema {
       table.integer('from_id').unsigned().references('id').inTable('stop_points')
       table.integer('to_id').unsigned().references('id').inTable('stop_points')
       table.integer('destination_id').unsigned().references('id').inTable('destinations')
-      table.integer('day', 2)
       table.string('distance', 100).notNullable()
       table.timestamps()
     })
