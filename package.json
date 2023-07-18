@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "rollback": "node ace migration:rollback --force",
-    "migrate": "node ace migration:run --force",
+    // "test": "node ace migration:rollback --force",
+    "test": "node ace migration:run --force",
     "seed": "node ace seed",
   },
   "keywords": [
