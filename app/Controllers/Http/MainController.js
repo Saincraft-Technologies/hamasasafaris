@@ -29,7 +29,7 @@ class MainController {
         const destination = await Destination.query().with('gallery').fetch();
         const attraction = await Attraction.query().with('gallery').fetch();
         const Navigation = use(`App/Models/Navigation`);
-        const activity = await Activity.query().with('gallery').fetch();
+        const activity = await Activity.query().with('article').fetch();
 
         /** Method to fill uploads! */
         const fillUploads = async (array) => {
