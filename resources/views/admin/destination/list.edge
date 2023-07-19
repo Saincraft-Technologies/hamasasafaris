@@ -28,16 +28,19 @@
         @each(item in items)
         <tr>
             <td style=" width:7%;">{{item.destination}}</td>
-            <td style=" width:20%;">{{item.caption}}</td>
-            <td style=" width:40%;">
+            <td>
+                <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
+                    {{item.caption}}</p>
+            </td>
+            <td>
                 <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
                     {{item.description}}</p>
             </td>
-            <td style="width:20%;" onclick="showGallery('{{item.gallery.id}}', '{{model}}')"><span
+            <td onclick="showGallery('{{item.gallery.id}}', '{{model}}')"><span
                     style="text-decoration:underline; color:rgb(117, 117, 237);">{{item.gallery.gallery}}</span>
             </td>
-            <td style="width:20%;">{{item.created_at}}</td>
-            <td style=" width:10%;">
+            <td>{{item.created_at}}</td>
+            <td>
                 <div class="dropdown text-center">
                     <button type="button"
                         class="btn btn-sm btn-icon btn-rounded btn-outline-secondary dropdown-btn dropdown-toggle arrow-none card-drop"
