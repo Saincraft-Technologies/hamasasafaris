@@ -168,7 +168,7 @@ class MainController {
         const { destination, attraction, activity } = params;
         /** only destinations queried */
         if (attraction) {
-            let attract = await Attraction.query().where('id', attraction).with('article').with('gallery').fetch();
+            let attract = await Attraction.query().where('id', attraction).with('article').fetch();
             const attractions = await fillUploads(attract.toJSON())
             const attractionWithArticle = await fillArticleContent(attractions)
             console.log('attractions===>>', attractionWithArticle);
