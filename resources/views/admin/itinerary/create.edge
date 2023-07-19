@@ -15,6 +15,8 @@
             <input type="text" class="form-control" id="distance" name="distance" required>
             <small id="distance_help" class="form-text text-muted">provide distance to stop point</small>
         </div>
+        <div class="form-group col-md-6 packageBlock">
+        </div>
     </div>
 
     <div class="form-row">
@@ -67,10 +69,19 @@
             url:'/admin/selector/stopPoint',
             method:'GET',
             success:async function(data){
-                console.log('stoppoints', data)
                 $('.from_id').html('');
                $('.from_id').append(await data);
             }
         })
+        $.ajax({
+            url:'/admin/selector/package',
+            method:'GET',
+            success:async function(data){
+                console.log('packages ===>>>', data)
+                $('.packageBlock').html('');
+               $('.packageBlock').append(await data);
+                console.log($('#packageId').val())
+            }
+        });
     })
 </script>

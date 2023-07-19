@@ -235,14 +235,16 @@ class ModelController {
 
                 case 'itinerary':
                     for (const key in object) {
-                        if (key !== '_csrf') {
+                        if (key !== '_csrf' && key !== 'day') {
                             newModal[key] = object[key];
                         }
                     }
-                    // gal.gallery = request.input(`${params.model}`);
-                    // await gal.save();
-                    // newModal.gallery_id = await gal.toJSON().id;
                     await newModal.save();
+                    const PackItin = use('App/Models/PackageItinerary');
+                    const packItin = new PackItin();
+                    packItin.day = require.input('day');
+                    packItin.package_id = request.input('packageId');
+                    packItin.itinerary_id = newModal.toJSON().id;
                     return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
                 case 'stopPoint':
