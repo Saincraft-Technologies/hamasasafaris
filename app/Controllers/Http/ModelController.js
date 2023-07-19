@@ -27,11 +27,23 @@ class ModelController {
             let delRoute = `/admin/delete/${params.model}`;
             let uploadRoute = `/admin/upload/${params.model}`;
             switch (t) {
+                case 'StopPoint':
+                    const stopPoint = await Modal.query().with('gallery').fetch();
+                    return await view.render(`admin.${params.model}.list`, { items: stopPoint.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+                    break;
                 case 'Itinerary':
-                    const itinaries = await Modal.query().with('fromPoint').with('toPoint').fetch();
-                    console.log('itineraries ===>>>', await itinaries.toJSON());
+                    const PackageModel = use(`App/Models/Package${t}`);
+                    const packItin = await PackageModel.query().with('package').with('itinerary').fetch();
+                    const items = packItin.toJSON()
+                    const final = [];
+                    for (const item of items) {
+                        const itt = await Modal.query().where('id', item.itinerary.id).with('fromPoint').with('toPoint').fetch();
+                        item['itinerary'] = itt.toJSON()[0];
+                        final.push(item);
+                    }
+                    console.log('itineraries ===>>>', await final);
 
-                    return await view.render(`admin.${params.model}.list`, { items: itinaries.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+                    return await view.render(`admin.${params.model}.list`, { items: final, model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
                     break;
                 case 'Activity':
                     model = await Modal.query().with('article').fetch();
@@ -60,7 +72,7 @@ class ModelController {
 
             const Modal = use(`App/Models/${t}`);
             let model = await Modal.all();
-            console.log('list invoked!', model);
+            // console.log('list invoked!', model);
             let action = `/admin/store/${params.model}`
             return await view.render(`admin.${params.model}.create`, { [`${params.model}`]: model, action: action });
         } catch (error) {
@@ -91,8 +103,13 @@ class ModelController {
                     const stopPointModel = await Modal.all();
                     console.log('list invoked!', stopPointModel.toJSON());
                     return await view.render(`admin.selector.stopPoint`, { items: stopPointModel.toJSON(), model: params.model });
-                    break; model
-                    model
+                    break;
+
+                case 'package':
+                    const packageModel = await Modal.all();
+                    console.log('list invoked!', packageModel.toJSON());
+                    return await view.render(`admin.selector.package`, { items: packageModel.toJSON(), model: params.model });
+                    break;
 
                 default:
                     const modelMain = await Modal.all();
@@ -235,16 +252,17 @@ class ModelController {
 
                 case 'itinerary':
                     for (const key in object) {
-                        if (key !== '_csrf' && key !== 'day') {
+                        if (key !== '_csrf' && key !== 'day' && key !== 'packageId') {
                             newModal[key] = object[key];
                         }
                     }
                     await newModal.save();
                     const PackItin = use('App/Models/PackageItinerary');
                     const packItin = new PackItin();
-                    packItin.day = require.input('day');
+                    packItin.day = request.input('day');
                     packItin.package_id = request.input('packageId');
                     packItin.itinerary_id = newModal.toJSON().id;
+                    packItin.save();
                     return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
                 case 'stopPoint':

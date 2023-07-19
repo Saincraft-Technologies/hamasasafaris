@@ -4,10 +4,10 @@
 const Model = use('Model')
 
 class PackageItinerary extends Model {
-    packages() {
+    package() {
         return this.belongsTo('App/Models/Package')
     }
-    Itineraries() {
+    itinerary() {
         return this.belongsTo('App/Models/Itinerary')
     }
 }

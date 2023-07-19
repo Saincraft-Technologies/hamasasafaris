@@ -7,6 +7,9 @@ class Itinerary extends Model {
     gallery() {
         return this.belongsTo('App/Models/Gallery')
     }
+    packageItineraries() {
+        return this.belongsTo('App/Models/PackageItinerary')
+    }
     fromPoint() {
         return this.belongsTo('App/Models/StopPoint', 'from_id', 'id')
     }
@@ -14,7 +17,10 @@ class Itinerary extends Model {
         return this.belongsTo('App/Models/StopPoint', 'to_id', 'id')
     }
     activities() {
-        return this.manyThrough('App/Models/ItineraryActivities', 'activities')
+        return this.manyThrough('App/Models/ItineraryActivity', 'activities')
+    }
+    packages() {
+        return this.manyThrough('App/Models/PackageItinerary', 'packages')
     }
     acommodations() {
         return this.manyThrough('App/Models/ItineraryAccommodation', 'accomodations')

@@ -5,7 +5,10 @@ const Model = use('Model')
 
 class Package extends Model {
     itineraries() {
-        return this.manyThrough('App/Models/PackageItinerary', 'itineraries')
+        return this.manyThrough('App/Models/PackageItinerary', 'itinerary')
+    }
+    packageItinerary() {
+        return this.belongsTo('App/Models/PackageItinerary')
     }
 }
 
