@@ -7,7 +7,6 @@ class MainController {
     async index({ view }) {
         const Destination = use(`App/Models/Destination`);
         const Navigations = use(`App/Models/Navigation`);
-        const Gallery = use(`App/Models/Gallery`);
         return view.render('site.index', {
             navigations: JSON.parse(JSON.stringify(await Navigations.all())),
             destinations: JSON.parse(JSON.stringify(await Destination.all())),
@@ -47,13 +46,13 @@ class MainController {
         }
         let accommodations = await fillUploads(accommodation);
         let destinations = await fillUploads(destination);
-        let activities = await fillUploads(activity);
-        // console.log('accommodation', k);
+        // let activities = await fillUploads(activity);
+        console.log('activities ====>>>>', activity.toJSON());
 
         return view.render('site.pages', {
             accommodations: JSON.parse(JSON.stringify(await accommodations)),
             destinations: JSON.parse(JSON.stringify(await destinations)),
-            activities: JSON.parse(JSON.stringify(await activities)),
+            activities: JSON.parse(JSON.stringify(await activity.toJSON())),
             navigations: JSON.parse(JSON.stringify(await Navigation.all())),
             galleries: JSON.parse(JSON.stringify(await Gallery.query().with('uploads').fetch()))
         });
@@ -168,7 +167,7 @@ class MainController {
         const { destination, attraction, activity } = params;
         /** only destinations queried */
         if (attraction) {
-            let attract = await Attraction.query().where('id', attraction).with('article').fetch();
+            let attract = await Attraction.query().where('id', attraction).with('article').with('gallery').fetch();
             const attractions = await fillUploads(attract.toJSON())
             const attractionWithArticle = await fillArticleContent(attractions)
             console.log('attractions===>>', attractionWithArticle);
