@@ -2,18 +2,33 @@
     {{ csrfField() }}
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="destination">destination name</label>
-            <input type="text" class="form-control" id="destination" name="destination" required>
-            <small id="destination_help" class="form-text text-muted">provide destination name</small>
+            <label for="activity">activity name</label>
+            @if(item.activity)
+            <input type="text" value="{{item.activity}}" class="form-control" id="activity" name="activity" required>
+            @else
+            <input type="text" class="form-control" id="activity" name="activity" required>
+            @endif
+            <small id="activity_help" class="form-text text-muted">provide activity name</small>
         </div>
+
         <div class="form-group col-md-6">
-            <label for="caption">destination caption</label>
-            <input type="text" class="form-control" id="caption" name="caption" required>
-            <small id="caption_help" class="form-text text-muted">provide caption</small>
+            <label for="activity">activity duration</label>
+            @if(item.duration)
+            <input type="text" value="{{item.duration}}" class="form-control" id="duration" name="duration" required>
+            @else
+            <input type="text" class="form-control" id="duration" name="duration" required>
+            @endif
+            <small id="duration_help" class="form-text text-muted">provide activity duration</small>
         </div>
         <div class="form-group col-md-6">
             <label for="description">description</label>
-            <input type="text" class="form-control" id="description" name="description" required>
+
+            @if(item.duration)
+            <textarea type="text" class="form-control" id="description" name="description"
+                required>{{description}}</textarea>
+            @else
+            <textarea type="text" class="form-control" id="description" name="description" required></textarea>
+            @endif
             <small id="description_help" class="form-text text-muted">provide description</small>
         </div>
     </div>
@@ -22,7 +37,12 @@
         <div class="row col-md-12">
             <div class="form-group col-md-6">
                 <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
-                    create destination
+
+                    @if(item.duration)
+                    update activity
+                    @else
+                    create activity
+                    @endif
                 </button>
             </div>
             <div class="form-group col-md-6">
@@ -48,4 +68,5 @@
         $('.submit-btn').addClass('disabled');
         ajaxSubmit(e, form, "POST", showAll);
     });
+    
 </script>

@@ -2,19 +2,33 @@
     {{ csrfField() }}
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="destination">destination name</label>
-            <input type="text" class="form-control" id="destination" name="destination" required>
-            <small id="destination_help" class="form-text text-muted">provide destination name</small>
+            <label for="facility">facility name</label>
+            @if(item.facility)
+            <input type="text" value="{{item.facility}}" class="form-control" id="facility" name="facility" required>
+            @else
+            <input type="text" class="form-control" id="facility" name="facility" required>
+            @endif
+            <small id="facility_help" class="form-text text-muted">provide facility name</small>
         </div>
         <div class="form-group col-md-6">
-            <label for="caption">destination caption</label>
-            <input type="text" class="form-control" id="caption" name="caption" required>
+            <label for="caption">facility caption</label>
+            @if(item.caption)
+            <textarea type="text" value="{{item.caption}}" class="form-control" id="caption" name="caption"
+                required></textarea>
+            @else
+            <textarea type="text" class="form-control" id="caption" name="caption" required></textarea>
+            @endif
             <small id="caption_help" class="form-text text-muted">provide caption</small>
         </div>
         <div class="form-group col-md-6">
-            <label for="description">description</label>
-            <input type="text" class="form-control" id="description" name="description" required>
-            <small id="description_help" class="form-text text-muted">provide description</small>
+            <label for="services">services</label>
+            @if(item.services)
+            <textarea type="text" value="{{item.services}}" class="form-control" id="services" name="services"
+                required></textarea>
+            @else
+            <textarea type="text" class="form-control" id="services" name="services" required></textarea>
+            @endif
+            <small id="services_help" class="form-text text-muted">provide services</small>
         </div>
     </div>
 
@@ -22,7 +36,12 @@
         <div class="row col-md-12">
             <div class="form-group col-md-6">
                 <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
-                    create destination
+
+                    @if(item)
+                    update facility
+                    @else
+                    create facility
+                    @endif
                 </button>
             </div>
             <div class="form-group col-md-6">

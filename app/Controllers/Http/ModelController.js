@@ -33,36 +33,19 @@ class ModelController {
 
                     return await view.render(`admin.${params.model}.list`, { items: itinaries.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
                     break;
+                case 'Activity':
+                    model = await Modal.query().with('article').fetch();
+                    return await view.render(`admin.${params.model}.list`, { items: model.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+                    break;
 
                 default:
-                    if (!params.model == 'gallery') {
-                    } else {
-                        model = await Modal.query().fetch();
-                    }
+
                     try {
                         model = await Modal.query().with('gallery').fetch();
                     } catch (error) {
                         model = await Modal.query().fetch();
                     }
-                    const models = JSON.parse(JSON.stringify(await model));
-                    const final = [];
-                    const Gal = use('App/Models/Gallery');
-                    console.log('models ===>', params.model)
-
-                    for (const value of models) {
-                        if (!value['gallery_id'] === null) {
-                            console.log('list invoked!', await value);
-                            const gall = await Gal.find(value.gallery_id);
-                            value['gallery'] = await gall.toJSON();
-
-                            final.push(await value);
-                        } else {
-                            final.push(await value);
-                        }
-                    }
-
-                    console.log(...final)
-                    return await view.render(`admin.${params.model}.list`, { items: final, model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+                    return await view.render(`admin.${params.model}.list`, { items: model.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
                     break;
             }
 
@@ -127,6 +110,7 @@ class ModelController {
 
             const Modal = use(`App/Models/${t}`);
             let model = await Modal.find(params.id);
+            console.log('model ====>>>', await model.toJSON());
             let action = `/admin/update/${params.model}/${params.id}`
             return await view.render(`admin.${params.model}.create`, { item: model.toJSON(), action: action });
         } catch (error) {
@@ -154,13 +138,10 @@ class ModelController {
 
             const Modal = use(`App/Models/${t}`);
             const Gallery = use(`App/Models/Gallery`);
+            const Article = use(`App/Models/Article`);
             const newModal = new Modal();
             const object = request.body;
-            for (const key in object) {
-                if (key !== '_csrf') {
-                    newModal[key] = object[key];
-                }
-            }
+
             const gal = new Gallery();
             switch (params.model) {
                 case 'gallery':
@@ -172,7 +153,11 @@ class ModelController {
                     break;
 
                 case 'accommodation':
-
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
                     gal.gallery = request.input(`${params.model}`);
                     await gal.save();
                     newModal.gallery_id = await gal.toJSON().id;
@@ -185,16 +170,44 @@ class ModelController {
                     break;
 
                 case 'destination':
-
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
                     gal.gallery = request.input(`${params.model}`);
                     await gal.save();
                     newModal.gallery_id = await gal.toJSON().id;
                     await newModal.save();
                     return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
+                case 'activity':
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
+                    const article = new Article();
+                    article.title = request.input(`${params.model}`);
+                    article.source = 'in-house';
+                    article.author = 'Hamasa safaris';
+                    article.visible = true;
+                    await article.save();
+
+                    newModal.article_id = await article.toJSON().id;
+                    await newModal.save();
+                    const DestAct = use('App/Models/DestinationAttraction');
+                    DestAct.destination_id = request.input('destinationId');
+                    DestAct.attraction_id = newModal.toJSON().id;
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
+                    break;
 
                 case 'package':
-
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
                     // gal.gallery = request.input(`${params.model}`);
                     // await gal.save();
                     // newModal.gallery_id = await gal.toJSON().id;
@@ -203,16 +216,29 @@ class ModelController {
                     break;
 
                 case 'attraction':
-
+                    for (const key in object) {
+                        if (key !== '_csrf' && key !== 'destinationId') {
+                            newModal[key] = object[key];
+                        }
+                    }
                     gal.gallery = request.input(`${params.model}`);
                     await gal.save();
                     newModal.gallery_id = await gal.toJSON().id;
                     await newModal.save();
+                    const DestAction = use('App/Models/DestinationAttraction');
+                    const destAct = new DestAction();
+                    destAct.destination_id = request.input('destinationId');
+                    destAct.attraction_id = newModal.toJSON().id;
+                    await destAct.save()
                     return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
                 case 'itinerary':
-
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
                     // gal.gallery = request.input(`${params.model}`);
                     // await gal.save();
                     // newModal.gallery_id = await gal.toJSON().id;
@@ -220,6 +246,11 @@ class ModelController {
                     return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
                 case 'stopPoint':
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
                     console.log('======>>', await request)
                     gal.gallery = request.input(`name`);
                     await gal.save();
@@ -249,11 +280,7 @@ class ModelController {
             const Gallery = use(`App/Models/Gallery`);
             let newModal = await Modal.findOrFail(id);
             const object = request.body;
-            for (const key in object) {
-                if (key !== '_csrf') {
-                    newModal[key] = object[key];
-                }
-            }
+
             const gal = await Gallery.findOrFail(newModal.gallery_id);
             switch (params.model) {
                 case 'gallery':
@@ -265,7 +292,11 @@ class ModelController {
                     break;
 
                 case 'accommodation':
-
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
                     await newModal.save();
@@ -273,7 +304,11 @@ class ModelController {
                     break;
 
                 case 'destination':
-
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
                     await newModal.save();
@@ -281,11 +316,30 @@ class ModelController {
                     break;
 
                 case 'attraction':
-
+                    for (const key in object) {
+                        if (key !== '_csrf' && key !== 'destinationId') {
+                            newModal[key] = object[key];
+                        }
+                    }
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
                     await newModal.save();
+                    const DestAct = use('App/Models/DestinationAttraction');
+                    const destAct = await DestAct.find('attraction_id', newModal.id);
+                    destAct.destination_id = request.input('destinationId');
+                    destAct.attraction_id = newModal.toJSON().id;
+                    await destAct.save()
                     return response.json({ status: true, notification: 'successfully updated ' + params.model });
+                    break;
+                case 'activity':
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
+                    newModal.article_id = await article.toJSON().id;
+                    await newModal.save();
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
                 default:
