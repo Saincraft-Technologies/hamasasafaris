@@ -52,6 +52,18 @@
         }
       });
     }
+
+    var showActivity= function (id, model) {
+      var url = '/admin/stopPoint/'+ model+"/"+id;
+      $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (response) {
+          $('.class_room_content').html(response);
+          initDataTable('basic-activity');
+        }
+      });
+    }
     // })
     
 </script>

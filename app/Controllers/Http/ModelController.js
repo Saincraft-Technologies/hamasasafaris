@@ -4,7 +4,7 @@ const capitalize = s => s.replace(/./, c => c.toUpperCase());
 class ModelController {
     async index({ auth, params, view }) {
         try {
-            console.log(await auth.getUser());
+            // console.log(await auth.getUser());
             let t = capitalize(params.model);
             // console.log(params);
 
@@ -26,10 +26,11 @@ class ModelController {
             let editRoute = `/admin/edit/${params.model}`;
             let delRoute = `/admin/delete/${params.model}`;
             let uploadRoute = `/admin/upload/${params.model}`;
+            let addActivityRoute = `/admin/activity/${params.model}`;
             switch (t) {
                 case 'StopPoint':
                     const stopPoint = await Modal.query().with('gallery').fetch();
-                    return await view.render(`admin.${params.model}.list`, { items: stopPoint.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+                    return await view.render(`admin.${params.model}.list`, { items: stopPoint.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute, addActivityRoute: addActivityRoute });
                     break;
                 case 'Itinerary':
                     const PackageModel = use(`App/Models/Package${t}`);
@@ -103,6 +104,11 @@ class ModelController {
                     const stopPointModel = await Modal.all();
                     console.log('list invoked!', stopPointModel.toJSON());
                     return await view.render(`admin.selector.stopPoint`, { items: stopPointModel.toJSON(), model: params.model });
+                    break;
+                case 'activity':
+                    const activity = await Modal.all();
+                    console.log('list invoked!', activity.toJSON());
+                    return await view.render(`admin.selector.activity`, { items: activity.toJSON(), model: params.model });
                     break;
 
                 case 'package':
@@ -179,11 +185,8 @@ class ModelController {
                     await gal.save();
                     newModal.gallery_id = await gal.toJSON().id;
                     console.log('gallery ====>>>>', await gal.toJSON());
-                    if (gal.toJSON() !== undefined) {
-                        await newModal.save();
-                        return response.json({ status: true, notification: 'successfully saved ' + params.model });
-                    }
-                    return response.json({ status: false, notification: 'failed to save ' + params.model });
+                    await newModal.save();
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
                 case 'destination':
@@ -289,15 +292,50 @@ class ModelController {
             return response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
         }
     }
-
+    async addStopPointActivity({ params, request, view }) {
+        const { id, model } = params;
+        try {
+            // const Activity = use(`App/Models/Activity`);
+            // const activities = await Activity.all();
+            const action = `/admin/activity/${model}/${id}`;
+            return await view.render(`admin.${model}.addActivity`, { action: action });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async stopPoint({ params, view }) {
+        const { id, model } = params;
+        try {
+            const StopPoint = use(`App/Models/StopPoint`);
+            const stopPoint = await StopPoint.query().where('id', id).with(`${model}`).fetch();
+            console.log(await stopPoint.toJSON()[0]);
+            return await view.render(`admin.stopPoint.profile`, { stopPoint: await stopPoint.toJSON()[0] })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async storeStopPointActivity({ params, request, response }) {
+        const { id, model } = params;
+        try {
+            const ModelActivity = use(`App/Models/${capitalize(model)}Activity`);
+            const modelActivity = new ModelActivity();
+            modelActivity.activity_id = request.input('activityId');
+            modelActivity.stop_point_id = id;
+            modelActivity.save();
+            return response.json({ status: true, notification: 'successfully added ' + model + ' activity' })
+        } catch (error) {
+            console.log(error);
+            return response.json({ status: false, notification: 'failed to add ' + model + ' activity' })
+        }
+    }
     async update({ auth, params, request, response, view }) {
         try {
             let t = capitalize(params.model);
             console.log(t);
             let id = params.id;
 
-            const Modal = use(`App/Models/${t}`);
-            const Gallery = use(`App/Models/Gallery`);
+            const Modal = use(`App / Models / ${t}`);
+            const Gallery = use(`App / Models / Gallery`);
             let newModal = await Modal.findOrFail(id);
             const object = request.body;
 
@@ -382,13 +420,14 @@ class ModelController {
             const uploads = await Upload.query().where('gallery_id', id).fetch()
             console.log("uploads ===>>>1", JSON.parse(JSON.stringify(gallery)), params.model);
 
-            let editRoute = `/upload/${model}/${id}`;
-            let delRoute = `/upload/${model}/${id}`;
-            let uploadRoute = `/admin/upload/${model}`;
+            let editRoute = `/ upload / ${model} / ${id}`;
+            let delRoute = `/ upload / ${model} / ${id}`;
+            let uploadRoute = `/ admin / upload / ${model}`;
             const modelValue = JSON.parse(JSON.stringify(await gallery))
             return await view.render(`admin.${model}.gallery`, { items: JSON.parse(JSON.stringify(uploads)), modelValue: modelValue[0]['gallery'], model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
 
         } catch (error) {
+            console.log(error);
 
         }
     }
@@ -397,13 +436,13 @@ class ModelController {
         try {
             const { model, id, fileId } = params;
             let t = capitalize(model);
-            const Modal = use(`App/Models/${t}`);
-            const Upload = use(`App/Models/Upload`);
+            const Modal = use(`App / Models / ${t}`);
+            const Upload = use(`App / Models / Upload`);
             /** prepare the file and modal view params */
             let modal = await Modal.query().where('id', id).fetch();
             const fileToView = await Upload.query().where('id', fileId).fetch();
             console.log('list invoked!', fileToView.toJSON()[0]);
-            let action = `/uploads/${model}/${params.id}/${fileToView.toJSON()[0].id}`
+            let action = `/ uploads / ${model} / ${params.id} / ${fileToView.toJSON()[0].id}`
             return await view.render(`admin.${model}.upload`, { model: model, file: fileToView.toJSON()[0], action: action });
 
         } catch (error) {
@@ -415,8 +454,8 @@ class ModelController {
         try {
             let t = capitalize(params.model);
             const Drive = use('Drive');
-            const Modal = use(`App/Models/${t}`);
-            const Upload = use(`App/Models/Upload`);
+            const Modal = use(`App / Models / ${t}`);
+            const Upload = use(`App / Models / Upload`);
             const { v4 } = require('uuid');
             const path = require('path');
             const name = v4();
@@ -436,8 +475,8 @@ class ModelController {
                 extname = file.extname;
                 let mimeType = type + '/' + subtype;
                 let fileType = mimeType;
-                const s3Path = `hamasasafaris/uploads/${name}.${extname}`
-                filepath = await Drive.disk('s3').put(s3Path, file.stream, { ACL: 'public-read', ContentType: `${type}/${subtype}` });
+                const s3Path = `hamasasafaris / uploads / ${name}.${extname}`
+                filepath = await Drive.disk('s3').put(s3Path, file.stream, { ACL: 'public-read', ContentType: `${type} / ${subtype}` });
                 // console.log('answer ====>>> ', ans);
 
             });
@@ -463,8 +502,8 @@ class ModelController {
         try {
             let t = capitalize(params.model);
             const Drive = use('Drive');
-            const Modal = use(`App/Models/${t}`);
-            const Upload = use(`App/Models/Upload`);
+            const Modal = use(`App / Models / ${t}`);
+            const Upload = use(`App / Models / Upload`);
 
             const fileToDelete = await Upload.query().where('id', params.fileId).fetch();
             await Drive.disk('s3').delete(fileToDelete.toJSON().filepath);
@@ -478,7 +517,7 @@ class ModelController {
 
         try {
             const Drive = use('Drive');
-            const Upload = use(`App/Models/Upload`);
+            const Upload = use(`App / Models / Upload`);
             const fileToUpdate = await Upload.find(params.fileId);
             console.log("Params ===>>", await fileToUpdate.filename);
             var extname;
@@ -490,7 +529,7 @@ class ModelController {
                 types: ['image'],
                 size: '2mb'
             }, async (file) => {
-                const s3Path = `hamasasafaris/uploads/${fileToUpdate.filename}`;
+                const s3Path = `hamasasafaris / uploads / ${fileToUpdate.filename}`;
                 // console.log('file ====>>', s3Path);
 
                 if (file) {
@@ -499,7 +538,7 @@ class ModelController {
                     extname = file.extname;
                     console.log(`${fileToUpdate.filename.split('.')[0]}.${extname}`);
                     fileToUpdate.filename = `${fileToUpdate.filename.split('.')[0]}.${extname}`;
-                    fileToUpdate.filepath = await Drive.disk('s3').put(s3Path, file.stream, { ACL: 'public-read', ContentType: `${type}/${subtype}` });
+                    fileToUpdate.filepath = await Drive.disk('s3').put(s3Path, file.stream, { ACL: 'public-read', ContentType: `${type} / ${subtype}` });
                 }
                 fileToUpdate.metadata = type + '/' + subtype;
                 console.log('answer ====>>> ', fileToUpdate);
@@ -513,6 +552,104 @@ class ModelController {
             console.log(error);
             return response.json({ status: false, notification: 'failed to update uploaded file!' });
         }
+    }
+    async delete({ params, response }) {
+        const { id, model } = params;
+        try {
+            let t = capitalize(model);
+            const Drive = use('Drive');
+            const Modal = use(`App / Models / ${t}`);
+            const Upload = use(`App / Models / Upload`);
+            const Gallery = use(`App / Models / Gallery`);
+            const itemToDelete = await Modal.find(id);
+            console.log()
+            switch (model) {
+                case 'accommodation':
+                    const accommodationGallery = await itemToDelete.gallery().fetch();
+                    // const accommodationArticle = await itemToDelete.article().fetch();
+                    if (accommodationGallery) {
+                        /** model gallery exists */
+                        console.log(await accommodationGallery.toJSON());
+                        const galleryUploads = await Upload.find(await accommodationGallery.toJSON().id);
+                        if (galleryUploads) {
+                            /** Gallery uploads exist */
+                            console.log('accommodation ===>>>', await galleryUploads);
+                            await galleryUploads.delete();
+                            await itemToDelete.delete();
+                            await accommodationGallery.delete();
+
+                        } else {
+                            await itemToDelete.delete();
+                            await accommodationGallery.delete();
+                        }
+                    } else {
+                        await itemToDelete.delete();
+                    }
+                    break;
+
+                case 'destination':
+                    // const destinationArticle = await itemToDelete.article().fetch();
+                    const destinationGalleryFetch = await itemToDelete.gallery().fetch();
+                    if (destinationGalleryFetch) {
+                        /** model gallery exists */
+                        console.log(await destinationGalleryFetch.toJSON());
+                        const destinationGallery = await Gallery.find(destinationGalleryFetch.toJSON().id);
+                        const galleryUploads = await Upload.find(await destinationGalleryFetch.toJSON().id);
+                        // const galleryUploads = await itemToDelete.uploads().fetch();
+                        // for (const upload of galleryUploads.toJSON()) {
+                        //     const uploads = await Upload.find(await upload.id);
+                        //     console.log('gallery ===>>>', await uploads);
+                        //     if (uploads) {
+                        //         /** Gallery uploads exist */
+                        //         console.log('gallery ===>>>', await uploads.toJSON());
+                        //         await uploads.delete();
+                        //     }
+                        // }
+                        if (galleryUploads) {
+                            /** Gallery uploads exist */
+                            console.log('destination ===>>>', await galleryUploads);
+                            await galleryUploads.delete();
+                            await itemToDelete.delete();
+                            await destinationGallery.delete();
+
+                        } else {
+                            console.log('destination ===>>>', await destinationGallery.toJSON());
+                            await itemToDelete.delete();
+                            await destinationGallery.delete();
+                        }
+                    } else {
+                        await itemToDelete.delete();
+                    }
+                    break;
+
+                case 'gallery':
+                    /** model gallery exists */
+                    const galleryUploads = await itemToDelete.uploads().fetch();
+                    for (const upload of galleryUploads.toJSON()) {
+                        const uploads = await Upload.find(await upload.id);
+                        console.log('gallery ===>>>', await uploads);
+                        if (uploads) {
+                            /** Gallery uploads exist */
+                            console.log('gallery ===>>>', await uploads.toJSON());
+                            await uploads.delete();
+                        }
+                    }
+
+                    await itemToDelete.delete();
+
+                    break;
+
+                default:
+                    await itemToDelete.delete();
+                    break;
+            }
+            // await itemToDelete.delete();
+            response.json({ status: true, notification: 'successfully deleted ' + model });
+        } catch (error) {
+            console.log(error);
+            response.json({ status: false, notification: 'failed to deleted ' + model });
+        }
+
     }
 }
 

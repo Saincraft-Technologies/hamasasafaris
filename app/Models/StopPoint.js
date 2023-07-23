@@ -7,6 +7,9 @@ class StopPoint extends Model {
     gallery() {
         return this.belongsTo('App/Models/Gallery')
     }
+    activities() {
+        return this.manyThrough('App/Models/StopPointActivity', 'activities')
+    }
 }
 
 module.exports = StopPoint

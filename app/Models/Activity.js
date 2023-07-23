@@ -8,7 +8,7 @@ class Activity extends Model {
         return this.belongsTo('App/Models/Article')
     }
     stopPoints() {
-        return this.belongsTo('App/Models/StopPoint')
+        return this.manyThrough('App/Models/StopPointActivity', 'stopPoints')
     }
 }
 

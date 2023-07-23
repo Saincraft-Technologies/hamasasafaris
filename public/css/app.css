@@ -29,7 +29,7 @@ File: Main Css File
   --gray-dark: #343a40;
   --primary: #727cf5;
   --secondary: #6c757d;
-  --success: #0acf97;
+  --success: rgba(10, 207, 151, 0.45);
   --info: #39afd1;
   --warning: #f8bf21;
   --danger: #fd6a88;

@@ -23,10 +23,14 @@ Route.group(() => {
     Route.get('/admin/create/:model', 'ModelController.create');
     Route.get('/admin/upload/:model/:id', 'ModelController.upload');
     Route.get('/admin/edit/:model/:id', 'ModelController.edit');
+    Route.get('/admin/activity/:model/:id', 'ModelController.addStopPointActivity');
+    Route.get('/admin/stopPoint/:model/:id', 'ModelController.stopPoint');
     Route.post('/admin/update/:model/:id', 'ModelController.update');
+    Route.post('/admin/activity/:model/:id', 'ModelController.storeStopPointActivity');
     Route.post('/admin/store/:model', 'ModelController.store');
     Route.get('/admin/selector/:model', 'ModelController.selector');
     Route.get('/admin/selector/:model/:id', 'ModelController.selector');
+    Route.delete('/admin/delete/:model/:id', 'ModelController.delete');
     /*** Upload File Proccessing */
     Route.get('/upload/:model/:id/:fileId', 'ModelController.viewupload');
     Route.post('/upload/:model/:id', 'ModelController.saveupload');

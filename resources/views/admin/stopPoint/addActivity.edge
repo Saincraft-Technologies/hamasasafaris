@@ -1,0 +1,50 @@
+<form method="POST" class="d-block ajaxForm" action="{{action}}">
+    {{ csrfField() }}
+    <div class="form-row">
+        <div class="form-group col-md-12 activityBlock">
+            <label for="name">select activity</label>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="row col-md-12">
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
+                    add stop point activity
+                </button>
+            </div>
+            <div class="form-group col-md-6">
+                <button class="m-2 btn btn-block btn-secondary" onclick="closeModal('#large-modal')" type="reset"
+                    data-dismiss="modal">
+                    cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(".ajaxForm").validate({}); // Jquery form validation initialization
+    $(".ajaxForm").submit(function (e) {
+        e.preventDefault()
+        var form = $(this);
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving.");
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving..");
+        $('.submit-btn').html('');
+        $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving...");
+        $('.submit-btn').addClass('disabled');
+        ajaxSubmit(e, form, "POST", showAll);
+    });
+
+    $(document).ready(function(){
+        $.ajax({
+            url:'/admin/selector/activity',
+            method:'GET',
+            success:async function(data){
+                $('.activityBlock').html('');
+               $('.activityBlock').append(await data);
+            }
+        })
+    });
+</script>

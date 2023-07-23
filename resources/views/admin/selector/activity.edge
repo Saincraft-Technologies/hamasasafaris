@@ -1,0 +1,12 @@
+<label for="{{model}}">select {{model}}</label>
+<select name="{{model}}Id" id="{{model}}Id" class="form-control select2">
+    <option value="" disabled selected>select {{model}}</option>
+    @each(item in items)
+    <option value="{{item.id}}">{{item.activity}}</option>
+    @endeach
+</select>
+<small id="{{model}}_help" class="form-text text-muted">provide {{model}}</small>
+<script>
+    $('#{{model}}Id').select2({
+                    dropdownParent: $('#medium-modal')});
+</script>
