@@ -125,7 +125,17 @@ class MainController {
         }
 
     }
+    async package({ params, view, response }) {
+        const Navigation = use('App/Models/Navigation');
+        const Package = use('App/Models/Package');
+        const packages = await Package.query().with('itineraries').fetch();
+        console.log('packages ===>>>', await packages.toJSON());
 
+        return view.render('site.packages.page', {
+            packages: await packages.toJSON(),
+            navigations: JSON.parse(JSON.stringify(await Navigation.all()))
+        });
+    }
     async attraction({ params, request, response, view }) {
 
         const Navigation = use(`App/Models/Navigation`);

@@ -1,0 +1,17 @@
+@layout('main')
+@section('content')
+@include('site/packages/slider')
+@include('site/packages/heading')
+<section class="projects-section bg-light mb-3" id="packages"
+    style="box-shadow: 10px 10px 10px rgb(208, 208, 208);">
+    <div class="container px-4 px-lg-5">
+        <!-- Featured Project Row-->
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+            <h4 class="text-danger">All Packages</h4>
+        </div>
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+            @include('site/leftright/package')
+        </div>
+    </div>
+</section>
+@endsection
