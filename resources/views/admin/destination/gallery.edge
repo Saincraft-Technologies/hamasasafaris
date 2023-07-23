@@ -1,35 +1,47 @@
-<div class="row">
-    <h5 class="ml-2 mb-2">{{modelValue}} {{model}} gallery </h5>
+<div class="card">
+    <div class="card-header">
+        <h5 class="page-title">
+            <button type="button" style="float:left" class="btn btn-outline-primary btn-rounded alignToTitle"
+                onclick="showAll()">
+                <i class="mdi mdi-arrow-left"></i>
+                back
+            </button>
+            <span style="float:right;">{{modelValue}} {{model}} gallery</span>
+        </h5>
+    </div>
+    <div class="card-body">
+        <table id="basic-gallery" class="table table-striped td-responsive nowrap" width="100%">
+            <thead>
+                <tr style="background-color: #313a46; color: #ababab;">
+                    <th>image</th>
+                    <th>options</th>
+                </tr>
+            </thead>
+            <tbody>
+                @each(item in items)
+                <tr>
+                    <td><img style="width:35%;" src="{{item.filepath}}" alt="{{item.caption}}"></td>
+                    <td style="width:20%;">
+                        <div class="dropdown text-center">
+                            <button type="button"
+                                class="btn btn-sm btn-icon btn-rounded btn-outline-secondary dropdown-btn dropdown-toggle arrow-none card-drop"
+                                data-toggle="dropdown" aria-expanded="false"><i
+                                    class="mdi mdi-dots-vertical"></i></button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item"
+                                    onclick="mediumModal('{{editRoute}}/{{item.id}}', 'update image',' mdi mdi-cloud text-info');"><i
+                                        class="mdi mdi-update text-info"></i> edit</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item"
+                                    onclick="confirmModal('{{delRoute}}/{{item.id}}', showAll)"><i
+                                        class="mdi mdi-delete text-danger"></i> delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                @endeach
+            </tbody>
+        </table>
+    </div>
 </div>
-<table id="basic-gallery" class="table table-striped td-responsive nowrap" width="100%">
-    <thead>
-        <tr style="background-color: #313a46; color: #ababab;">
-            <th>image</th>
-            <th>options</th>
-        </tr>
-    </thead>
-    <tbody>
-        @each(item in items)
-        <tr>
-            <td><img style="width:35%;" src="{{item.filepath}}" alt="{{item.caption}}"></td>
-            <td style="width:20%;">
-                <div class="dropdown text-center">
-                    <button type="button"
-                        class="btn btn-sm btn-icon btn-rounded btn-outline-secondary dropdown-btn dropdown-toggle arrow-none card-drop"
-                        data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical"></i></button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item"
-                            onclick="mediumModal('{{editRoute}}/{{item.id}}', 'update image',' mdi mdi-cloud text-info');"><i
-                                class="mdi mdi-update text-info"></i> edit</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item"
-                            onclick="confirmModal('{{delRoute}}/{{item.id}}', showAll)"><i
-                                class="mdi mdi-delete text-danger"></i> delete</a>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        @endeach
-    </tbody>
-</table>

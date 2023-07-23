@@ -1,62 +1,82 @@
 <div class="row">
 
-    <div class="col-xl-6">
+    <div class="col-xl-5">
         <div class="card">
             <div class="card-header">
-                <h4 class="page-title">Stop point profile
+                <h4 class="page-title">
+                    <button type="button" style="float:left" class="btn btn-outline-primary btn-rounded alignToTitle"
+                        onclick="showAll()">
+                        <i class="mdi mdi-arrow-left"></i>
+                        back
+                    </button>
+                    <h4 style="float:right;">Stop point profile
+                    </h4>
                 </h4>
             </div>
-            <div class="card-body row">
-                <div class="col-6">
-                    <h5>Name</h5>
-                </div>
-                <div class="col-6">{{stopPoint.name}}</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <h5>Name</h5>
+                    </div>
+                    <div class="col-8">{{stopPoint.name}}</div>
 
-                <div class="col-6">
-                    <h5>Caption</h5>
-                </div>
-                <div class="col-6">{{stopPoint.caption}}</div>
+                    <div class="col-4">
+                        <h5>Caption</h5>
+                    </div>
+                    <div class="col-8">{{stopPoint.caption}}</div>
 
-                <div class="col-6">
-                    <h5>Description</h5>
+                    <div class="col-4">
+                        <h5>Description</h5>
+                    </div>
+                    <p class="col-8">{{stopPoint.description}}</p>
                 </div>
-                <div class="col-6">{{stopPoint.description}}</div>
             </div> <!-- end card body-->
         </div> <!-- end card -->
     </div><!-- end col-->
+    <div class="col-xl-7">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="page-title">{{stopPoint.name}} Activities
+                </h5>
+            </div>
+            <div class="card-body">
+                <table id="basic-activity" class="table table-striped td-responsive nowrap" width="100%">
+                    <thead>
+                        <tr style="background-color: #313a46; color: #ababab;">
+                            <th>activity</th>
+                            <th>duration</th>
+                            <th>description</th>
+                            <th>options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @each(item in stopPoint.activities)
+                        <tr>
+                            <td style=" width:7%;">{{item.activity}}</td>
+                            <td style=" width:20%;">{{item.duration}}</td>
+                            <td style=" width:40%;">
+                                <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
+                                    {{item.description}}</p>
+                            </td>
+                            <td style=" width:10%;">
+                                <div class="dropdown text-center">
+                                    <button type="button"
+                                        class="btn btn-sm btn-icon btn-rounded btn-outline-secondary dropdown-btn dropdown-toggle arrow-none card-drop"
+                                        data-toggle="dropdown" aria-expanded="false"><i
+                                            class="mdi mdi-dots-vertical"></i></button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item"
+                                            onclick="confirmModal('{{delRoute}}/{{item.id}}', showAll)"><i
+                                                class="mdi mdi-delete text-danger"></i> delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
-<table id="basic-activity" class="table table-striped td-responsive nowrap" width="100%">
-    <thead>
-        <tr style="background-color: #313a46; color: #ababab;">
-            <th>activity</th>
-            <th>duration</th>
-            <th>description</th>
-            <th>options</th>
-        </tr>
-    </thead>
-    <tbody>
-        @each(item in stopPoint.activities)
-        <tr>
-            <td style=" width:7%;">{{item.activity}}</td>
-            <td style=" width:20%;">{{item.duration}}</td>
-            <td style=" width:40%;">
-                <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
-                    {{item.description}}</p>
-            </td>
-            <td style=" width:10%;">
-                <div class="dropdown text-center">
-                    <button type="button"
-                        class="btn btn-sm btn-icon btn-rounded btn-outline-secondary dropdown-btn dropdown-toggle arrow-none card-drop"
-                        data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical"></i></button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item"
-                            onclick="confirmModal('{{delRoute}}/{{item.id}}', showAll)"><i
-                                class="mdi mdi-delete text-danger"></i> delete</a>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        @endeach
-    </tbody>
-</table>

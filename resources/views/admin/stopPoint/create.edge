@@ -3,17 +3,30 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="name">stop point name</label>
+            @if(item.name)
+            <input type="text" class="form-control" id="name" value="{{item.name}}" name="name" required>
+            @else
             <input type="text" class="form-control" id="name" name="name" required>
+            @endif
             <small id="name_help" class="form-text text-muted">provide stopPoint name</small>
         </div>
         <div class="form-group col-md-6">
             <label for="caption">stopPoint caption</label>
+            @if(item.caption)
+            <input type="text" class="form-control" id="caption" value="{{item.caption}}" name="caption" required>
+            @else
             <input type="text" class="form-control" id="caption" name="caption" required>
+            @endif
             <small id="caption_help" class="form-text text-muted">provide caption</small>
         </div>
         <div class="form-group col-md-6">
             <label for="description">description</label>
-            <input type="text" class="form-control" id="description" name="description" required>
+            @if(item.description)
+            <textarea type="text" class="form-control" id="description" name="description"
+                required>{{item.description}}</textarea>
+            @else
+            <textarea type="text" class="form-control" id="description" name="description" required></textarea>
+            @endif
             <small id="description_help" class="form-text text-muted">provide description</small>
         </div>
     </div>
@@ -22,7 +35,11 @@
         <div class="row col-md-12">
             <div class="form-group col-md-6">
                 <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
-                    create stopPoint
+                    @if(item)
+                    create stop point
+                    @else
+                    update stop point
+                    @endif
                 </button>
             </div>
             <div class="form-group col-md-6">
