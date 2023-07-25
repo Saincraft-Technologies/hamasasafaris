@@ -1,7 +1,7 @@
 <form method="POST" class="d-block ajaxForm" action="{{action}}">
     {{ csrfField() }}
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
             <label for="name">stop point name</label>
             @if(item.name)
             <input type="text" class="form-control" id="name" value="{{item.name}}" name="name" required>
@@ -10,7 +10,7 @@
             @endif
             <small id="name_help" class="form-text text-muted">provide stopPoint name</small>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
             <label for="caption">stopPoint caption</label>
             @if(item.caption)
             <input type="text" class="form-control" id="caption" value="{{item.caption}}" name="caption" required>
@@ -19,7 +19,7 @@
             @endif
             <small id="caption_help" class="form-text text-muted">provide caption</small>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
             <label for="description">description</label>
             @if(item.description)
             <textarea type="text" class="form-control" id="description" name="description"
@@ -64,5 +64,56 @@
         $('.submit-btn').html("<i class='mdi mdi-upload'></i> saving...");
         $('.submit-btn').addClass('disabled');
         ajaxSubmit(e, form, "POST", showAll);
+    });
+
+    $('#description').summernote({
+        minHeight: 200,
+        placeholder: 'Write here ...',
+        focus: false,
+        airMode: false,
+        fontNames: ['Roboto', 'Calibri', 'Times New Roman', 'Arial'],
+        fontNamesIgnoreCheck: ['Roboto', 'Calibri'],
+        dialogsInBody: true,
+        dialogsFade: true,
+        disableDragAndDrop: false,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline']],
+            ['para', ['style', 'ul', 'ol', 'paragraph']],
+            ['fontsize', ['fontsize']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['height', ['height']],
+            ['misc', ['undo', 'redo', 'print', 'help', 'fullscreen']]
+        ],
+        popover: {
+            air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline']]
+            ]
+        }
+    });
+
+    $('#caption').summernote({
+        minHeight: 100,
+        placeholder: 'Write here ...',
+        focus: false,
+        airMode: false,
+        fontNames: ['Roboto', 'Calibri', 'Times New Roman', 'Arial'],
+        fontNamesIgnoreCheck: ['Roboto', 'Calibri'],
+        dialogsInBody: true,
+        dialogsFade: true,
+        disableDragAndDrop: false,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['fontsize', ['fontsize']],
+            ['misc', ['undo', 'redo']]
+        ],
+        popover: {
+            air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline', 'clear']]
+            ]
+        }
     });
 </script>

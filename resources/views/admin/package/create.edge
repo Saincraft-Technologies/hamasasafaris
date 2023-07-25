@@ -8,7 +8,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="description">description</label>
-            <input type="text" class="form-control" id="description" name="description" required>
+            <textarea type="text" class="form-control" id="description" name="description" required></textarea>
             <small id="description_help" class="form-text text-muted">provide description</small>
         </div>
     </div>
@@ -43,4 +43,32 @@
         $('.submit-btn').addClass('disabled');
         ajaxSubmit(e, form, "POST", showAll);
     });
+
+    $('#description').summernote({
+        minHeight: 200,
+        placeholder: 'Write here ...',
+        focus: false,
+        airMode: false,
+        fontNames: ['Roboto', 'Calibri', 'Times New Roman', 'Arial'],
+        fontNamesIgnoreCheck: ['Roboto', 'Calibri'],
+        dialogsInBody: true,
+        dialogsFade: true,
+        disableDragAndDrop: false,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline']],
+            ['para', ['style', 'ul', 'ol', 'paragraph']],
+            ['fontsize', ['fontsize']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['height', ['height']],
+            ['misc', ['undo', 'redo', 'print', 'help', 'fullscreen']]
+        ],
+        popover: {
+            air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline']]
+            ]
+        }
+    });
+
 </script>

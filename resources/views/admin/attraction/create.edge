@@ -1,7 +1,7 @@
 <form method="POST" class="d-block ajaxForm" action="{{action}}">
     {{ csrfField() }}
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
             <label for="attraction">attraction name</label>
             @if(item.attraction)
             <input type="text" value="{{item.attraction}}" class="form-control" id="attraction" name="attraction"
@@ -11,7 +11,7 @@
             @endif
             <small id="attraction_help" class="form-text text-muted">provide attraction name</small>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
             <label for="caption">attraction caption</label>
             @if(item.attraction)
             <textarea type="text" class="form-control" id="caption" name="caption" required>{{item.caption}}</textarea>
@@ -32,9 +32,8 @@
         </div>
         @if(item.attraction)
         @else
-        <div class="form-group col-md-6 destinationBlock">
+        <div class="form-group col-md-12 destinationBlock">
             <label for="destination">destination</label>
-
             <small id="description_help" class="form-text text-muted">provide destination</small>
         </div>
         @endif
@@ -102,12 +101,36 @@
         disableDragAndDrop: false,
         toolbar: [
             // [groupName, [list of button]]
-            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['style', ['bold', 'italic', 'underline']],
             ['para', ['style', 'ul', 'ol', 'paragraph']],
             ['fontsize', ['fontsize']],
             ['font', ['strikethrough', 'superscript', 'subscript']],
             ['height', ['height']],
             ['misc', ['undo', 'redo', 'print', 'help', 'fullscreen']]
+        ],
+        popover: {
+            air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline']]
+            ]
+        }
+    });
+
+    $('#caption').summernote({
+        minHeight: 100,
+        placeholder: 'Write here ...',
+        focus: false,
+        airMode: false,
+        fontNames: ['Roboto', 'Calibri', 'Times New Roman', 'Arial'],
+        fontNamesIgnoreCheck: ['Roboto', 'Calibri'],
+        dialogsInBody: true,
+        dialogsFade: true,
+        disableDragAndDrop: false,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['fontsize', ['fontsize']],
+            ['misc', ['undo', 'redo']]
         ],
         popover: {
             air: [

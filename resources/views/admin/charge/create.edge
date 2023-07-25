@@ -89,6 +89,7 @@
             }
         })
     });
+    
     $('#description').summernote({
         minHeight: 200,
         placeholder: 'Write here ...',
@@ -101,12 +102,36 @@
         disableDragAndDrop: false,
         toolbar: [
             // [groupName, [list of button]]
-            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['style', ['bold', 'italic', 'underline']],
             ['para', ['style', 'ul', 'ol', 'paragraph']],
             ['fontsize', ['fontsize']],
             ['font', ['strikethrough', 'superscript', 'subscript']],
             ['height', ['height']],
             ['misc', ['undo', 'redo', 'print', 'help', 'fullscreen']]
+        ],
+        popover: {
+            air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline']]
+            ]
+        }
+    });
+
+    $('#caption').summernote({
+        minHeight: 100,
+        placeholder: 'Write here ...',
+        focus: false,
+        airMode: false,
+        fontNames: ['Roboto', 'Calibri', 'Times New Roman', 'Arial'],
+        fontNamesIgnoreCheck: ['Roboto', 'Calibri'],
+        dialogsInBody: true,
+        dialogsFade: true,
+        disableDragAndDrop: false,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['fontsize', ['fontsize']],
+            ['misc', ['undo', 'redo']]
         ],
         popover: {
             air: [

@@ -19,10 +19,10 @@
                 @each(item in items)
                 <tr>
                     <td style=" width:7%;">{{item.attraction}}</td>
-                    <td style=" width:20%;">{{item.caption}}</td>
+                    <td style=" width:20%;">{{{item.caption}}}</td>
                     <td style=" width:40%;">
                         <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
-                            {{item.description}}</p>
+                            {{{item.description}}}</p>
                     </td>
                     <td style="width:20%;" onclick="showGallery('{{item.gallery.id}}', '{{model}}')">
                         {{item.gallery.gallery}}
