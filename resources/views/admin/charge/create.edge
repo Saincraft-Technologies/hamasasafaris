@@ -2,25 +2,33 @@
     {{ csrfField() }}
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="destination">destination name</label>
+            <label for="charge">charge name</label>
 
-            @if(item.destination)
-            <input type="text" class="form-control" id="destination" value="{{item.destination}}" name="destination"
-                required>
+            @if(item.charge)
+            <input type="text" class="form-control" id="charge" value="{{item.charge}}" name="charge" required>
             @else
 
-            <input type="text" class="form-control" id="destination" name="destination" required>
+            <input type="text" class="form-control" id="charge" name="charge" required>
             @endif
-            <small id="destination_help" class="form-text text-muted">provide destination name</small>
+            <small id="charge_help" class="form-text text-muted">provide charge name</small>
         </div>
         <div class="form-group col-md-6">
-            <label for="caption">destination caption</label>
-            @if(item.caption)
-            <input type="text" class="form-control" value="{{item.caption}}" id="caption" name="caption" required>
+            <label for="amount">charge amount</label>
+            @if(item.amount)
+            <input type="number" class="form-control" value="{{item.amount}}" id="amount" name="amount" required>
             @else
-            <input type="text" class="form-control" id="caption" name="caption" required>
+            <input type="text" class="form-control" id="amount" name="amount" required>
             @endif
-            <small id="caption_help" class="form-text text-muted">provide caption</small>
+            <small id="amount_help" class="form-text text-muted">provide amount</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="discount">charge discount</label>
+            @if(item.discount)
+            <input type="number" class="form-control" value="{{item.discount}}" id="discount" name="discount" required>
+            @else
+            <input type="text" class="form-control" id="discount" name="discount" required>
+            @endif
+            <small id="discount_help" class="form-text text-muted">provide discount</small>
         </div>
         <div class="form-group col-md-12">
             <label for="description">description</label>
@@ -35,14 +43,15 @@
         </div>
     </div>
 
+
     <div class="form-row">
         <div class="row col-md-12">
             <div class="form-group col-md-6">
                 <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
-                    @if(item.destination)
-                    update destination
+                    @if(item.charge)
+                    update charge
                     @else
-                    create destination
+                    create charge
                     @endif
                 </button>
             </div>
@@ -70,6 +79,16 @@
         ajaxSubmit(e, form, "POST", showAll);
     });
 
+    $(document).ready(function(){
+        $.ajax({
+            url:'/admin/selector/itinerary',
+            method:'GET',
+            success:async function(data){
+                $('.itineraryBlock').html('');
+               $('.itineraryBlock').append(await data);
+            }
+        })
+    });
     $('#description').summernote({
         minHeight: 200,
         placeholder: 'Write here ...',

@@ -51,6 +51,11 @@ class ModelController {
                     return await view.render(`admin.${params.model}.list`, { items: model.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
                     break;
 
+                case 'Charge':
+                    model = await Modal.query().with('itinerary').fetch();
+                    return await view.render(`admin.${params.model}.list`, { items: model.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+                    break;
+
                 default:
 
                     try {
@@ -235,6 +240,15 @@ class ModelController {
                     return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
+                case 'charge':
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
+                    await newModal.save();
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
+                    break;
                 case 'attraction':
                     for (const key in object) {
                         if (key !== '_csrf' && key !== 'destinationId') {
@@ -334,12 +348,14 @@ class ModelController {
             console.log(t);
             let id = params.id;
 
-            const Modal = use(`App / Models / ${t}`);
-            const Gallery = use(`App / Models / Gallery`);
+            const Modal = use(`App/Models/${t}`);
+            const Gallery = use(`App/Models/Gallery`);
             let newModal = await Modal.findOrFail(id);
             const object = request.body;
-
-            const gal = await Gallery.findOrFail(newModal.gallery_id);
+            var gal;
+            if (newModal.gallery_id) {
+                gal = await Gallery.findOrFail(newModal.gallery_id);
+            }
             switch (params.model) {
                 case 'gallery':
 
@@ -401,6 +417,13 @@ class ModelController {
                     break;
 
                 default:
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
+                    await newModal.save();
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
             }
 
