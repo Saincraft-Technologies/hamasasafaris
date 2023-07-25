@@ -7,17 +7,17 @@
         <div class="featured-text text-left text-lg-left">
             @each(item in accommodation.article.sections)
             <h6>{{item.section}}</h6>
-            <small class="text-muted" style="font-size:small;"><i>{{item.caption}}</i></small>
+            <small class="text-muted" style="font-size:small;"><i>{{{item.caption}}}</i></small>
 
             <p class="text-black-50 mt-3 mb-5" style="text-align: left;">
                 {{item.body}}<br>
                 <img src="/{{item.upload.filepath}}" style="width: 60%;" alt=""><br>
-                <small><i>{{item.upload.caption}}</i></small>
+                <small><i>{{{item.upload.caption}}}</i></small>
             </p>
             @endeach
             <legend class="text-black-50 mb-0 mt-2" style="text-align: left; font-size:small;"><small>
                     <i>- Source</i><br>
-                    <i>{{accommodation.article.source}}</i><br>
+                    <i>{{{accommodation.article.source}}}</i><br>
                     <i>{{accommodation.article.updated_at}}</i></small></legend>
             </p>
         </div>
