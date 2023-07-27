@@ -128,11 +128,20 @@ class MainController {
     async package({ params, view, response }) {
         const Navigation = use('App/Models/Navigation');
         const Package = use('App/Models/Package');
+        const Itinerary = use('App/Models/Itinerary');
         const packages = await Package.query().with('itineraries').fetch();
-        console.log('packages ===>>>', await packages.toJSON());
-
+        const final = [];
+        for (let packagee of packages.toJSON()) {
+            let iitem = [];
+            for (let itinerary of packagee.itineraries) {
+                const data = await Itinerary.query().where('id', itinerary.id).with('fromPoint').with('toPoint').fetch();
+                iitem.push(data.toJSON()[0]);
+            }
+            packagee['itineraries'] = iitem;
+            final.push(packagee);
+        }
         return view.render('site.packages.page', {
-            packages: await packages.toJSON(),
+            packages: final,
             navigations: JSON.parse(JSON.stringify(await Navigation.all()))
         });
     }

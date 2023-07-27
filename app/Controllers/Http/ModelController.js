@@ -459,8 +459,8 @@ class ModelController {
         try {
             const { model, id, fileId } = params;
             let t = capitalize(model);
-            const Modal = use(`App / Models / ${t}`);
-            const Upload = use(`App / Models / Upload`);
+            const Modal = use(`App/Models/${t}`);
+            const Upload = use(`App/Models/Upload`);
             /** prepare the file and modal view params */
             let modal = await Modal.query().where('id', id).fetch();
             const fileToView = await Upload.query().where('id', fileId).fetch();
@@ -477,8 +477,8 @@ class ModelController {
         try {
             let t = capitalize(params.model);
             const Drive = use('Drive');
-            const Modal = use(`App / Models / ${t}`);
-            const Upload = use(`App / Models / Upload`);
+            const Modal = use(`App/Models/${t}`);
+            const Upload = use(`App/Models/Upload`);
             const { v4 } = require('uuid');
             const path = require('path');
             const name = v4();
@@ -525,8 +525,8 @@ class ModelController {
         try {
             let t = capitalize(params.model);
             const Drive = use('Drive');
-            const Modal = use(`App / Models / ${t}`);
-            const Upload = use(`App / Models / Upload`);
+            const Modal = use(`App/Models/${t}`);
+            const Upload = use(`App/Models/Upload`);
 
             const fileToDelete = await Upload.query().where('id', params.fileId).fetch();
             await Drive.disk('s3').delete(fileToDelete.toJSON().filepath);
@@ -540,7 +540,7 @@ class ModelController {
 
         try {
             const Drive = use('Drive');
-            const Upload = use(`App / Models / Upload`);
+            const Upload = use(`App/Models/Upload`);
             const fileToUpdate = await Upload.find(params.fileId);
             console.log("Params ===>>", await fileToUpdate.filename);
             var extname;
@@ -581,9 +581,9 @@ class ModelController {
         try {
             let t = capitalize(model);
             const Drive = use('Drive');
-            const Modal = use(`App / Models / ${t}`);
-            const Upload = use(`App / Models / Upload`);
-            const Gallery = use(`App / Models / Gallery`);
+            const Modal = use(`App/Models/${t}`);
+            const Upload = use(`App/Models/Upload`);
+            const Gallery = use(`App/Models/Gallery`);
             const itemToDelete = await Modal.find(id);
             console.log()
             switch (model) {
