@@ -4,26 +4,34 @@
         <h4>{{item.name}}</h4>
         <p class="text-black-50 mb-0">{{{item.description}}}</p>
     </div>
-    <div class="col-xl-8 col-lg-8 ">
-        <div class="featured-text text-center text-lg-left row">
-            @each(itinerary in item.itineraries)
-            <p class="text-black-50 mb-0">
-                Distance:{{{itinerary.distance}}}</p>
-            <div class="col-6">
-                <p class="text-black-50 mb-0">
-                    From: {{itinerary.fromPoint.name}}<br>
-                    {{{itinerary.toPoint.caption}}}<br>
-                    {{{itinerary.toPoint.description}}}</p>
+    <div class="col-xl-8 col-lg-8 featured-text ">
+        @each(itinerary in item.itineraries)
+        <hr>
+        <div class=" mb-5 text-center card text-lg-left row">
+            <div class="card-header bg-danger text-white">Day {{{itinerary.day}}} <span
+                    style="float-right">Distance:{{{itinerary.distance}}}</span></div>
+            <div class="card-body row">
+                <div class="col-6">
+                    <p class="text-black-50 mb-0">
+                        From: {{itinerary.fromPoint.name}}<br>
+                        {{{itinerary.fromPoint.caption}}}<br>
+                        {{{itinerary.fromPoint.description}}}<br>
+                        <a href="">view activities</a>
+                    </p>
+                </div>
+
+                <div class="col-6">
+                    <p class="text-black-50 mb-0">
+                        To: {{itinerary.toPoint.name}}<br>
+                        {{{itinerary.toPoint.caption}}}<br>
+                        {{{itinerary.toPoint.description}}}<br>
+                        <a href="">view activities</a>
+                    </p>
+                </div>
             </div>
-            <div class="col-6">
-                <p class="text-black-50 mb-0">
-                    To: {{itinerary.toPoint.name}}<br>
-                    {{{itinerary.toPoint.caption}}}<br>
-                    {{{itinerary.toPoint.description}}}</p>
-            </div>
-            @endeach
-            <a class="btn btn-danger col-3 offset-5" href="/packages/{{item.id}}">Book</a>
         </div>
+        @endeach
+        <a class="btn btn-danger" href="/packages/{{item.id}}">Book</a>
     </div>
 </div>
 @endeach
