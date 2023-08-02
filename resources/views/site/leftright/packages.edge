@@ -2,7 +2,9 @@
 <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
     <div class="col-xl-4 col-lg-4 ">
         <h4>{{item.name}}</h4>
-        <p class="text-black-50 mb-0">{{{item.description}}}</p>
+        <p class="text-black-50 mb-0">Charges: $ {{{item.cost}}} /person</p>
+        <p class="text-black-50 mb-0">Conditions: {{{item.conditions}}}</p>
+        <p class="text-black-50 mb-0">More-info: {{{item.description}}}</p>
     </div>
     <div class="col-xl-8 col-lg-8 featured-text ">
         @each(itinerary in item.itineraries)
@@ -15,7 +17,6 @@
                     <p class="text-black-50 mb-0">
                         From: {{itinerary.fromPoint.name}}<br>
                         {{{itinerary.fromPoint.caption}}}<br>
-                        {{{itinerary.fromPoint.description}}}<br>
                         <a href="">view activities</a>
                     </p>
                 </div>
@@ -24,11 +25,12 @@
                     <p class="text-black-50 mb-0">
                         To: {{itinerary.toPoint.name}}<br>
                         {{{itinerary.toPoint.caption}}}<br>
-                        {{{itinerary.toPoint.description}}}<br>
                         <a href="">view activities</a>
                     </p>
                 </div>
             </div>
+            <div class="card-footer bg-default text-dark">Park Fee {{{itinerary.park_fee}}} <span
+                    style="float-right">Transport:{{{itinerary.transport_fee}}}</span></div>
         </div>
         @endeach
         <a class="btn btn-danger" href="/packages/{{item.id}}">Book</a>

@@ -7,9 +7,19 @@
             <small id="name_help" class="form-text text-muted">provide package name</small>
         </div>
         <div class="form-group col-md-6">
+            <label for="cost">cost per person</label>
+            <input type="number" class="form-control" id="cost" name="cost" required>
+            <small id="name_help" class="form-text text-muted">provide cost per person</small>
+        </div>
+        <div class="form-group col-md-12">
             <label for="description">description</label>
             <textarea type="text" class="form-control" id="description" name="description" required></textarea>
             <small id="description_help" class="form-text text-muted">provide description</small>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="conditions">conditions</label>
+            <textarea type="text" class="form-control" id="conditions" name="conditions" required></textarea>
+            <small id="conditions_help" class="form-text text-muted">provide conditions</small>
         </div>
     </div>
 
@@ -17,7 +27,7 @@
         <div class="row col-md-12">
             <div class="form-group col-md-6">
                 <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
-                    create attraction
+                    create package
                 </button>
             </div>
             <div class="form-group col-md-6">
@@ -45,6 +55,34 @@
     });
 
     $('#description').summernote({
+        minHeight: 200,
+        placeholder: 'Write here ...',
+        focus: false,
+        airMode: false,
+        fontNames: ['Roboto', 'Calibri', 'Times New Roman', 'Arial'],
+        fontNamesIgnoreCheck: ['Roboto', 'Calibri'],
+        dialogsInBody: true,
+        dialogsFade: true,
+        disableDragAndDrop: false,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline']],
+            ['para', ['style', 'ul', 'ol', 'paragraph']],
+            ['fontsize', ['fontsize']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['height', ['height']],
+            ['misc', ['undo', 'redo', 'print', 'help', 'fullscreen']]
+        ],
+        popover: {
+            air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline']]
+            ]
+        }
+    });
+
+
+    $('#conditions').summernote({
         minHeight: 200,
         placeholder: 'Write here ...',
         focus: false,

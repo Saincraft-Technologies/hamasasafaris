@@ -13,9 +13,9 @@
         <div class="form-group col-md-12">
             <label for="caption">stopPoint caption</label>
             @if(item.caption)
-            <input type="text" class="form-control" id="caption" value="{{item.caption}}" name="caption" required>
+            <textarea type="text" class="form-control" id="caption" name="caption" required>{{item.caption}}</textarea>
             @else
-            <input type="text" class="form-control" id="caption" name="caption" required>
+            <textarea type="text" class="form-control" id="caption" name="caption" required></textarea>
             @endif
             <small id="caption_help" class="form-text text-muted">provide caption</small>
         </div>

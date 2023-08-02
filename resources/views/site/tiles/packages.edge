@@ -1,0 +1,26 @@
+@each(item in packages)
+<!-- Project One Row-->
+<div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+
+    <div class="col-lg-6">
+        <div class="bg-danger text-center h-100 project">
+            <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-left">
+
+                    <h4 class="mt-5 text-white">{{item.name}}</h4>
+                    <p class="m-1 text-white-50">{{{item.description}}}
+                    </p><a class="btn btn-white mt-1 mb-1" href="/destinations/{{item.id}}">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endeach
+<script>
+    $('#destinationMainSlider').carousel({
+  interval: 2000
+})
+$('#destinationMainSlider2').carousel({
+  interval: 2500
+})
+</script>

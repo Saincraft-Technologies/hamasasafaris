@@ -8,6 +8,8 @@
             <thead>
                 <tr style="background-color: #313a46; color: #ababab;">
                     <th>{{model}}</th>
+                    <th>cost/person</th>
+                    <th>conditions</th>
                     <th>description</th>
                     <th>create date</th>
                     <th>options</th>
@@ -17,11 +19,16 @@
                 @each(item in items)
                 <tr>
                     <td style=" width:7%;">{{item.name}}</td>
+                    <td style=" width:7%;">{{item.cost}}</td>
+                    <td style=" width:30%;">
+                        <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
+                            {{{item.conditions}}}</p>
+                    </td>
                     <td style=" width:40%;">
                         <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
                             {{{item.description}}}</p>
                     </td>
-                    <td style="width:20%;">{{item.created_at}}</td>
+                    <td style="width:10%;">{{item.created_at}}</td>
                     <td style=" width:10%;">
                         <div class="dropdown text-center">
                             <button type="button"

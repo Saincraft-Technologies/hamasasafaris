@@ -416,6 +416,17 @@ class ModelController {
                     return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
 
+                case 'stopPoint':
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            console.log(key, '======>>', object[key])
+                            newModal[key] = object[key];
+                        }
+                    }
+                    console.log('======>>', await newModal)
+                    await newModal.save();
+                    return response.json({ status: true, notification: 'successfully updated ' + params.model });
+                    break;
                 default:
                     for (const key in object) {
                         if (key !== '_csrf') {
@@ -423,7 +434,7 @@ class ModelController {
                         }
                     }
                     await newModal.save();
-                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
+                    return response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
             }
 
@@ -585,7 +596,7 @@ class ModelController {
             const Upload = use(`App/Models/Upload`);
             const Gallery = use(`App/Models/Gallery`);
             const itemToDelete = await Modal.find(id);
-            console.log()
+            console.log('t value ==>>', itemToDelete)
             switch (model) {
                 case 'accommodation':
                     const accommodationGallery = await itemToDelete.gallery().fetch();
@@ -658,6 +669,17 @@ class ModelController {
                         }
                     }
 
+                    await itemToDelete.delete();
+
+                    break;
+
+                case 'itinerary':
+                    /** model itinerary exists */
+                    const PackageItinerary = use(`App/Models/PackageItinerary`);
+
+                    const itineraryPackages = await PackageItinerary.query().where('itinerary_id', id).fetch();
+                    const ItPck = await PackageItinerary.find(itineraryPackages.toJSON()[0].id);
+                    ItPck.delete();
                     await itemToDelete.delete();
 
                     break;
