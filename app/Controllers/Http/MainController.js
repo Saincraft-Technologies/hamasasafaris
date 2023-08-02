@@ -125,12 +125,38 @@ class MainController {
         }
 
     }
-    async package({ params, view, response }) {
+    async packages({ params, view, response }) {
         const Navigation = use('App/Models/Navigation');
         const Package = use('App/Models/Package');
         const Itinerary = use('App/Models/Itinerary');
         const PackageItinerary = use('App/Models/PackageItinerary');
         const packages = await Package.query().with('itineraries').fetch();
+        // console.log('log ====>>', packageItineraries.toJSON())
+        const final = [];
+        for (let packagee of packages.toJSON()) {
+            let iitem = [];
+            for (let itinerary of packagee.itineraries) {
+                const packageItineraries = await PackageItinerary.query().where('itinerary_id', itinerary.id).fetch();
+                const data = await Itinerary.query().where('id', itinerary.id).with('fromPoint').with('toPoint').fetch();
+                const ans = data.toJSON();
+                ans[0]['day'] = await packageItineraries.toJSON()[0].day;
+                iitem.push(ans[0]);
+            }
+            packagee['itineraries'] = iitem;
+            console.log(packagee);
+            final.push(packagee);
+        }
+        return view.render('site.packages.pages', {
+            packages: final,
+            navigations: JSON.parse(JSON.stringify(await Navigation.all()))
+        });
+    }
+    async package({ params, view, response }) {
+        const Navigation = use('App/Models/Navigation');
+        const Package = use('App/Models/Package');
+        const Itinerary = use('App/Models/Itinerary');
+        const PackageItinerary = use('App/Models/PackageItinerary');
+        const packages = await Package.query().where('id', params.package).with('itineraries').fetch();
         // console.log('log ====>>', packageItineraries.toJSON())
         const final = [];
         for (let packagee of packages.toJSON()) {
