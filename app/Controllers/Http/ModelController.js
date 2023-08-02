@@ -488,10 +488,8 @@ class ModelController {
         try {
             let t = capitalize(params.model);
             const Drive = use('Drive');
-            const Modal = use(`App/Models/${t}`);
             const Upload = use(`App/Models/Upload`);
             const { v4 } = require('uuid');
-            const path = require('path');
             const name = v4();
             var extname;
             var type;
@@ -507,8 +505,6 @@ class ModelController {
                 type = file.type;
                 subtype = file.subtype;
                 extname = file.extname;
-                let mimeType = type + '/' + subtype;
-                let fileType = mimeType;
                 const s3Path = `hamasasafaris / uploads / ${name}.${extname}`
                 filepath = await Drive.disk('s3').put(s3Path, file.stream, { ACL: 'public-read', ContentType: `${type} / ${subtype}` });
                 // console.log('answer ====>>> ', ans);
