@@ -1,12 +1,12 @@
-<div id="destinationSlider2" class="carousel slide carousel-fade mt-0 col-md-11"
+<div id="accommodationSlider2" class="carousel slide carousel-fade mt-0 col-md-11"
     style="box-shadow: 10px 10px 10px rgb(208, 208, 208);" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-        @each(item in destination.gallery.uploads)
+        @each(item in accommodation.gallery.uploads)
         @if($loop.first)
-        <li data-target="#destinationSlider2" data-slide-to="{{$loop.index}}"></li>
+        <li data-target="#accommodationSlider2" data-slide-to="{{$loop.index}}"></li>
         @else
-        <li data-target="#destinationSlider2" data-slide-to="{{$loop.index}}"></li>
+        <li data-target="#accommodationSlider2" data-slide-to="{{$loop.index}}"></li>
         @endif
 
         @endeach
@@ -14,10 +14,10 @@
 
     <!-- Slides -->
     <div class="carousel-inner">
-        @each(item in destination.gallery.uploads)
+        @each(item in accommodation.gallery.uploads)
         @if($loop.first)
         <div class="carousel-item active">
-            <img src="{{item.filepath}}" style="height: 40%;" alt="{{item.caption}}">
+            <img src="{{item.filepath}}" alt="{{item.caption}}">
             <div class="carousel-caption">
                 <i>{{{item.caption}}}</i>
             </div>
@@ -35,18 +35,18 @@
         @endeach
     </div>
 
-    <a class="carousel-control-prev" href="#destinationSlider2" role="button" data-slide="prev">
+    <a class="carousel-control-prev" href="#accommodationSlider2" role="button" data-slide="prev">
         <span class="mdi mdi-arrow-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#destinationSlider2" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#accommodationSlider2" role="button" data-slide="next">
         <span class="sr-only">Next</span>
         <span class="mdi mdi-arrow-right" aria-hidden="true"></span>
     </a>
 
 </div>
 <script>
-    $('#destinationSlider2').carousel({
+    $('#accommodationSlider2').carousel({
   interval: 1000
 })
 </script>

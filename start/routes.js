@@ -77,6 +77,8 @@ Route.get('/accommodations/:accommodation', 'MainController.accommodation');
 Route.get('/accommodations/:accommodation/:activity', 'MainController.accommodation');
 
 Route.get('/about', 'MainController.about');
+Route.get('/questions', 'MainController.questions');
+
 Route.get('/login', 'HomeController.login');
 Route.get('/register', 'HomeController.register');
 Route.post('/login', 'HomeController.auth');
