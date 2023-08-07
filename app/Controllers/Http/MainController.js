@@ -68,7 +68,17 @@ class MainController {
                 const Gallery = use(`App/Models/Gallery`);
                 const gall = await Gallery.query().where('id', val.gallery_id).with('uploads').fetch()
                 val['gallery'] = await gall.toJSON()[0];
-                console.log('inside', await val);
+                newArray.push(await val);
+            }
+
+            return await newArray;
+        }
+        const fillGallery = async (array) => {
+            const newArray = [];
+            for (const val of array) {
+                const Gallery = use(`App/Models/Gallery`);
+                const gall = await Gallery.query().where('id', val.gallery_id).with('uploads').fetch()
+                val['gallery'] = await gall.toJSON()[0];
                 newArray.push(await val);
             }
 
@@ -82,7 +92,6 @@ class MainController {
                 const Section = use(`App/Models/Section`);
                 if (val.article_id) {
                     const sec = await Section.query().where('article_id', val.article_id).with('upload').fetch()
-                    console.log('article inside ===>>>>', await val);
                     val['article']['sections'] = await sec.toJSON();
                     newArray.push(await val);
                 } else {
@@ -103,11 +112,10 @@ class MainController {
             /** images */
 
             const destinations = await fillUploads(destin.toJSON())
-            console.log('destiny ===>>', destinations);
-            const attractions = await fillUploads(destinations[0].attractions)
+            const attractions = await fillGallery(destinations[0].attractions)
+            console.log('destination ==>>122', await attractions)
 
             const destinationWithArticle = await fillArticleContent(destinations)
-            console.log('destinations===>>', destinationWithArticle);
             return view.render('site.destinations.page', {
                 destination: destinationWithArticle[0],
                 navigations: JSON.parse(JSON.stringify(await Navigation.all())), attractions: attractions

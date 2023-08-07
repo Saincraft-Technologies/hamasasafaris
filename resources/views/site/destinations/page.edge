@@ -1,4 +1,4 @@
-@layout('main')
+@layout('page_main')
 @section('content')
 @include('site/destinations/heading')
 <section class="projects-section bg-light mb-3" id="destinations" style="box-shadow: 10px 10px 10px rgb(208, 208, 208);">
@@ -21,9 +21,9 @@
         </div>
         <h5 class="mt-5 mb-5" style="color:#b34343;">Article</h5>
         @include('site/destinations/article')
-        <h4 class="mt-5 mb-5" style="color:#b34343;">Frequently asked questions</h4>
+        <h4 class="mt-5 mb-5" style="color:#b34343;">Attractions</h4>
         <!-- Facilities tiles -->
-        @include('site/tiles/facilities')
+        @include('site/tiles/attractions')
 
         <a href="/destinations">
             <h4 class="mt-5 mb-5" style="color:#b34343;">Related destinations</h4>
