@@ -151,6 +151,13 @@ class MainController {
             navigations: JSON.parse(JSON.stringify(await Navigation.all()))
         });
     }
+
+    async about({ view }) {
+        const Navigation = use('App/Models/Navigation');
+        return view.render('site.abouts.page', {
+            navigations: JSON.parse(JSON.stringify(await Navigation.all()))});
+
+    }
     async package({ params, view, response }) {
         const Navigation = use('App/Models/Navigation');
         const Package = use('App/Models/Package');
