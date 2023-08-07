@@ -1,13 +1,12 @@
-@each(item in packages)
 <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
     <div class="col-xl-4 col-lg-4 ">
-        <h4>{{item.name}}</h4>
-        <p class="text-black-50 mb-0">Charges: $ {{{item.cost}}} /person</p>
-        <p class="text-black-50 mb-0">Conditions: {{{item.conditions}}}</p>
-        <p class="text-black-50 mb-0">More-info: {{{item.description}}}</p>
+        <h4>{{package.name}}</h4>
+        <p class="text-black-50 mb-0">Charges: $ {{{package.cost}}} /person</p>
+        <p class="text-black-50 mb-0">Conditions: {{{package.conditions}}}</p>
+        <p class="text-black-50 mb-0">More-info: {{{package.description}}}</p>
     </div>
     <div class="col-xl-8 col-lg-8 featured-text ">
-        @each(itinerary in item.itineraries)
+        @each(itinerary in package.itineraries)
         <hr>
         <div class=" mb-5 text-center card text-lg-left row">
             <div class="card-header bg-danger text-white">Day {{{itinerary.day}}} <span
@@ -33,7 +32,6 @@
                     style="float-right">Transport:{{{itinerary.transport_fee}}}</span></div>
         </div>
         @endeach
-        <a class="btn btn-danger" href="/packages/{{item.id}}">Book</a>
+        <a class="btn btn-danger" href="/packages/{{package.id}}">Book</a>
     </div>
 </div>
-@endeach

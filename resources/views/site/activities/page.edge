@@ -1,34 +1,11 @@
 @layout('main')
 @section('content')
 @include('site/activities/heading')
-<section class="projects-section bg-light mb-3" id="activities" style="box-shadow: 10px 10px 10px rgb(208, 208, 208);">
-    <div class="container px-4 px-lg-5">
-        <!-- Featured Project Row-->
-        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-            <h4 class="text-danger">{{activity.activity}}</h4>
-        </div>
-        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-            <div class="col-xl-8 col-lg-7">
-                @include('site/activities/slider')
-            </div>
-            <div class="col-xl-4 col-lg-5">
-                <div class="featured-text text-center text-lg-left">
-                    <h5>{{activity.activity}}</h5>
-                    <p class="text-black-50 mb-4">{{activity.description}}</p>
-                    <a class="btn btn-danger" href="/home#booking">view gallery</a>
-                </div>
-            </div>
-        </div>
-        <h5 class="mt-5 mb-5" style="color:#b34343;">Article</h5>
-        @include('site/activities/article')
-        <h4 class="mt-5 mb-5" style="color:#b34343;">Frequently asked questions</h4>
-        <!-- Facilities tiles -->
-        @include('site/tiles/facilities')
-
-        <a href="/activities">
-            <h4 class="mt-5 mb-5" style="color:#b34343;">Related activities</h4>
-        </a>
-        <!-- Facilities leftright -->
-    </div>
-</section>
+<div class="row">
+    @each(item in activities)
+    <div>{{item.activity}}</div>
+    @else
+    
+    @endeach
+</div>
 @endsection

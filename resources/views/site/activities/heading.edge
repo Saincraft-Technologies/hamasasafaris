@@ -2,8 +2,13 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-lg-8">
+                @if(activity)
                 <h2 class="text-white mb-4" title="title">{{activity.activity}}</h2>
                 <p class="text-white-50" title="caption">{{activity.caption}}</p>
+                @else
+                <h2 class="text-white mb-4" title="title">All Activities</h2>
+                <p class="text-white-50" title="caption">All related activities</p>
+                @endif
             </div>
         </div>
         {{-- <img class="img-fluid" src="assets/img/ipad.png" alt="..." /> --}}

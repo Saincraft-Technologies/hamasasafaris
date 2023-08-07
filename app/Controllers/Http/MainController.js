@@ -156,26 +156,34 @@ class MainController {
         const Package = use('App/Models/Package');
         const Itinerary = use('App/Models/Itinerary');
         const PackageItinerary = use('App/Models/PackageItinerary');
-        const packages = await Package.query().where('id', params.package).with('itineraries').fetch();
+        const { ppackage, stoppoint, activity } = params;
+        const packages = await Package.query().where('id', ppackage).with('itineraries').fetch();
         // console.log('log ====>>', packageItineraries.toJSON())
         const final = [];
-        for (let packagee of packages.toJSON()) {
-            let iitem = [];
-            for (let itinerary of packagee.itineraries) {
-                const packageItineraries = await PackageItinerary.query().where('itinerary_id', itinerary.id).fetch();
-                const data = await Itinerary.query().where('id', itinerary.id).with('fromPoint').with('toPoint').fetch();
-                const ans = data.toJSON();
-                ans[0]['day'] = await packageItineraries.toJSON()[0].day;
-                iitem.push(ans[0]);
+        if (stoppoint === undefined) {
+            if (activity === undefined) {
+
+                for (let packagee of packages.toJSON()) {
+                    let iitem = [];
+                    for (let itinerary of packagee.itineraries) {
+                        const packageItineraries = await PackageItinerary.query().where('itinerary_id', itinerary.id).fetch();
+                        const data = await Itinerary.query().where('id', itinerary.id).with('fromPoint').with('toPoint').fetch();
+                        const ans = data.toJSON();
+                        ans[0]['day'] = await packageItineraries.toJSON()[0].day;
+                        iitem.push(ans[0]);
+                    }
+                    packagee['itineraries'] = iitem;
+                    final.push(packagee);
+                }
+                console.log('final =====>>>>', final);
             }
-            packagee['itineraries'] = iitem;
-            console.log(packagee);
-            final.push(packagee);
         }
+
         return view.render('site.packages.page', {
-            packages: final,
+            package: final[0],
             navigations: JSON.parse(JSON.stringify(await Navigation.all()))
         });
+
     }
     async attraction({ params, request, response, view }) {
 
@@ -243,19 +251,6 @@ class MainController {
         const Navigation = use(`App/Models/Navigation`);
         const Activity = use(`App/Models/Activity`);
         const Attraction = use(`App/Models/Attraction`);
-        const fillUploads = async (array) => {
-            const array1 = JSON.parse(JSON.stringify(await array));
-            const newArray = [];
-            for (const val of array1) {
-                const Gallery = use(`App/Models/Gallery`);
-                const gall = await Gallery.query().where('id', val.gallery_id).with('uploads').fetch()
-                val['gallery'] = await gall.toJSON()[0];
-                console.log('inside', await val);
-                newArray.push(await val);
-            }
-
-            return await newArray;
-        }
 
         const fillArticleContent = async (array) => {
             const array1 = JSON.parse(JSON.stringify(await array));
@@ -279,12 +274,11 @@ class MainController {
         const { destination, attraction, activity } = params;
         if (activity) {
             /** only activity queried */
-            let active = await Activity.query().where('id', activity).with('article').with('gallery').fetch();
+            let active = await Activity.query().where('id', activity).with('article').fetch();
 
             /** only destinations queried */
             /** images */
-            const activit = await fillUploads(active.toJSON())
-            const activities = await fillArticleContent(activit)
+            const activities = await fillArticleContent(active.toJSON())
             console.log('activities ===>>', activities);
             return view.render('site.activities.page', {
                 navigations: JSON.parse(JSON.stringify(await Navigation.all())), activity: activities[0]
@@ -292,10 +286,8 @@ class MainController {
         } else {
             /** destination and attraction queried */
             console.log('only destination');
-            let active = await Activity.query().with('gallery').with('article').fetch();
-            const activit = await fillUploads(active.toJSON())
-            const activities = await fillArticleContent(activit)
-            console.log(destin, attract);
+            let active = await Activity.query().with('article').fetch();
+            const activities = await fillArticleContent(active.toJSON())
             return view.render('site.activities.page', {
                 navigations: JSON.parse(JSON.stringify(await Navigation.all())), activities: activities
             });
@@ -362,7 +354,6 @@ class MainController {
             console.log(error);
         }
     }
-
 }
 
 module.exports = MainController

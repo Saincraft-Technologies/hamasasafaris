@@ -63,12 +63,13 @@ Route.get('/attractions/:attraction/:activity', 'MainController.attraction');
 
 
 Route.get('/packages', 'MainController.packages');
-Route.get('/packages/:package', 'MainController.package');
-Route.get('/packages/:package/:attraction/:activity', 'MainController.package');
+Route.get('/packages/:ppackage', 'MainController.package');
+Route.get('/packages/:ppackage/:stoppoint', 'MainController.package');
+Route.get('/packages/:ppackage/:stoppoint/:activity', 'MainController.package');
 
 Route.get('/activities', 'MainController.activity');
 Route.get('/activities/:activity', 'MainController.activity');
-Route.get('/activities/:activity/:activity', 'MainController.activity');
+// Route.get('/activities/:activity/:activity', 'MainController.activity');
 
 
 Route.get('/accommodations', 'MainController.accommodation');
