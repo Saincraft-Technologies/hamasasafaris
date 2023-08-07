@@ -344,14 +344,16 @@ class ModelController {
     }
     async update({ auth, params, request, response, view }) {
         try {
+            console.log('=========== UPDATE ==========');
             let t = capitalize(params.model);
-            console.log(t);
+            console.log(params.model);
             let id = params.id;
 
             const Modal = use(`App/Models/${t}`);
             const Gallery = use(`App/Models/Gallery`);
             let newModal = await Modal.findOrFail(id);
             const object = request.body;
+            console.log('Model ====>>>1', object);
             var gal;
             if (newModal.gallery_id) {
                 gal = await Gallery.findOrFail(newModal.gallery_id);
@@ -370,9 +372,11 @@ class ModelController {
                         if (key !== '_csrf') {
                             newModal[key] = object[key];
                         }
+                        console.log('Model ====>>>', newModal[key]);
                     }
                     gal.gallery = request.input(`${params.model}`);
                     gal.save();
+
                     await newModal.save();
                     return response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
@@ -554,14 +558,13 @@ class ModelController {
             var type;
             var subtype;
             // Uploads the file to Amazon S3 and stores the url
-
+            const initPath = "hamasasafaris/uploads/";
             request.multipart.file('pic_image_update', {
                 types: ['image'],
                 size: '2mb'
             }, async (file) => {
-                const s3Path = `hamasasafaris / uploads / ${fileToUpdate.filename}`;
+                const s3Path = `${initPath}${fileToUpdate.filename}`;
                 // console.log('file ====>>', s3Path);
-
                 if (file) {
                     type = file.type;
                     subtype = file.subtype;
