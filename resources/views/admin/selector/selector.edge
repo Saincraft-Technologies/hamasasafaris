@@ -1,5 +1,5 @@
 <label for="{{model}}">select {{model}}</label>
-<select name="{{model}}Id" id="{{model}}Id" class="form-control select2">
+<select name="{{model}}_id" id="{{model}}_id" class="form-control select2">
     <option value="" disabled selected>select {{model}}</option>
     @each(item in items)
     <option value="{{item.id}}">{{item.title}}</option>

@@ -297,6 +297,14 @@ class ModelController {
                     break;
 
                 default:
+
+                    for (const key in object) {
+                        if (key !== '_csrf') {
+                            newModal[key] = object[key];
+                        }
+                    }
+                    await newModal.save();
+                    return response.json({ status: true, notification: 'successfully saved ' + params.model });
                     break;
             }
 
