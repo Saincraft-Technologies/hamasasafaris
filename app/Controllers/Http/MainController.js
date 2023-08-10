@@ -103,11 +103,14 @@ class MainController {
 
             return await newArray;
         }
+        
+        
+
         const { destination, attraction, activity } = params;
         if (destination) {
             /** only destinations queried */
-            let destin = await Destination.query().where('id', destination).with('article').with('attractions').with('gallery').fetch();
-
+            let destin = await Destination.query().where('id', destination).with('article.sections').with('attractions.gallery.uploads').with('gallery.uploads').fetch();
+            
             /** only destinations queried */
             /** images */
 
