@@ -205,7 +205,7 @@ class MainController {
             if (activity === undefined) {
                 const StopPoint = use('App/Models/StopPoint');
                 const stoppointt = await StopPoint.query().where('id', stoppoint).with('activities.article.sections').fetch();
-                console.log('stop point init =====>>>>', await stoppointt.toJSON());
+                console.log('stop point init =====>>>>', stoppointt.toJSON()[0].activities);
                 return view.render('site.activities.package', {
                     package: packages.toJSON()[0],
                     stoppoint: await stoppointt.toJSON()[0],
