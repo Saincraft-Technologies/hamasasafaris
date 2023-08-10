@@ -4,10 +4,10 @@
 const Model = use('Model')
 
 class StopPointActivity extends Model {
-    stopPoints() {
+    stopPoint() {
         return this.belongsTo('App/Models/StopPoint')
     }
-    activities() {
+    activity() {
         return this.belongsTo('App/Models/Activity')
     }
 }

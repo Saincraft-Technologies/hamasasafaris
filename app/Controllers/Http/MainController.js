@@ -184,28 +184,54 @@ class MainController {
         // console.log('log ====>>', packageItineraries.toJSON())
         const final = [];
         if (stoppoint === undefined) {
+            for (let packagee of packages.toJSON()) {
+                let iitem = [];
+                for (let itinerary of packagee.itineraries) {
+                    const packageItineraries = await PackageItinerary.query().where('itinerary_id', itinerary.id).fetch();
+                    const data = await Itinerary.query().where('id', itinerary.id).with('fromPoint').with('toPoint').fetch();
+                    const ans = data.toJSON();
+                    ans[0]['day'] = await packageItineraries.toJSON()[0].day;
+                    iitem.push(ans[0]);
+                }
+                packagee['itineraries'] = iitem;
+                final.push(packagee);
+            }
+            console.log('final =====>>>>', final);
+            return view.render('site.packages.page', {
+                package: final[0],
+                navigations: JSON.parse(JSON.stringify(await Navigation.all()))
+            });
+        } else {
             if (activity === undefined) {
-
+                const StopPoint = use('App/Models/StopPoint');
+                const stoppointt = await StopPoint.query().where('id', stoppoint).with('activities.article.sections').fetch();
+                console.log('stop point init =====>>>>', await stoppointt.toJSON());
+                return view.render('site.activities.package', {
+                    package: packages.toJSON()[0],
+                    stoppoint: await stoppointt.toJSON()[0],
+                    navigations: JSON.parse(JSON.stringify(await Navigation.all()))
+                });
+            } else {
                 for (let packagee of packages.toJSON()) {
                     let iitem = [];
                     for (let itinerary of packagee.itineraries) {
                         const packageItineraries = await PackageItinerary.query().where('itinerary_id', itinerary.id).fetch();
-                        const data = await Itinerary.query().where('id', itinerary.id).with('fromPoint').with('toPoint').fetch();
-                        const ans = data.toJSON();
-                        ans[0]['day'] = await packageItineraries.toJSON()[0].day;
-                        iitem.push(ans[0]);
+                        const stopPointActivities = await StopPointActivity.query().where('activity_id', activity).where('stop_point_id', stoppoint).with('activity').with('stopPoint').fetch();
+                        const ans = stopPointActivities.toJSON();
+                        console.log('activity ===>>', ans);
+                        iitem.push(ans);
                     }
                     packagee['itineraries'] = iitem;
                     final.push(packagee);
                 }
                 console.log('final =====>>>>', final);
+
+                return view.render('site.packages.page', {
+                    package: final[0],
+                    navigations: JSON.parse(JSON.stringify(await Navigation.all()))
+                });
             }
         }
-
-        return view.render('site.packages.page', {
-            package: final[0],
-            navigations: JSON.parse(JSON.stringify(await Navigation.all()))
-        });
 
     }
     async attraction({ params, request, response, view }) {
