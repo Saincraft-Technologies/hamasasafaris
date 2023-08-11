@@ -8,7 +8,7 @@ class MainController {
         const Destination = use(`App/Models/Destination`);
         const Navigations = use(`App/Models/Navigation`);
         return view.render('site.index', {
-            navigations: JSON.parse(JSON.stringify(await Navigations.all())),
+            navigations: await Navigations.all(),
             destinations: JSON.parse(JSON.stringify(await Destination.all())),
             galleries: []
         });
@@ -64,6 +64,7 @@ class MainController {
         const Navigation = use('App/Models/Navigation')
         const Destination = use(`App/Models/Destination`);
         const Attraction = use(`App/Models/Attraction`);
+        
         const fillUploads = async (array) => {
             const array1 = JSON.parse(JSON.stringify(await array));
             const newArray = [];
