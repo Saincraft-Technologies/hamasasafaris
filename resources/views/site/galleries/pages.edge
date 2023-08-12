@@ -1,0 +1,17 @@
+@layout('page_main')
+@section('content')
+@include('site/accommodations/slider')
+@include('site/accommodations/heading')
+<section class="projects-section bg-light mb-3" id="accommodations"
+    style="box-shadow: 10px 10px 10px rgb(208, 208, 208);">
+    <div class="container px-4 px-lg-5">
+        <!-- Featured Project Row-->
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+            <h4 class="text-danger">All Accomodations</h4>
+        </div>
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+            @include('site/leftright/accommodation')
+        </div>
+    </div>
+</section>
+@endsection

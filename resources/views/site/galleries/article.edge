@@ -1,0 +1,20 @@
+<!-- Featured Project Row-->
+<div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+    <div class="col-xl-4 col-lg-5">
+        <h4 style="margin-left:15px;"> {{accommodation.accommodation}}</h4><br>
+        <small><i>{{{accommodation.caption}}}</i></small>
+    </div>
+    <div class=" col-xl-8 col-lg-7">
+        <div class="featured-text text-left text-lg-left">
+
+            <p class="text-black-50 mt-3 mb-5" style="text-align: left;">
+                {{{accommodation.description}}}
+            </p>
+            <legend class="text-black-50 mb-0 mt-2" style="text-align: left; font-size:small;"><small>
+                    <i>- Source</i><br>
+                    <i>{{{accommodation.article.source}}}</i><br>
+                    <i>{{accommodation.article.updated_at}}</i></small></legend>
+            </p>
+        </div>
+    </div>
+</div>

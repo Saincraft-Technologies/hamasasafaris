@@ -3,6 +3,7 @@
 
 const Booking = use('App/Models/Booking')
 const Mail = use('Mail')
+const capitalize = s => s.replace(/./, c => c.toUpperCase());
 class MainController {
     async index({ view }) {
         const Destination = use(`App/Models/Destination`);
@@ -32,21 +33,6 @@ class MainController {
         // const attraction = await Attraction.query().with('gallery.uploads').fetch();
         const activity = await Activity.query().with('article.sections').fetch();
 
-        /** Method to fill uploads! */
-        // const fillUploads = async (array) => {
-        //     const array1 = JSON.parse(JSON.stringify(await array));
-        //     const newArray = [];
-        //     for (const val of array1) {
-        //         const Gallery = use(`App/Models/Gallery`);
-        //         const gall = await Gallery.query().where('id', val.gallery_id).with('uploads').fetch()
-        //         val['gallery'] = await gall.toJSON()[0];
-        //         console.log('inside', await val);
-        //         newArray.push(await val);
-        //     }
-
-        //     return await newArray;
-        // }
-
         let accommodations = await accommodation;
         let destinations = await destination;
         // let activities = await fillUploads(activity);
@@ -61,7 +47,7 @@ class MainController {
         });
     }
 
-    async destinations({ }) {
+    async destinations({ params, view }) {
         const Navigation = use('App/Models/Navigation')
         const Destination = use(`App/Models/Destination`);
         const Attraction = use(`App/Models/Attraction`);
@@ -104,6 +90,23 @@ class MainController {
                 destinations: destin.toJSON(),
                 navigations: JSON.parse(JSON.stringify(await Navigation.all()))
             });
+        }
+
+    }
+    async gallery({ params, request, response, view }) {
+        console.log('======= gallery invoked!========');
+        try {
+            const Navigation = use('App/Models/Navigation');
+            const { model, modelId } = params;
+            const Model = use('App/Models/' + capitalize(model));
+            const models = await Model.query().where('id', modelId).with('gallery.uploads').fetch();
+            console.log(modelId, model, await models.toJSON()[0]);
+            return view.render('site.galleries.page', {
+                galleries: models.toJSON()[0],
+                navigations: JSON.parse(JSON.stringify(await Navigation.all()))
+            });
+        } catch (error) {
+            console.log(error);
         }
 
     }

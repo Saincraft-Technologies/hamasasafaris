@@ -3,11 +3,11 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-lg-8">
                 @if(galleries)
-                <h2 class="text-white mb-4" title="title">{{about.about}}</h2>
-                <p class="text-white-50" title="caption">{{about.caption}}</p>
+                <h2 class="text-white mb-4" title="title">{{galleries.gallery.gallery}} Gallery</h2>
+                <p class="text-white-50" title="caption">{{{galleries.caption}}}</p>
                 @else
-                <h2 class="text-white mb-4" title="title">FAQs</h2>
-                <p class="text-white-50" title="caption">Frequently asked questions!</p>
+                <h2 class="text-white mb-4" title="title">Gallery</h2>
+                <p class="text-white-50" title="caption">Gallery preview!</p>
                 @endif
             </div>
         </div>
