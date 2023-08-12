@@ -60,12 +60,26 @@ class MainController {
             galleries: await Gallery.query().with('uploads').fetch()
         });
     }
+
+    async destinations({ }) {
+        const Navigation = use('App/Models/Navigation')
+        const Destination = use(`App/Models/Destination`);
+        const Attraction = use(`App/Models/Attraction`);
+        const destinations = await Destination.query().with('attractions').with('gallery.uploads').fetch();
+        console.log('destination ====>>>', await destinations.toJSON())
+        return view.render('site.destinations.pages', {
+            destination: destinations.toJSON(),
+            navigations: JSON.parse(JSON.stringify(await Navigation.all()))
+        });
+    }
     async destination({ params, request, response, view }) {
         const Navigation = use('App/Models/Navigation')
         const Destination = use(`App/Models/Destination`);
         const Attraction = use(`App/Models/Attraction`);
         const { destination, attraction, activity } = params;
-        if (destination) {
+        console.log('===== Destination ========');
+        if (destination !== undefined) {
+            console.log('only destination');
             /** only destinations queried */
             let destin = await Destination.query().where('id', destination).with('article.sections').with('attractions.gallery.uploads').with('gallery.uploads').fetch();
 
@@ -84,12 +98,11 @@ class MainController {
         } else {
             /** destination and attraction queried */
             console.log('only destination');
-            let destin = await Destination.query().where('id', destination).first();
-            let attract = await Attraction.query().where('id', attraction).first();
-            console.log(destin, attract);
-            return view.render('site.attractions.page', {
-                destination: destin,
-                navigations: JSON.parse(JSON.stringify(await Navigation.all())), attraction: attract
+            let destin = await Destination.query().with('attractions').with('gallery.uploads').fetch();
+            console.log('destine ====>>>', await destin.toJSON());
+            return view.render('site.destinations.pages', {
+                destinations: destin.toJSON(),
+                navigations: JSON.parse(JSON.stringify(await Navigation.all()))
             });
         }
 
@@ -193,7 +206,6 @@ class MainController {
             }
         }
     }
-
     async attraction({ params, request, response, view }) {
 
         const Navigation = use(`App/Models/Navigation`);

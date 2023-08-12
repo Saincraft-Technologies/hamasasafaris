@@ -2,8 +2,13 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-lg-8">
+                @if(destination)
                 <h2 class="text-white mb-4" title="title">{{destination.destination}}</h2>
                 <p class="text-white-50" title="caption">{{destination.caption}}</p>
+                @else
+                <h2 class="text-white mb-4" title="title">All Destinations</h2>
+                <p class="text-white-50" title="caption">Tanzania tourism destinations</p>
+                @endif
             </div>
         </div>
         {{-- <img class="img-fluid" src="assets/img/ipad.png" alt="..." /> --}}

@@ -6,18 +6,11 @@
     <div class="container px-4 px-lg-5">
         <!-- Featured Project Row-->
         <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-            <h4 class="text-danger">{{destination.destination}}</h4>
+            <h4 class="text-danger">All destinations</h4>
         </div>
-        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-            <div class="col-xl-8 col-lg-7">
-                @include('site/destinations/slider')
-            </div>
-            <div class="col-xl-4 col-lg-5">
-                <div class="featured-text text-center text-lg-left">
-                    <h4>About {{destination.destination}}</h4>
-                    <p class="text-black-50 mb-0">{{{destination.description}}}</p>
-                    <a class="btn btn-danger" href="/home#booking">Book!</a>
-                </div>
+        <div class="row gx-0 mb-4 mb-lg-12 align-items-center">
+            <div class="col-xl-12 col-lg-12">
+                @include('site/tiles/destination')
             </div>
         </div>
         <h4 class="mt-5 mb-5" style="color:#b34343;">Key Features and Attractions</h4>

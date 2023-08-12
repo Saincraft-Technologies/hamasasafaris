@@ -52,6 +52,7 @@ Route.get('/', 'MainController.genesis');
 Route.get('/home', 'MainController.genesis');
 Route.get('/pages', 'MainController.genesis');
 
+Route.get('/destinations', 'MainController.destination');
 Route.get('/destinations/:destination', 'MainController.destination');
 Route.get('/destinations/:destination/:attraction', 'MainController.destination');
 Route.get('/destinations/:destination/:attraction/:activity', 'MainController.destination');
