@@ -9,7 +9,7 @@
             <!-- Indicators-->
             <ol class="carousel-indicators">
                 @each(upload in item.gallery.uploads)
-                <li data-target="{{item.caption}}" data-slide-to="{{upload.id}}"></li>
+                <li data-target="{{item.attraction}}" data-slide-to="{{upload.id}}"></li>
                 @endeach
             </ol>
 
@@ -58,7 +58,7 @@
 
                 @each(upload in item.gallery.uploads)
                 <div class="carousel-item active">
-                    <img class="img-fluid mb-3 mb-lg-0" src="{{upload.filepath}}" alt="{{upload.facility}}" />
+                    <img class="img-fluid mb-3 mb-lg-0" src="{{upload.filepath}}" alt="{{upload.filename}}" />
                 </div>
                 @endeach
             </div>
@@ -69,9 +69,9 @@
         <div class="bg-black text-center h-100 project">
             <div class="d-flex h-100">
                 <div class="project-text w-100 my-auto text-center text-lg-right">
-                    <h4 class="text-white">{{item.facility}}</h4>
+                    <h4 class="text-white">{{item.attraction}}</h4>
                     <p class="m-2 text-white-50">{{{item.description}}}
-                    </p><a class="btn btn-white mt-4" href="/facilities/{{item.id}}">Explore</a>
+                    </p><a class="btn btn-white mt-4" href="/attraction/{{item.id}}">Explore</a>
                 </div>
             </div>
         </div>
