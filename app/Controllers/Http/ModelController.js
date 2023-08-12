@@ -152,7 +152,7 @@ class ModelController {
 
             const Modal = use(`App/Models/${t}`);
             let model = JSON.parse(JSON.stringify(await Modal.find(params.id)));
-            let action = `/upload/${params.model}/${params.id}`
+            let action = `/uploader/${params.model}/${params.id}`
             return await view.render(`admin.${params.model}.upload`, { [`${params.model}`]: model, action: action });
         } catch (error) {
             console.log(error);
@@ -496,7 +496,7 @@ class ModelController {
         }
     }
     async saveupload({ auth, params, request, response, view }) {
-
+        console.log('==== uploading next ======');
         try {
             let t = capitalize(params.model);
             const Drive = use('Drive');
@@ -517,13 +517,13 @@ class ModelController {
                 type = file.type;
                 subtype = file.subtype;
                 extname = file.extname;
-                const s3Path = `hamasasafaris / uploads / ${name}.${extname}`
+                const s3Path = 'hamasasafaris/uploads/' + name + '.' + extname;
                 filepath = await Drive.disk('s3').put(s3Path, file.stream, { ACL: 'public-read', ContentType: `${type} / ${subtype}` });
                 // console.log('answer ====>>> ', ans);
 
             });
 
-            let processedData = await request.multipart.process()
+            let processedData = await request.multipart.process();
             console.log('processed data ====>>>>', await processedData);
             const imageModal = new Upload();
             imageModal.gallery_id = params.id;
@@ -536,7 +536,7 @@ class ModelController {
             return response.json({ status: true, notification: 'successfully uploaded file ' });
 
         } catch (error) {
-            console.log(error);
+            console.log('======error======', error);
             return response.status(500).json({ status: false, notification: 'failed to add ' + params.model });
         }
     }

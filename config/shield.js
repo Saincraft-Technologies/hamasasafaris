@@ -134,7 +134,7 @@ module.exports = {
   csrf: {
     enable: true,
     methods: ['POST', 'PUT', 'DELETE'],
-    filterUris: [],
+    filterUris: ['/uploader/:model/:id', '/uploader/:model/:id/:fileId'],
     cookieOptions: {
       httpOnly: false,
       sameSite: true,

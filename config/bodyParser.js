@@ -120,6 +120,7 @@ module.exports = {
     |
     | This value can contain a boolean or an array of route patterns
     | to be autoprocessed.
+    |['/admin/store/:model', '/admin/activity/:model/:id', '/admin/update/:model/:id', '/login', '/signup']
     */
     autoProcess: true,
 
@@ -133,7 +134,7 @@ module.exports = {
     | is to true. Otherwise everything is processed manually.
     |
     */
-    processManually: ['/upload', '/uploads']
+    processManually: ['/uploader/:model/:id'],
 
     /*
     |--------------------------------------------------------------------------

@@ -33,8 +33,8 @@ Route.group(() => {
     Route.delete('/admin/delete/:model/:id', 'ModelController.delete');
     /*** Upload File Proccessing */
     Route.get('/upload/:model/:id/:fileId', 'ModelController.viewupload');
-    Route.post('/upload/:model/:id', 'ModelController.saveupload');
     Route.delete('/upload/:model/:id/:fileId', 'ModelController.deleteupload');
+    Route.post('/uploader/:model/:id', 'ModelController.saveupload');
     Route.post('/uploads/:model/:id/:fileId', 'ModelController.updateupload');
     /*** End of file proccessing */
     Route.get('/storage/uploads/:model/:id', 'ModelController.gallery');
