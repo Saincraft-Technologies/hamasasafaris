@@ -16,6 +16,7 @@ class IsLoggedIn {
       if (auth.check()) {
         await next()
       };
+      
     } catch (error) {
       console.log(error.message);
       auth.logout()

@@ -8,7 +8,7 @@ class MainController {
         const Destination = use(`App/Models/Destination`);
         const Navigations = use(`App/Models/Navigation`);
         return view.render('site.index', {
-            navigations: await Navigations.all(),
+            navigations: JSON.parse(JSON.stringify(await Navigation.all())),
             destinations: JSON.parse(JSON.stringify(await Destination.all())),
             galleries: []
         });
@@ -56,7 +56,7 @@ class MainController {
             accommodations: await accommodations.toJSON(),
             destinations: await destinations.toJSON(),
             activities: await activity.toJSON(),
-            navigations: await Navigation.all(),
+            navigations: JSON.parse(JSON.stringify(await Navigation.all())),
             galleries: await Gallery.query().with('uploads').fetch()
         });
     }
@@ -64,52 +64,6 @@ class MainController {
         const Navigation = use('App/Models/Navigation')
         const Destination = use(`App/Models/Destination`);
         const Attraction = use(`App/Models/Attraction`);
-        
-        const fillUploads = async (array) => {
-            const array1 = JSON.parse(JSON.stringify(await array));
-            const newArray = [];
-            for (const val of array1) {
-                const Gallery = use(`App/Models/Gallery`);
-                const gall = await Gallery.query().where('id', val.gallery_id).with('uploads').fetch()
-                val['gallery'] = await gall.toJSON()[0];
-                newArray.push(await val);
-            }
-
-            return await newArray;
-        }
-        const fillGallery = async (array) => {
-            const newArray = [];
-            for (const val of array) {
-                const Gallery = use(`App/Models/Gallery`);
-                const gall = await Gallery.query().where('id', val.gallery_id).with('uploads').fetch()
-                val['gallery'] = await gall.toJSON()[0];
-                newArray.push(await val);
-            }
-
-            return await newArray;
-        }
-
-        const fillArticleContent = async (array) => {
-            const array1 = JSON.parse(JSON.stringify(await array));
-            const newArray = [];
-            for (const val of array1) {
-                const Section = use(`App/Models/Section`);
-                if (val.article_id) {
-                    const sec = await Section.query().where('article_id', val.article_id).with('upload').fetch()
-                    val['article']['sections'] = await sec.toJSON();
-                    newArray.push(await val);
-                } else {
-                    val['article'] = null;
-                    newArray.push(await val);
-                }
-            }
-
-
-            return await newArray;
-        }
-
-
-
         const { destination, attraction, activity } = params;
         if (destination) {
             /** only destinations queried */
@@ -120,7 +74,7 @@ class MainController {
 
             const destinations = await destin.toJSON();
             const attractions = await destinations[0].attractions;
-            console.log('destination ==>>122', await attractions)
+            console.log('destination ==>>122', await destinations)
 
             const destinationWithArticle = await destinations;
             return view.render('site.destinations.page', {

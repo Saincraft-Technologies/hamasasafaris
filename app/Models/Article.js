@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Article extends Model {
     sections() {
-        return this.belongsTo('App/Models/Section')
+        return this.hasMany('App/Models/Section')
     }
 }
 

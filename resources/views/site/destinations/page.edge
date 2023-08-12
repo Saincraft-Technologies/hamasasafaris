@@ -1,7 +1,8 @@
 @layout('page_main')
 @section('content')
 @include('site/destinations/heading')
-<section class="projects-section bg-light mb-3" id="destinations" style="box-shadow: 10px 10px 10px rgb(208, 208, 208);">
+<section class="projects-section bg-light mb-3" id="destinations"
+    style="box-shadow: 10px 10px 10px rgb(208, 208, 208);">
     <div class="container px-4 px-lg-5">
         <!-- Featured Project Row-->
         <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
@@ -19,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <h5 class="mt-5 mb-5" style="color:#b34343;">Article</h5>
+        <h5 class="mt-5 mb-5" style="color:#b34343;">About {{destination.destination}} </h5>
         @include('site/destinations/article')
         <h4 class="mt-5 mb-5" style="color:#b34343;">Attractions</h4>
         <!-- Facilities tiles -->

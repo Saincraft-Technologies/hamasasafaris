@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Section extends Model {
     article() {
-        return this.hasMany('App/Models/Article')
+        return this.belongsTo('App/Models/Article')
     }
     upload() {
         return this.belongsTo('App/Models/Upload')
