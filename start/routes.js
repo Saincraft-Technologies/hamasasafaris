@@ -65,6 +65,8 @@ Route.get('/attractions/:attraction/:activity', 'MainController.attraction');
 Route.get('/galleries/:model/:modelId', 'MainController.gallery');
 
 
+Route.get('/book', 'MainController.book');
+
 Route.get('/packages', 'MainController.packages');
 Route.get('/packages/:ppackage', 'MainController.package');
 Route.get('/packages/:ppackage/:stoppoint', 'MainController.package');
