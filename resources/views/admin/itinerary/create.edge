@@ -6,7 +6,13 @@
         </div>
         <div class="form-group col-md-6">
             <label for="day">day</label>
+             @if(itinerary.attractions)
+            <input type="text"  class="form-control" id="attraction" name="attraction"
+                required>
+            <input type="number" value="{{item.itinerary}}" class="form-control" id="day" name="day" required>
+            @else
             <input type="number" class="form-control" id="day" name="day" required>
+            @endif
             <small id="day_help" class="form-text text-muted">provide from stop point</small>
         </div>
 
