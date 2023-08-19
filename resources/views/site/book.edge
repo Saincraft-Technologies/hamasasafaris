@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="travelers">Number of Travelers</label>
-                                <input type="number" name="travelers" class="form-control" value="1" min="1"
+                                <input type="number"  class="form-control" value="1" min="1"
                                     id="travelers" name="travelers" required>
                             </div>
                             <div class="form-group col-md-6">
@@ -75,7 +75,7 @@
         let phone = document.getElementById('phone');
         let email = document.getElementById('email');
         let days = document.getElementById('days');
-        console.log("name===>>", )
+        console.log("name===>>",  )
         if($(name).val()==''|| $(phone).val()==''||$(email).val()==''||$(days).val()==''){
             alert('please fill required fields to continue!')
         }else{ 
@@ -97,7 +97,7 @@
     }
 
     // Dynamically add traveler details fields based on the number of travelers
-    document.getElementById("num-travelers").addEventListener("change", function () {
+    document.getElementById("travelers").addEventListener("change", function () {
       var numTravelers = parseInt(this.value);
       var travelerDetails = document.getElementById("traveler-details");
 
