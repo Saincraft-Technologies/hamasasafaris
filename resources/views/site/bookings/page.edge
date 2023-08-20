@@ -1,10 +1,11 @@
 
 
 @section('content')
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 mb-5 mb-md-4">
-        <div class="card py-5 h-100">
+<section class="contact-section">
+<div class="container px-6 px-lg-5 mb-5">
+    <div class="row gx-5 gx-lg-5">
+        <div class="offset-0 col-md-12 mb-3 mb-md-0">
+        <div class="card py-5 h-100" style="background:rgb(250, 245, 245);">
             <div class="card-body text-center">
                 <h2>Tour Booking Form</h2>
                 <form id="booking-form" action="/bookings/book" enctype="application/x-www-form-urlencoded"
@@ -76,9 +77,9 @@
                 </form>
             </div>
         </div>
+        </div>
     </div>
 </div>
-
 <script>
     var currentStep = 1;
 
@@ -154,4 +155,5 @@
       document.getElementById("review-travelers").textContent = this.value;
     });
 </script>
+</section>
 @endsection

@@ -407,7 +407,7 @@ class MainController {
             });
 
             session.flash({ status: true, notification: 'booking '+await packagee.toJSON()[0].name+' successfull! \n Thank you for choosing us!' });
-            return response.redirect('/');
+            return response.redirect('/#booking');
 
         } catch (error) {
             console.log(error);
