@@ -44,10 +44,23 @@
                                 <input type="number"  class="form-control" value="1" min="1"
                                     id="travelers" name="travelers" required>
                             </div>
+                        <div class=" col-md-6">
+                            <label for="book_date">Booking Date*</label>
+                            <input type="date" class="form-control" id="book_date" name="book_date" required>
+                        </div>
+                        <div class=" col-md-6">
+                            <label for="days">Days*</label>
+                            <input type="number" value="1" min="1" class="form-control" id="days" name="days" required>
+                        </div>
                             <div class="form-group col-md-6">
-                                <label for="days">Number of Days</label>
-                                <input type="number" name="days" class="form-control" value="1" min="1"
-                                    id="days" name="days" required>
+                                <label for="package_id">Package</label>
+                                <select class="form-control" 
+                                    id="package_id" name="package_id" required>
+                                    <option selected disabled>select a package</option>
+                                @each(package in packages)
+                                <option value="{{package.id}}">{{package.name}} - USD {{package.cost}}</option>
+                                @endeach
+                                    </select>
                             </div>
                         </div>
                         <div id="traveler-details" class="col-md-12 mt-4">

@@ -4,6 +4,17 @@
 const Booking = use('App/Models/Booking')
 const Mail = use('Mail')
 const capitalize = s => s.replace(/./, c => c.toUpperCase());
+function randomString(length, chars) {
+    var mask = '';
+    if (chars.indexOf('a') > -1) mask += 'abcdefghijklmnopqrstuvwxyz';
+    if (chars.indexOf('A') > -1) mask += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (chars.indexOf('#') > -1) mask += '0123456789';
+    if (chars.indexOf('!') > -1) mask += '~`!@#$%^&*()_+-={}[]:";\'<>?,./|\\';
+    var result = '';
+    for (var i = length; i > 0; --i) result += mask[Math.floor(Math.random() * mask.length)];
+    return result;
+}
+
 class MainController {
     async index({ view }) {
         const Destination = use(`App/Models/Destination`);
@@ -25,6 +36,7 @@ class MainController {
         const Activity = use(`App/Models/Activity`);
         const Gallery = use(`App/Models/Gallery`);
         const Accommodation = use(`App/Models/Accommodation`);
+        const Package = use(`App/Models/Package`);
 
         const Navigation = use(`App/Models/Navigation`);
 
@@ -35,6 +47,7 @@ class MainController {
 
         let accommodations = await accommodation;
         let destinations = await destination;
+        const packages = await Package.all();
         // let activities = await fillUploads(activity);
         console.log('genesis ====>>>>', activity.toJSON(), accommodation.toJSON(), destination.toJSON());
 
@@ -43,6 +56,7 @@ class MainController {
             destinations: await destinations.toJSON(),
             activities: await activity.toJSON(),
             navigations: JSON.parse(JSON.stringify(await Navigation.all())),
+            packages:await packages.toJSON(),
             galleries: await Gallery.query().with('uploads').fetch()
         });
     }
@@ -364,24 +378,36 @@ class MainController {
     async book({ session, request, response, view }) {
         try {
             const Booking = use('App/Models/Booking')
-            const data = request.only(['email', 'name', 'phone', 'country', 'travelers', 'days']);
-
-            console.log('booking here!', data);
+            const data = request.only(['email', 'name', 'phone', 'country', 'travelers', 'days', 'book_date', 'package_id']);
+            const ranId = Math.random(14);
+            const PPackage = use('App/Models/Package');
+            const packagee = await PPackage.query().where('id',data.package_id).fetch();
             const booking = new Booking();
+            booking.identifier = Array.from(Array(14), () => Math.floor(Math.random() * 36).toString(36)).join('');
             booking.email = data.email;
             booking.name = data.name;
             booking.phone = data.phone;
             booking.country = data.country;
             booking.travelers = data.travelers;
+            booking.book_date = data.book_date;
+            booking.package_id = data.package_id;
             booking.days = data.days;
             await booking.save();
+            booking.package = await packagee.toJSON()[0].name;
             await Mail.send('bookingemail', booking.toJSON(), (message) => {
                 message.from('samwel@hamasasafaris.com')
                     .to(booking.email)
                     .subject('Hamasa Safari Booking')
             });
-            return view.render('site.bookings.report', { bookings: await booking.toJSON()
+            await Mail.send('bookeremail', booking.toJSON(), (message) => {
+                message.from('samwel@hamasasafaris.com')
+                    .to('samwel@hamasasafaris.com')
+                    .cc('info@saincrafttechnologies.com')
+                    .subject('Notification: New Hamasa Safari Booking!')
             });
+
+            session.flash({ status: true, notification: 'booking '+await packagee.toJSON()[0].name+' successfull! \n Thank you for choosing us!' });
+            return response.redirect('/');
 
         } catch (error) {
             console.log(error);
