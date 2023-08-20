@@ -361,18 +361,26 @@ class MainController {
         }
 
     }
-    async book({ session, request, response }) {
+    async book({ session, request, response, view }) {
         try {
             const Booking = use('App/Models/Booking')
-            const data = request.only(['email', 'name', 'phone', 'country', 'travelers', 'days'])
-            const booking = await Booking.create(data)
-            await Mail.send('booking email', booking.toJSON(), (message) => {
+            const data = request.only(['email', 'name', 'phone', 'country', 'travelers', 'days']);
+
+            console.log('booking here!', data);
+            const booking = new Booking();
+            booking.email = data.email;
+            booking.name = data.name;
+            booking.phone = data.phone;
+            booking.country = data.country;
+            booking.travelers = data.travelers;
+            booking.days = data.days;
+            await booking.save();
+            await Mail.send('bookingemail', booking.toJSON(), (message) => {
                 message.from('samwel@hamasasafaris.com')
                     .to(booking.email)
                     .subject('Hamasa Safari Booking')
             });
-            return view.render('site.bookings.report', {
-                navigations: JSON.parse(JSON.stringify(await Navigation.all())), bookings: await booking.toJSON()
+            return view.render('site.bookings.report', { bookings: await booking.toJSON()
             });
 
         } catch (error) {
