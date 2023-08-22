@@ -18,7 +18,7 @@ class IsLoggedIn {
       };
       
     } catch (error) {
-      console.log(error.message);
+      console.log("error at login =====>>>.", error.message);
       auth.logout()
       return response.redirect('/login');
     }

@@ -10,6 +10,9 @@ class Package extends Model {
     packageItinerary() {
         return this.belongsTo('App/Models/PackageItinerary')
     }
+    bookings() {
+        return this.hasMany('App/Models/Booking')
+    }
 }
 
 module.exports = Package

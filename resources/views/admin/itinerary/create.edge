@@ -2,44 +2,147 @@
 <form method="POST" class="d-block ajaxForm" enctype="application/x-www-form-urlencoded" action="{{action}}">
     {{ csrfField() }}
     <div class="form-row">
-        <div class="form-group col-md-12 from_id">
+         @if(item.itinerary.fromPoint)
+        <div class="form-group col-md-6">
+            <label for="from_id">Starting Point</label>
+            <select name="from_id" class="form-control select2" id="from_id">
+                <option value="">select starting point</option>
+                @each(stoppoint in stopPoints)
+                @if(stoppoint.id == item.itinerary.fromPoint.id)
+                <option value="{{stoppoint.id}}" selected>{{stoppoint.name}}</option>
+                @else
+                <option value="{{stoppoint.id}}">{{stoppoint.name}}</option>
+                @endif  
+                @endeach
+            </select>
         </div>
+        @else
+        <div class="form-group col-md-6">
+            <label for="from_id">Starting Point</label>
+            <select name="from_id" class="form-control select2" id="from_id">
+                <option value="">select starting point</option>
+                @each(stoppoint in stopPoints)
+                <option value="{{stoppoint.id}}">{{stoppoint.name}}</option>
+                @endeach
+            </select>
+        </div>
+        @endif
+        @if(item.itinerary.fromPoint)
+        <div class="form-group col-md-6">
+            <label for="to_id">Ending Point</label>
+            <select name="to_id" class="form-control select2" id="to_id">
+                <option value="">select ending point</option>
+                @each(stoppoint in stopPoints)
+                @if(stoppoint.id == item.itinerary.toPoint.id)
+                <option value="{{stoppoint.id}}" selected>{{stoppoint.name}}</option>
+                @else
+                <option value="{{stoppoint.id}}">{{stoppoint.name}}</option>
+                @endif  
+                @endeach
+            </select>
+        </div>
+        @else
+        <div class="form-group col-md-6">
+            <label for="to_id">Ending Point</label>
+            <select name="to_id" class="form-control select2" id="to_id">
+                <option value="">select ending point</option>
+                @each(stoppoint in stopPoints)
+                <option value="{{stoppoint.id}}">{{stoppoint.name}}</option>
+                @endeach
+            </select>
+        </div>
+        @endif
         <div class="form-group col-md-6">
             <label for="day">day</label>
-             @if(itinerary.attractions)
-            <input type="text"  class="form-control" id="attraction" name="attraction"
-                required>
-            <input type="number" value="{{item.itinerary}}" class="form-control" id="day" name="day" required>
+             @if(item.day)
+            <input type="number" value="{{item.day}}" value="1"  min="1" class="form-control" id="day" name="day" required>
             @else
-            <input type="number" class="form-control" id="day" name="day" required>
+            <input type="number" class="form-control" value="1" min="1" id="day" name="day" required>
             @endif
             <small id="day_help" class="form-text text-muted">provide from stop point</small>
         </div>
 
         <div class="form-group col-md-6">
             <label for="distance">distance</label>
-            <input type="text" class="form-control" id="distance" name="distance" required>
+            @if(item.distance)
+            <input type="text" class="form-control" placeholder="50km"  value="{{item.distance}}" id="distance" name="distance" required>
+            @else
+            <input type="text" class="form-control" placeholder="50km" id="distance" name="distance" required>
+            @endif
             <small id="distance_help" class="form-text text-muted">provide distance to stop point</small>
         </div>
         <div class="form-group col-md-6">
-            <label for="park_fee">park fee</label>
-            <input type="number" class="form-control" id="park_fee" name="park_fee" value="0.00" required>
+            <label for="park_fee">park fee (usd)</label>
+            @if(item.park_fee)
+            <input type="number" class="form-control" value="{{item.park_fee}}" id="park_fee" name="park_fee" value="0.00" min="0.00" required>
+            @else
+            <input type="number" class="form-control" id="park_fee" name="park_fee" value="0.00" min="0.00" required>
+            @endif
             <small id="park_fee_help" class="form-text text-muted">provide park fee of stop point</small>
         </div>
         <div class="form-group col-md-6">
-            <label for="transport_fee">transport fee</label>
-            <input type="number" class="form-control" id="transport_fee" name="transport_fee" value="0.00" required>
+            <label for="transport_fee">transport fee (usd)</label>
+            @if(item.transport_fee)
+            <input type="number" class="form-control" value="{{item.transport_fee}}" id="transport_fee" name="transport_fee" value="0.00" min="0.00" required>
+            @else
+            <input type="number" class="form-control" id="transport_fee" name="transport_fee" value="0.00" min="0.00" required>
+            @endif
             <small id="transport_fee_help" class="form-text text-muted">provide transport fee to stop point</small>
         </div>
-        <div class="form-group col-md-6 packageBlock">
+        <div class="form-group col-md-6">
+            <label for="accommodation_fee">accommodation fee (usd)</label>
+            @if(item.accommodation_fee)
+            <input type="number" class="form-control" value="{{item.accommodation_fee}}" id="accommodation_fee" name="accommodation_fee" value="0.00" min="0.00" required>
+            @else
+            <input type="number" class="form-control" id="accommodation_fee" name="accommodation_fee" value="0.00" min="0.00" required>
+            @endif
+            <small id="accommodation_fee_help" class="form-text text-muted">provide accommodation fee to stop point</small>
         </div>
+        <div class="form-group col-md-6">
+            <label for="vehicle_entry_fee">vehicle entry fee (usd)</label>
+            @if(item.vehicle_entry_fee)
+            <input type="number" class="form-control" value="{{item.vehicle_entry_fee}}" id="vehicle_entry_fee" name="vehicle_entry_fee" value="0.00" min="0.00" required>
+            @else
+            <input type="number" class="form-control" id="vehicle_entry_fee" name="vehicle_entry_fee" value="0.00" min="0.00" required>
+            @endif
+            <small id="vehicle_entry_fee_help" class="form-text text-muted">provide vehicle entry fee to stop point</small>
+        </div>
+        @if(item.package)
+        <div class="form-group col-md-6">
+            <label for="package_id">Package</label>
+            <select name="package_id" class="form-control select2" id="packageId">
+                <option value="">select package</option>
+                @each(package in packages)
+                @if(package.id == item.package.id)
+                <option value="{{package.id}}" selected>{{package.name}}</option>
+                @else
+                <option value="{{package.id}}">{{package.name}}</option>
+                @endif  
+                @endeach
+            </select>
+        </div>
+        @else
+        <div class="form-group col-md-6">
+            <label for="package_id">Package</label>
+            <select name="package_id" class="form-control select2" id="packageId">
+                <option value="">select package</option>
+                @each(package in packages)
+                <option value="{{package.id}}">{{package.name}}</option>
+                @endeach
+            </select>
+        </div>
+        @endif
     </div>
 
     <div class="form-row">
         <div class="row col-md-12">
             <div class="form-group col-md-6">
                 <button class="m-2 btn btn-block btn-primary submit-btn" type="submit">
+                    @if(item)
+                    update itinerary
+                    @else
                     create itinerary
+                    @endif
                 </button>
             </div>
             <div class="form-group col-md-6">

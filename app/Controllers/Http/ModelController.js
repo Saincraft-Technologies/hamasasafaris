@@ -33,18 +33,15 @@ class ModelController {
                     return await view.render(`admin.${params.model}.list`, { items: stopPoint.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute, addActivityRoute: addActivityRoute });
                     break;
                 case 'Itinerary':
+                    try {
+                        
                     const PackageModel = use(`App/Models/Package${t}`);
-                    const packItin = await PackageModel.query().with('package').with('itinerary').fetch();
+                    const packItin = await PackageModel.query().with('package').with('itinerary.fromPoint').with('itinerary.toPoint').fetch();
                     const items = packItin.toJSON()
-                    const final = [];
-                    for (const item of items) {
-                        const itt = await Modal.query().where('id', item.itinerary.id).with('fromPoint').with('toPoint').fetch();
-                        item['itinerary'] = itt.toJSON()[0];
-                        final.push(item);
+                    return await view.render(`admin.${params.model}.list`, { items: items, model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+                    } catch (error) {
+                        console.log(error);
                     }
-                    console.log('itineraries ===>>>', await final);
-
-                    return await view.render(`admin.${params.model}.list`, { items: final, model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
                     break;
                 case 'Activity':
                     model = await Modal.query().with('article').fetch();
@@ -53,6 +50,12 @@ class ModelController {
 
                 case 'Charge':
                     model = await Modal.query().with('itinerary').fetch();
+                    return await view.render(`admin.${params.model}.list`, { items: model.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
+                    break;
+
+                case 'Booking':
+                    model = await Modal.query().with('package').fetch();
+                    console.log(await model.toJSON())
                     return await view.render(`admin.${params.model}.list`, { items: model.toJSON(), model: params.model, delRoute: delRoute, editRoute: editRoute, uploadRoute: uploadRoute });
                     break;
 
@@ -68,7 +71,7 @@ class ModelController {
             }
 
         } catch (error) {
-            console.log(error);
+            console.log('error',error);
         }
     }
     async create({ params, view }) {
@@ -78,9 +81,24 @@ class ModelController {
 
             const Modal = use(`App/Models/${t}`);
             let model = await Modal.all();
+
+            switch (t) {
+                case 'Itinerary':
+                    const PPackage = use(`App/Models/Package`);
+                    const StopPoint = use(`App/Models/StopPoint`);
+                    return await view.render(`admin.${params.model}.create`, { 
+                        packages:(await PPackage.query().fetch()).toJSON(),
+                        stopPoints:(await StopPoint.query().fetch()).toJSON(),  
+                        action: `/admin/store/${params.model}` 
+                    });
+                    break;
+            
+                default:
+                    let action = `/admin/store/${params.model}`
+                    return await view.render(`admin.${params.model}.create`, { [`${params.model}`]: model, action: action });
+                    break;
+            }
             // console.log('list invoked!', model);
-            let action = `/admin/store/${params.model}`
-            return await view.render(`admin.${params.model}.create`, { [`${params.model}`]: model, action: action });
         } catch (error) {
             console.log(error);
         }
@@ -135,12 +153,31 @@ class ModelController {
         try {
             let t = capitalize(params.model);
             console.log('params', params);
-
             const Modal = use(`App/Models/${t}`);
-            let model = await Modal.find(params.id);
-            console.log('model ====>>>', await model.toJSON());
-            let action = `/admin/update/${params.model}/${params.id}`
-            return await view.render(`admin.${params.model}.create`, { item: model.toJSON(), action: action });
+            const iPackage = use(`App/Models/PackageItinerary`);
+            const PPackage = use(`App/Models/Package`);
+            const StopPoint = use(`App/Models/StopPoint`);
+
+            switch (t) {
+                case 'Itinerary':
+                    // let itinerary = await Modal.query().where('id',params.id).with('fromPoint').with('toPoint').fetch();
+                    let ipackage = await iPackage.query().where('itinerary_id',params.id).with('package').with('itinerary.fromPoint').with('itinerary.toPoint').fetch();
+                    console.log('model ====>>>', await ipackage.toJSON());
+                    return await view.render(`admin.${params.model}.create`, { 
+                        item: ipackage.toJSON()[0], 
+                        packages:(await PPackage.query().fetch()).toJSON(),
+                        stopPoints:(await StopPoint.query().fetch()).toJSON(),  
+                        action: `/admin/update/${params.model}/${params.id}` 
+                    });
+                    break;
+            
+                default:
+                    let model = await Modal.find(params.id);
+                    console.log('model ====>>>', await model.toJSON());
+                    let action = `/admin/update/${params.model}/${params.id}`
+                    return await view.render(`admin.${params.model}.create`, { item: model.toJSON(), action: action });
+                    break;
+            }
         } catch (error) {
             console.log(error);
         }
@@ -269,7 +306,7 @@ class ModelController {
 
                 case 'itinerary':
                     for (const key in object) {
-                        if (key !== '_csrf' && key !== 'day' && key !== 'packageId') {
+                        if (key !== '_csrf' && key !== 'day' && key !== 'package_id'&& key !== 'transport_fee' && key !== 'park_fee' && key !== 'accommodation_fee' && key !== 'vehicle_entry_fee') {
                             newModal[key] = object[key];
                         }
                     }
@@ -277,7 +314,12 @@ class ModelController {
                     const PackItin = use('App/Models/PackageItinerary');
                     const packItin = new PackItin();
                     packItin.day = request.input('day');
+                    packItin.distance = request.input('distance');
+                    packItin.park_fee = request.input('park_fee');
+                    packItin.transport_fee = request.input('transport_fee');
                     packItin.package_id = request.input('packageId');
+                    packItin.accommodation_fee = request.input('accommodation_fee');
+                    packItin.vehicle_entry_fee = request.input('vehicle_entry_fee');
                     packItin.itinerary_id = newModal.toJSON().id;
                     packItin.save();
                     return response.json({ status: true, notification: 'successfully saved ' + params.model });
@@ -350,7 +392,7 @@ class ModelController {
             return response.json({ status: false, notification: 'failed to add ' + model + ' activity' })
         }
     }
-    async update({ auth, params, request, response, view }) {
+    async update({  params, request, response}) {
         try {
             console.log('=========== UPDATE ==========');
             let t = capitalize(params.model);
@@ -375,6 +417,26 @@ class ModelController {
                     return response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
 
+                case 'itinerary':
+                    const PackItin = use('App/Models/PackageItinerary');
+                    for (const key in object) {
+                        if (key !== '_csrf' && key !== 'day' && key !== 'package_id'&& key !== 'transport_fee' && key !== 'park_fee' && key !== 'distance' && key !== 'accommodation_fee' && key !== 'vehicle_entry_fee') {
+                            newModal[key] = object[key];
+                        }
+                    }
+                    await newModal.save();
+                    const packItin = await PackItin.findOrFail((await PackItin.query().where('package_id',request.input('package_id')).where('itinerary_id', params.id).fetch()).toJSON()[0].id);
+                    packItin.day = request.input('day');
+                    packItin.distance = request.input('distance');
+                    packItin.park_fee = request.input('park_fee');
+                    packItin.transport_fee = request.input('transport_fee');
+                    packItin.package_id = request.input('package_id');
+                    packItin.accommodation_fee = request.input('accommodation_fee');
+                    packItin.vehicle_entry_fee = request.input('vehicle_entry_fee');
+                    packItin.itinerary_id =  params.id;
+                    packItin.save();
+                    return response.json({ status: true, notification: 'successfully updated ' + params.model });
+                    break;
                 case 'accommodation':
                     for (const key in object) {
                         if (key !== '_csrf') {
@@ -449,8 +511,6 @@ class ModelController {
                     return response.json({ status: true, notification: 'successfully updated ' + params.model });
                     break;
             }
-
-
         } catch (error) {
             console.log(error);
             return response.status(500).json({ status: false, notification: 'failed to update ' + params.model });

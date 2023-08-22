@@ -7,9 +7,9 @@
         <table id="basic-datatable" class="table table-striped td-responsive nowrap" width="100%">
             <thead>
                 <tr style="background-color: #313a46; color: #ababab;">
-                    <th>{{model}}</th>
-                    <th>caption</th>
-                    <th>description</th>
+                    <th>Client</th>
+                    <th>Contacts</th>
+                    <th>Travel Info</th>
                     <th>create date</th>
                     <th>options</th>
                 </tr>
@@ -17,13 +17,11 @@
             <tbody>
                 @each(item in items)
                 <tr>
-                    <td style=" width:7%;">{{item.destination}}</td>
-                    <td style=" width:20%;">{{item.caption}}</td>
-                    <td style=" width:40%;">
-                        <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
-                            {{{item.description}}}</p>
+                    <td style=" width:25%;">ID: {{item.identifier}}<br>Name: {{item.name}}</td>
+                    <td style=" width:25%;">Email: {{item.email}}<br>Phone: {{item.phone}}<br>Country: {{item.country}}</td>
+                    <td style=" width:30%;">Traveler: {{item.travelers}}<br>Days: {{item.days}}<br>Package: {{item.package.name}}
                     </td>
-                    <td style="width:20%;">{{item.created_at}}</td>
+                    <td style="width:10%;">{{item.created_at}}</td>
                     <td style=" width:10%;">
                         <div class="dropdown text-center">
                             <button type="button"

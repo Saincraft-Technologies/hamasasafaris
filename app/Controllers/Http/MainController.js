@@ -174,21 +174,12 @@ class MainController {
         // console.log('log ====>>', packageItineraries.toJSON())
         const final = [];
         if (stoppoint === undefined) {
-            for (let packagee of packages.toJSON()) {
-                let iitem = [];
-                for (let itinerary of packagee.itineraries) {
-                    const packageItineraries = await PackageItinerary.query().where('itinerary_id', itinerary.id).fetch();
-                    const data = await Itinerary.query().where('id', itinerary.id).with('fromPoint').with('toPoint').fetch();
-                    const ans = data.toJSON();
-                    ans[0]['day'] = await packageItineraries.toJSON()[0].day;
-                    iitem.push(ans[0]);
-                }
-                packagee['itineraries'] = iitem;
-                final.push(packagee);
-            }
-            console.log('final =====>>>>', final);
+            const packageItineraries = await PackageItinerary.query().where('package_id', params.ppackage).with('package').with('itinerary.fromPoint').with('itinerary.toPoint').fetch();
+            console.log('final =====>>>>', packageItineraries.toJSON());
             return view.render('site.packages.page', {
-                package: final[0],
+                packageItinerary: await packageItineraries.toJSON(),
+                selected:await packageItineraries.toJSON()[0].package,
+                packages: (await Package.all()).toJSON(),
                 navigations: JSON.parse(JSON.stringify(await Navigation.all()))
             });
         } else {

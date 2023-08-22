@@ -1,4 +1,4 @@
-<label for="from_id">From Stop Point</label>
+<label for="from_id">Starting Point</label>
 <select name="from_id" id="from_id" class="form-control select2">
     <option value="" disabled selected>Select {{model}}</option>
     @each(item in items)
@@ -11,7 +11,7 @@
                     dropdownParent: $('#large-modal')});
 </script>
 
-<label for="to_id">To Stop Point</label>
+<label for="to_id">Ending Point</label>
 <select name="to_id" id="to_id" class="form-control select2">
     <option value="" disabled selected>Select {{model}}</option>
     @each(item in items)

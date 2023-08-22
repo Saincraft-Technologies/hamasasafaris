@@ -4,8 +4,8 @@
 const Model = use('Model')
 
 class Booking extends Model {
-    attractions(){
-        return this.belongsToMany('App/Models/Attraction').pivotTable('booking_attractions')
+    package(){
+        return this.belongsTo('App/Models/Package')
     }
     
 }

@@ -1,37 +1,53 @@
 <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
     <div class="col-xl-4 col-lg-4 ">
-        <h4>{{package.name}}</h4>
-        <p class="text-black-50 mb-0">Charges: $ {{{package.cost}}} /person</p>
-        <p class="text-black-50 mb-0">Conditions: {{{package.conditions}}}</p>
-        <p class="text-black-50 mb-0">More-info: {{{package.description}}}</p>
+        @each(item in packages)
+        
+        @if(item.id == selected.id)
+          
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              {{item.name}} 
+            </label>
+          </div>
+        @else
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+                {{item.name}} 
+            </label>
+          </div>
+        @endif
     </div>
+          
+        @endeach
     <div class="col-xl-8 col-lg-8 featured-text ">
-        @each(itinerary in package.itineraries)
+        @each(item in packageItinerary)
         <hr>
         <div class=" mb-5 text-center card text-lg-left row">
-            <div class="card-header bg-danger text-white">Day {{{itinerary.day}}} <span
-                    style="float-right">Distance:{{{itinerary.distance}}}</span></div>
+            <div class="card-header bg-danger text-white">Day {{{item.day}}} <span
+                    style="float-right">Distance: {{{item.distance}}}</span></div>
             <div class="card-body row">
                 <div class="col-6">
                     <p class="text-black-50 mb-0">
-                        From: {{itinerary.fromPoint.name}}<br>
-                        {{{itinerary.fromPoint.caption}}}<br>
-                        <a href="/packages/{{package.id}}/{{itinerary.fromPoint.id}}">view activities</a>
+                        From: {{item.itinerary.fromPoint.name}}<br>
+                        {{{item.itinerary.fromPoint.caption}}}<br>
+                        <a href="/packages/{{item.package.id}}/{{item.itinerary.fromPoint.id}}">view activities</a>
                     </p>
                 </div>
 
                 <div class="col-6">
                     <p class="text-black-50 mb-0">
-                        To: {{itinerary.toPoint.name}}<br>
-                        {{{itinerary.toPoint.caption}}}<br>
-                        <a href="/packages/{{package.id}}/{{itinerary.toPoint.id}}">view activities</a>
+                        To: {{item.itinerary.toPoint.name}}<br>
+                        {{{item.itinerary.toPoint.caption}}}<br>
+                        <a href="/packages/{{item.package.id}}/{{item.itinerary.toPoint.id}}">view activities</a>
                     </p>
                 </div>
             </div>
-            <div class="card-footer bg-default text-dark">Park Fee {{{itinerary.park_fee}}} <span
-                    style="float-right">Transport:{{{itinerary.transport_fee}}}</span></div>
+            <div class="card-footer bg-default text-dark">Park Fee {{{item.park_fee}}} <span
+                    style="float-right">Transport:{{{item.transport_fee}}}</span></div>
         </div>
         @endeach
-        <a class="btn btn-danger" href="/packages/{{package.id}}">Book</a>
+        <a class="btn btn-danger" href="/#booking">Book</a>
     </div>
 </div>

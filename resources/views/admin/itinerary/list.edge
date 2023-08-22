@@ -10,7 +10,7 @@
                     <th>Packages</th>
                     <th>From</th>
                     <th>To</th>
-                    <th>Distance</th>
+                    <th>Details</th>
                     <th>Create date</th>
                     <th>Options</th>
                 </tr>
@@ -27,7 +27,12 @@
                     <td style=" width:20%;">{{item.itinerary.toPoint.name}}</td>
                     <td style=" width:40%;">
                         <p style="overflow-wrap: break-word;word-break: break-all; white-space: normal;">
-                            {{item.itinerary.distance}}</p>
+                            Distance: {{item.distance}}<br>
+                            Park Fee: <small class="text-mute">USD</small> {{item.park_fee}}<br>
+                            Transport: <small class="text-mute">USD</small> {{item.transport_fee}}<br>
+                            Accommodation: <small class="text-mute">USD</small> {{item.accommodation_fee}}<br>
+                            Vehicle Entry: <small class="text-mute">USD</small> {{item.vehicle_entry_fee}}<br>
+                        </p>
                     </td>
                     <td style="width:20%;">{{item.created_at}}</td>
                     <td style=" width:10%;">
