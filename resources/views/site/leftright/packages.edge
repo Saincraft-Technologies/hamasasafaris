@@ -22,8 +22,12 @@
           
         @endeach
     <div class="col-xl-8 col-lg-8 featured-text ">
+        <div class="card">
+            <div class="card-header text-dark">
+                <small>{{selected.name}} <br>usd {{selected.cost}} p/p<br><i>{{{selected.conditions}}}</i><br>{{{selected.description}}}</small>
+            </div>
+        </div>
         @each(item in packageItinerary)
-        <hr>
         <div class=" mb-5 text-center card text-lg-left row">
             <div class="card-header bg-danger text-white">Day {{{item.day}}} <span
                     style="float-right">Distance: {{{item.distance}}}</span></div>
