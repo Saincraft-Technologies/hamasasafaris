@@ -9,6 +9,6 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - 3002:3002
+      - 3001:3001
       - 9229:9229
     command: ["NODE_ENV=production","node", "--inspect=0.0.0.0:9229", "server.js"]
