@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "nodemon server.js",
-    "migrate": "node ace migration:run --force",
-    "seed": "node ace seed --files='UserSeeder.js,TokenSeeder.js,GallerySeeder.js,ArticleSeeder.js,UploadSeeder.js,NavigationSeeder.js,PageSeeder.js,BookingSeeder.js,DestinationSeeder.js,AccommodationSeeder.js,AttractionSeeder.js,FacilitySeeder.js,StopPointSeeder.js,ItinerarySeeder.js,' --force"
+    "migrate": "adonis migration:run --force",
+    "seed": "adonis seed --files='UserSeeder.js,TokenSeeder.js,GallerySeeder.js,ArticleSeeder.js,UploadSeeder.js,NavigationSeeder.js,PageSeeder.js,BookingSeeder.js,DestinationSeeder.js,AccommodationSeeder.js,AttractionSeeder.js,FacilitySeeder.js,StopPointSeeder.js,ItinerarySeeder.js,' --force"
   },
   "keywords": [
     "adonisjs",
