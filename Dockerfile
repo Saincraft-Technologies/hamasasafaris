@@ -6,7 +6,8 @@ COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 # RUN npm install mysql ../
 RUN npm install --production --silent && mv node_modules ./
 COPY . .
-RUN npm run test 
+RUN npm run migration ./
+RUN npm run seed ./  
 EXPOSE 3002
 USER node
 CMD ["npm", "start"]
