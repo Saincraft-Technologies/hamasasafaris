@@ -7,9 +7,8 @@ node_modules
 # Public files
 public
 # Environment variables, never commit this file
-.env2
-.env1
-database/hamasa_backup
+.env
+
 
 # The development sqlite file
 database/*.sqlite

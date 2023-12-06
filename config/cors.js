@@ -1,5 +1,6 @@
 'use strict'
-
+/** @type {import('@adonisjs/framework/src/Env')} */
+const Env = use('Env')
 module.exports = {
   /*
   |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ module.exports = {
   | Function - Receives the current origin and should return one of the above values.
   |
   */
-  origin: ["https://hamasasafaris.saincrafttechnologies.com", "https://www.hamasasafaris.com", "https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com"," https://saincrafttechnologies-static-public-2023.fra1.digitaloceanspaces.com/hamasasafaris"],
+  origin: [Env.get('URL_1'),Env.get('URL_2'),Env.get('URL_3'),Env.get('URL_4'),Env.get('URL_5'),Env.get('URL_6'),],
 
   /*
   |--------------------------------------------------------------------------
