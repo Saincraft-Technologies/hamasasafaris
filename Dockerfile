@@ -4,7 +4,7 @@ ENV NODE_EVN=$SOME_ARG
 WORKDIR /usr/src/hamasa
 COPY ["package.json", ".env.example", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 # RUN npm install mysql2 ../
-RUN npm install --production --silent --legacy-peer-deps && mv node_modules ./
+RUN npm install --production --silent && mv node_modules ./
 COPY . .
 RUN cp .env.example .env
 RUN npm run migrate ./
