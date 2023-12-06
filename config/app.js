@@ -224,7 +224,10 @@ module.exports = {
       level: 'info'
     }
   },
-
+  providers : [
+    // ... other providers
+    '@adonisjs/lucid/providers/LucidProvider',
+  ],
   /*
   |--------------------------------------------------------------------------
   | Generic Cookie Options
