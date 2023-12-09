@@ -6,7 +6,6 @@ COPY ["package.json", ".env.example","package-lock.json*", "npm-shrinkwrap.json*
 # RUN npm install mysql2 ../
 RUN npm install --production --silent && mv node_modules ./
 COPY . .
-RUN cp .env.example .env
 RUN npm run migrate 
 # RUN npm run seed ./  
 EXPOSE 3001

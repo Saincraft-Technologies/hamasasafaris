@@ -5,13 +5,13 @@ node_modules
 # Adonis directory for storing tmp files
 # tmp
 # Public files
-public
+# public
 # Environment variables, never commit this file
 .env
 
 
 # The development sqlite file
-database/*.sqlite
+# database/*.sqlite
 
 # VSCode & Webstorm history directories
 .history
