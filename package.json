@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "nodemon server.js",
-    "migrate": "node --trace-warnings ace migration:run --force",
+    "migrate": "node ace migration:run --force",
     "seed": "node ace seed --files='UserSeeder.js,TokenSeeder.js,GallerySeeder.js,ArticleSeeder.js,UploadSeeder.js,NavigationSeeder.js,PageSeeder.js,BookingSeeder.js,DestinationSeeder.js,AccommodationSeeder.js,AttractionSeeder.js,FacilitySeeder.js,StopPointSeeder.js,ItinerarySeeder.js,' --force"
   },
   "keywords": [
@@ -18,7 +18,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@adonisjs/ace": "^11.3.1",
+    "@adonisjs/ace": "^5.0.8",
     "@adonisjs/auth": "^3.0.7",
     "@adonisjs/bodyparser": "~2.0.9",
     "@adonisjs/cors": "^1.0.7",
